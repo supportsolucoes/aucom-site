@@ -13,6 +13,7 @@ export type PaginaErp = {
   abertura: string;
   itens: { t: string; d: string }[];
   zap: string;
+  foto: 'loja' | 'posto';
 };
 
 export const paginasErp: Record<string, PaginaErp> = {
@@ -35,6 +36,7 @@ export const paginasErp: Record<string, PaginaErp> = {
       { t: 'E-commerce', d: 'Integração via API para a loja virtual usar o mesmo estoque e faturamento.' },
     ],
     zap: 'Olá! Vim pela página de ERP para varejo e atacado e quero saber mais.',
+    foto: 'loja',
   },
 
   'postos-de-combustivel': {
@@ -56,5 +58,6 @@ export const paginasErp: Record<string, PaginaErp> = {
       { t: 'Frota de clientes', d: 'Abastecimento a prazo por empresa conveniada, com fechamento mensal.' },
     ],
     zap: 'Olá! Vim pela página de sistema para posto de combustível e quero saber mais.',
+    foto: 'posto',
   },
 };

@@ -4,17 +4,26 @@ import { semQuebra } from '../dados/texto';
 import { Image } from 'astro:assets';
 import fotoRodovia from '../imagens/rodovia-interior-sp.jpg';
 import fotoCarreta from '../imagens/carreta-rodovia-br.jpg';
+import fotoLoja from '../imagens/loja-varejo.jpg';
+import fotoPosto from '../imagens/posto.jpg';
+
+const fotos = {
+  rodovia: fotoRodovia,
+  carreta: fotoCarreta,
+  loja: fotoLoja,
+  posto: fotoPosto,
+};
 
 interface Props {
   rotulo?: string;
   titulo: string;
   texto?: string;
   migalhas: { texto: string; href?: string }[];
-  /** nome da foto de fundo; sem isto o topo fica so no gradiente */
-  foto?: 'rodovia' | 'carreta';
+  /** foto de fundo; sem isto o topo fica so no gradiente */
+  foto?: keyof typeof fotos;
 }
 const { rotulo, titulo, texto, migalhas, foto } = Astro.props;
-const imagem = foto === 'rodovia' ? fotoRodovia : foto === 'carreta' ? fotoCarreta : null;
+const imagem = foto ? fotos[foto] : null;
 ---
 
 <section class="hero-interno">

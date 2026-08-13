@@ -16,6 +16,11 @@ export function getStaticPaths() {
 const { modulo } = Astro.props;
 const c = conteudo[modulo.slug];
 
+// alterna as duas fotos entre os modulos, para as paginas irmas nao
+// ficarem todas com o mesmo topo
+const posicao = modulos.findIndex((m) => m.slug === modulo.slug);
+const foto = posicao % 2 === 0 ? 'rodovia' : 'carreta';
+
 const schema = c.faq
   ? {
       '@context': 'https://schema.org',
@@ -35,6 +40,7 @@ const schema = c.faq
     titulo={c.h1}
     texto={c.abertura}
     migalhas={[{ texto: 'TMS', href: '/tms/' }, { texto: modulo.nome }]}
+    foto={foto}
   >
     <div class="acoes-hero">
       <a href="/demonstracao/" class="botao botao-acao">Agendar demonstração</a>

@@ -19,14 +19,14 @@ const {
       <h2>{titulo}</h2>
       <p>{texto}</p>
     </div>
+
     <div class="cta-acoes">
       <a href="/demonstracao/" class="botao botao-acao">Agendar demonstração</a>
       <a href={zap(zapMensagem)} class="botao botao-zap" target="_blank" rel="noopener">
         Falar no WhatsApp
       </a>
-      <a href={`tel:${empresa.telefoneLink}`} class="tel">
-        <span class="rotulo">ou ligue</span>
-        <strong>{empresa.telefone}</strong>
+      <a href={`tel:${empresa.telefoneLink}`} class="botao botao-fantasma tel">
+        {empresa.telefone}
       </a>
     </div>
   </div>
@@ -37,15 +37,17 @@ const {
     background: var(--tinta);
     color: #fff;
   }
+  /* texto em cima, botoes lado a lado embaixo: em coluna estreita
+     eles ficavam empilhados e sobrava tela vazia à esquerda */
   .cta-conteudo {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 34px;
-    flex-wrap: wrap;
+    text-align: center;
+    gap: 26px;
   }
   .cta-texto {
-    max-width: 54ch;
+    max-width: 58ch;
   }
   .cta h2 {
     color: #fff;
@@ -54,32 +56,28 @@ const {
   .cta p {
     color: #A9BECA;
     margin: 0;
-    font-size: 17px;
+    font-size: 17.5px;
   }
   .cta-acoes {
     display: flex;
-    flex-direction: column;
-    gap: 11px;
-    min-width: 260px;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .cta-acoes .botao {
+    min-width: 220px;
   }
   .tel {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    text-decoration: none;
-    text-align: center;
-    margin-top: 4px;
-  }
-  .tel .rotulo {
-    color: #7E96A4;
-  }
-  .tel strong {
     font-family: var(--f-mono);
-    font-size: 18px;
-    color: #fff;
     letter-spacing: -0.01em;
   }
-  .tel:hover strong {
-    color: var(--ciano);
+
+  @media (max-width: 560px) {
+    .cta-acoes {
+      width: 100%;
+    }
+    .cta-acoes .botao {
+      width: 100%;
+    }
   }
 </style>
