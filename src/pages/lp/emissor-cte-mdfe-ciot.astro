@@ -1,0 +1,75 @@
+---
+import Campanha from '../../layouts/Campanha.astro';
+---
+
+<Campanha
+  titulo="Emissor de CT-e, MDF-e e CIOT para Transportadora | Aucom"
+  descricao="Sistema para emitir CT-e, MDF-e, DACTE e CIOT integrado à SEFAZ, com conferência antes do envio e contingência automática. Peça uma demonstração."
+  selo="CT-e · MDF-e · CIOT · DACTE"
+  h1="Emissor de CT-e, MDF-e e CIOT integrado à SEFAZ"
+  abertura="Conferência antes de transmitir e contingência automática quando o serviço cai — para o caminhão não ficar parado esperando documento. De quem atende transportadora há 30 anos."
+  destaques={[
+    'Conferência <strong>antes</strong> do envio: menos rejeição',
+    'Contingência automática quando a SEFAZ está fora do ar',
+    'MDF-e montado a partir dos CT-e da viagem',
+    'CIOT gerado junto da viagem, não depois dela',
+  ]}
+  dores={[
+    {
+      icone: 'alerta',
+      titulo: 'Rejeição da SEFAZ na hora errada',
+      texto:
+        'CFOP, tomador, peso divergente. Quase toda rejeição vem de um dado que já estava errado antes do envio — o sistema confere isso antes.',
+    },
+    {
+      icone: 'relogio',
+      titulo: 'SEFAZ fora do ar e operação parada',
+      texto:
+        'A emissão entra em contingência e você continua carregando. Quando o serviço volta, as transmissões pendentes são regularizadas sozinhas.',
+    },
+    {
+      icone: 'documento',
+      titulo: 'MDF-e esquecido em aberto',
+      texto:
+        'Manifesto não encerrado vira problema na fiscalização. O sistema controla o encerramento e avisa o que está pendente.',
+    },
+  ]}
+  recursos={[
+    { titulo: 'CT-e modelo 57 e CT-e OS', texto: 'Carga fracionada, lotação, redespacho e subcontratação, com o tomador certo em cada caso.' },
+    { titulo: 'MDF-e com encerramento controlado', texto: 'Montado a partir dos CT-e da viagem, com veículo, motorista e percurso preenchidos.' },
+    { titulo: 'CIOT e pagamento de frete', texto: 'Declaração a partir da viagem, com adiantamento, saldo e vale-pedágio no mesmo lugar.' },
+    { titulo: 'DACTE impresso e por e-mail', texto: 'Gerado na hora, enviado ao tomador e guardado junto do documento.' },
+    { titulo: 'Carta de correção e cancelamento', texto: 'Dentro do prazo legal, com histórico de quem fez e quando.' },
+    { titulo: 'Guarda dos XML', texto: 'Emitidos e recebidos, organizados por período, prontos para a contabilidade e para os 5 anos de guarda.' },
+    { titulo: 'Importação de XML de NF-e', texto: 'O XML do embarcador vira CT-e sem digitação: peso, valor, destinatário e chave já preenchidos.' },
+    { titulo: 'Séries e filiais', texto: 'Numeração por filial e aviso de quebra de sequência antes de virar problema no fisco.' },
+  ]}
+  faq={[
+    {
+      p: 'O sistema emite CT-e OS além do CT-e normal?',
+      r: 'Sim. CT-e modelo 57 para transporte de carga e CT-e OS para prestação de serviço, cada um com as regras fiscais próprias.',
+    },
+    {
+      p: 'Como funciona a contingência?',
+      r: 'Quando a SEFAZ fica indisponível, a emissão continua em contingência e o carregamento não para. Assim que o serviço volta, o sistema regulariza as transmissões pendentes sem que ninguém precise lembrar disso.',
+    },
+    {
+      p: 'Dá para emitir de mais de uma filial?',
+      r: 'Sim, com série e numeração próprias por filial e visão consolidada na matriz.',
+    },
+    {
+      p: 'Quando o CIOT é obrigatório?',
+      r: 'Sempre que a transportadora contrata transportador autônomo para uma operação de transporte remunerado. A declaração precisa existir antes de o veículo rodar — por isso ela nasce junto da viagem no sistema.',
+    },
+    {
+      p: 'Consigo importar o XML da nota do meu cliente?',
+      r: 'Sim, e é onde está o maior ganho de tempo: o XML entra e o conhecimento sai preenchido, inclusive com várias notas em um mesmo CT-e.',
+    },
+    {
+      p: 'Quanto tempo leva para começar a emitir?',
+      r: 'De 2 a 6 semanas, conforme o porte da operação e a migração de dados. O prazo é fechado no diagnóstico.',
+    },
+  ]}
+  origem="lp-fiscal"
+  zapMensagem="Olá! Vi o anúncio sobre emissão de CT-e e MDF-e e quero saber mais."
+/>

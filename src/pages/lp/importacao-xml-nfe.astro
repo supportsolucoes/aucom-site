@@ -1,0 +1,73 @@
+---
+import Campanha from '../../layouts/Campanha.astro';
+---
+
+<Campanha
+  titulo="Importar XML de NF-e e Gerar CT-e sem Digitar | Aucom TMS"
+  descricao="Importe o XML da nota fiscal do embarcador e gere o CT-e sem digitação: peso, valor, destinatário e chave preenchidos, com conferência automática."
+  selo="Importação de XML de nota fiscal"
+  h1="Importe o XML da nota e gere o CT-e sem digitar nota por nota"
+  abertura="O arquivo que o embarcador já te manda vira conhecimento de transporte preenchido. Menos tempo de escritório, menos erro de digitação, menos rejeição na SEFAZ."
+  destaques={[
+    'Peso, valor, destinatário e chave da NF-e <strong>preenchidos sozinhos</strong>',
+    'Várias notas do mesmo destino em um único CT-e',
+    'Importação em lote: a pasta do dia inteira de uma vez',
+    'Frete calculado pela tabela do cliente, sem recalcular à mão',
+  ]}
+  dores={[
+    {
+      icone: 'xml',
+      titulo: 'Uma tarde inteira digitando nota',
+      texto:
+        'Numa carga fracionada com 30 notas, alguém do escritório passa a tarde redigitando remetente, destinatário, peso, valor e uma chave de 44 dígitos.',
+    },
+    {
+      icone: 'alerta',
+      titulo: 'Erro de digitação que vira rejeição',
+      texto:
+        'Um dígito trocado na chave e o CT-e volta. O caminhão espera, o cliente cobra e o faturamento atrasa.',
+    },
+    {
+      icone: 'relogio',
+      titulo: 'Romaneio refeito do zero',
+      texto:
+        'Depois de digitar tudo, ainda é preciso montar o romaneio de carregamento — de novo, na mão.',
+    },
+  ]}
+  recursos={[
+    { titulo: 'O XML entra e vira CT-e', texto: 'Remetente, destinatário, peso, volume, valor da mercadoria e chave da NF-e preenchidos a partir do arquivo.' },
+    { titulo: 'Várias notas, um conhecimento', texto: 'Carga fracionada para o mesmo destino vira um CT-e só, com todas as chaves vinculadas.' },
+    { titulo: 'Importação em lote', texto: 'Selecione a pasta com os XML do dia e importe tudo, com relatório do que entrou e do que precisa de atenção.' },
+    { titulo: 'Conferência automática', texto: 'Compara peso e valor, avisa nota duplicada e aponta divergência antes de gerar o documento.' },
+    { titulo: 'Frete pela tabela do cliente', texto: 'Cálculo por peso, valor, volume ou faixa de quilometragem, com os dados que vieram da nota.' },
+    { titulo: 'Romaneio direto das notas', texto: 'Da mesma importação sai o romaneio de carregamento, na ordem de entrega.' },
+  ]}
+  faq={[
+    {
+      p: 'E se o embarcador não mandar o XML?',
+      r: 'Dá para buscar pela chave de acesso, quando disponível, ou lançar manualmente. Mas na maioria das operações o embarcador envia o arquivo — e aí o ganho é imediato.',
+    },
+    {
+      p: 'Funciona com XML de qualquer emissor?',
+      r: 'Sim. O XML da NF-e segue layout nacional da SEFAZ, então não importa qual sistema o seu cliente usa para emitir.',
+    },
+    {
+      p: 'Consigo importar várias notas de uma vez?',
+      r: 'Sim, em lote. O sistema mostra o que foi importado, o que já existia e o que precisa de conferência.',
+    },
+    {
+      p: 'O sistema calcula o frete a partir da nota?',
+      r: 'Sim, pela tabela cadastrada para aquele cliente — por peso, valor, volume ou faixa de quilometragem.',
+    },
+    {
+      p: 'Isso substitui o meu emissor de CT-e?',
+      r: 'A importação faz parte do TMS da Aucom, que também emite CT-e, MDF-e, DACTE e CIOT. É o mesmo sistema, não um complemento à parte.',
+    },
+    {
+      p: 'Quanto tempo leva para implantar?',
+      r: 'De 2 a 6 semanas, conforme o porte da operação. O prazo é fechado no diagnóstico e não muda depois.',
+    },
+  ]}
+  origem="lp-xml"
+  zapMensagem="Olá! Vi o anúncio sobre importar XML da nota para gerar CT-e e quero saber mais."
+/>

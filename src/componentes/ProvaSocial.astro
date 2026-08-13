@@ -1,0 +1,53 @@
+---
+import { provas } from '../dados/site';
+
+interface Props {
+  compacto?: boolean;
+}
+const { compacto = false } = Astro.props;
+---
+
+<div class:list={['prova', { compacto }]}>
+  <div class="campos">
+    {provas.map((p) => (
+      <div class="campo">
+        <span class="rotulo">{p.rotulo}</span>
+        <span class="valor grande">{p.valor}</span>
+        {p.nota && <span class="nota">{p.nota}</span>}
+      </div>
+    ))}
+  </div>
+
+  <p class="pendente">
+    <strong>Para a Aucom preencher:</strong> os números reais desta faixa (transportadoras
+    atendidas, CT-e emitidos por mês, tempo de casa do cliente mais antigo) e os logos
+    autorizados. É o bloco que mais pesa na decisão de quem não conhece a empresa.
+  </p>
+</div>
+
+<style>
+  .prova .valor.grande {
+    color: var(--azul);
+  }
+  .nota {
+    font-size: 12.5px;
+    color: var(--tinta-3);
+    line-height: 1.4;
+  }
+  .pendente {
+    margin: 12px 0 0;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--tinta-3);
+    background: transparent;
+    border: 1px dashed var(--fio-forte);
+    border-radius: var(--raio-p);
+    padding: 9px 13px;
+  }
+  .pendente strong {
+    color: var(--sinal-esc);
+  }
+  .pendente strong {
+    font-weight: 700;
+  }
+</style>

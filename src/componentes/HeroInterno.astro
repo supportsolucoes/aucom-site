@@ -1,0 +1,103 @@
+---
+import Migalhas from './Migalhas.astro';
+import { semQuebra } from '../dados/texto';
+import { Image } from 'astro:assets';
+import fotoRodovia from '../imagens/rodovia-interior-sp.jpg';
+import fotoCarreta from '../imagens/carreta-rodovia-br.jpg';
+
+interface Props {
+  rotulo?: string;
+  titulo: string;
+  texto?: string;
+  migalhas: { texto: string; href?: string }[];
+  /** nome da foto de fundo; sem isto o topo fica so no gradiente */
+  foto?: 'rodovia' | 'carreta';
+}
+const { rotulo, titulo, texto, migalhas, foto } = Astro.props;
+const imagem = foto === 'rodovia' ? fotoRodovia : foto === 'carreta' ? fotoCarreta : null;
+---
+
+<section class="hero-interno">
+  {imagem && (
+    <Image
+      class="hero-foto"
+      src={imagem}
+      alt=""
+      widths={[900, 1400, 1920]}
+      sizes="100vw"
+      format="webp"
+      quality={70}
+      loading="eager"
+      fetchpriority="high"
+    />
+  )}
+  <div class="hero-veu" aria-hidden="true"></div>
+
+  <div class="faixa">
+    <Migalhas itens={migalhas} />
+    <div class="hero-texto">
+      {rotulo && <span class="rotulo">{rotulo}</span>}
+      <h1 set:html={semQuebra(titulo)} />
+      {texto && <p class="subtitulo" set:html={semQuebra(texto)} />}
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-interno {
+    position: relative;
+    isolation: isolate;
+    background:
+      radial-gradient(90% 80% at 85% 0%, #10496E 0%, transparent 62%),
+      linear-gradient(160deg, var(--noite-2) 0%, var(--noite) 72%);
+    color: #fff;
+    padding-bottom: clamp(44px, 6vw, 76px);
+    overflow: hidden;
+  }
+  .hero-foto {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+  .hero-veu {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      95deg,
+      rgba(4, 18, 29, 0.95) 0%,
+      rgba(5, 22, 35, 0.9) 42%,
+      rgba(6, 28, 45, 0.62) 100%
+    );
+  }
+  .hero-texto {
+    max-width: 62ch;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    padding-top: clamp(22px, 3vw, 34px);
+  }
+  .hero-texto .rotulo {
+    color: var(--ciano);
+  }
+  .hero-texto h1 {
+    color: #fff;
+  }
+  .hero-texto .subtitulo {
+    color: #A8C4D6;
+  }
+  .hero-interno :global(.migalhas a) {
+    color: #7C9DB3;
+  }
+  .hero-interno :global(.migalhas span) {
+    color: #B8CEDC;
+  }
+  .hero-interno :global(.migalhas li + li::before) {
+    color: #47657A;
+  }
+</style>

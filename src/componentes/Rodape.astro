@@ -1,0 +1,180 @@
+---
+import { empresa, modulos, modulosRisco } from '../dados/site';
+import Marca from './Marca.astro';
+const ano = new Date().getFullYear();
+---
+
+<footer class="rodape">
+  <div class="faixa">
+    <div class="colunas">
+      <div class="col marca-col">
+        <Marca claro altura={36} />
+        <p>
+          Sistemas para transportadoras há mais de {empresa.anos} anos, em {empresa.cidade}, interior de
+          São Paulo. Transporte, documentos fiscais e risco no mesmo sistema.
+        </p>
+        <div class="sociais">
+          <a href={empresa.sociais.linkedin} rel="noopener">LinkedIn</a>
+          <a href={empresa.sociais.instagram} rel="noopener">Instagram</a>
+          <a href={empresa.sociais.youtube} rel="noopener">YouTube</a>
+          <a href={empresa.sociais.facebook} rel="noopener">Facebook</a>
+        </div>
+      </div>
+
+      <div class="col">
+        <span class="rotulo">TMS</span>
+        <ul>
+          <li><a href="/tms/">Visão geral</a></li>
+          {modulos.slice(0, 5).map((m) => (
+            <li><a href={`/tms/${m.slug}/`}>{m.nome}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="col">
+        <span class="rotulo">Também no TMS</span>
+        <ul>
+          {modulos.slice(5).map((m) => (
+            <li><a href={`/tms/${m.slug}/`}>{m.nome}</a></li>
+          ))}
+          <li><a href="/gerenciamento-de-risco/">Gerenciamento de risco</a></li>
+          {modulosRisco.map((m) => (
+            <li><a href={`/gerenciamento-de-risco/${m.slug}/`}>{m.nome}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="col">
+        <span class="rotulo">Empresa</span>
+        <ul>
+          <li><a href="/erp/">ERP</a></li>
+          <li><a href="/planos/">Planos</a></li>
+          <li><a href="/clientes/">Clientes</a></li>
+          <li><a href="/sobre/">Sobre a Aucom</a></li>
+          <li><a href="/contato/">Contato</a></li>
+          <li><a href={empresa.areaCliente} rel="noopener">Área do cliente</a></li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <span class="rotulo">Atendimento</span>
+        <ul>
+          <li><a href={`tel:${empresa.telefoneLink}`}>{empresa.telefone}</a></li>
+          <li><a href={`mailto:${empresa.email}`}>{empresa.email}</a></li>
+          <li class="sem-link">{empresa.horario}</li>
+          <li class="sem-link">{empresa.cidade} — {empresa.uf}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="base">
+      <span>© {ano} {empresa.nomeCompleto}. Todos os direitos reservados.</span>
+      <div class="legais">
+        <a href="/politica-de-privacidade/">Política de privacidade</a>
+        <a href="/termos-e-condicoes/">Termos e condições</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .rodape {
+    background: var(--tinta);
+    color: #B8C9D3;
+    padding: 54px 0 26px;
+    margin-top: 20px;
+    font-size: 15px;
+  }
+  .colunas {
+    display: grid;
+    grid-template-columns: 1.6fr repeat(4, 1fr);
+    gap: 34px 26px;
+  }
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+  }
+  .marca-col img {
+    height: 36px;
+    width: auto;
+  }
+  .marca-col p {
+    font-size: 14.5px;
+    line-height: 1.55;
+    max-width: 34ch;
+    color: #92AAB8;
+  }
+  .rotulo {
+    color: #6D8797;
+  }
+  .col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .col a {
+    color: #D5E1E8;
+    text-decoration: none;
+    font-size: 14.5px;
+  }
+  .col a:hover {
+    color: var(--ciano);
+    text-decoration: underline;
+  }
+  .col .sem-link {
+    color: #92AAB8;
+    font-size: 14.5px;
+  }
+  .sociais {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin-top: 2px;
+  }
+  .sociais a {
+    color: #D5E1E8;
+    text-decoration: none;
+    font-family: var(--f-mono);
+    font-size: 12.5px;
+  }
+  .sociais a:hover {
+    color: var(--ciano);
+  }
+
+  .base {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #233945;
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-size: 13.5px;
+    color: #7E96A4;
+  }
+  .legais {
+    display: flex;
+    gap: 20px;
+  }
+  .legais a {
+    color: #7E96A4;
+    text-decoration: none;
+  }
+  .legais a:hover {
+    color: var(--ciano);
+  }
+
+  @media (max-width: 900px) {
+    .colunas {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .marca-col {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

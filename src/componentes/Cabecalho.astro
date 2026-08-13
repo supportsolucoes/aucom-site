@@ -1,0 +1,239 @@
+---
+import { empresa, menu } from '../dados/site';
+import Marca from './Marca.astro';
+const atual = Astro.url.pathname;
+---
+
+<header class="cabecalho">
+  <div class="topo">
+    <div class="faixa topo-conteudo">
+      <span class="rotulo">Sistemas para transportadoras desde 1995 · {empresa.cidade}/{empresa.uf}</span>
+      <div class="topo-contato">
+        <a href={`tel:${empresa.telefoneLink}`}>{empresa.telefone}</a>
+        <a href={empresa.areaCliente} rel="noopener">Área do cliente</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="barra">
+    <div class="faixa barra-conteudo">
+      <a href="/" class="marca" aria-label="Aucom, página inicial">
+        <img src="/marca/aucom.png" alt="Aucom" width="200" height="55" />
+      </a>
+
+      <nav class="menu" aria-label="Principal">
+        {menu.map((item) => (
+          <a
+            href={item.href}
+            class:list={['menu-link', { ativo: atual.startsWith(item.href) }]}
+            aria-current={atual.startsWith(item.href) ? 'page' : undefined}
+          >
+            {item.texto}
+          </a>
+        ))}
+      </nav>
+
+      <a href="/demonstracao/" class="botao botao-acao botao-topo">Agendar demonstração</a>
+
+      <button class="abre-menu" aria-expanded="false" aria-controls="menu-movel" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="menu-movel" id="menu-movel" aria-label="Principal" hidden>
+    <div class="faixa">
+      {menu.map((item) => <a href={item.href}>{item.texto}</a>)}
+      <a href="/demonstracao/" class="botao botao-acao">Agendar demonstração</a>
+      <a href={`tel:${empresa.telefoneLink}`} class="tel-movel">{empresa.telefone}</a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  /* barra escura: e o unico jeito de usar o logo oficial da Aucom,
+     que so existe em versao clara para fundo escuro */
+  .cabecalho {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: var(--noite);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .topo {
+    background: rgba(0, 0, 0, 0.28);
+    color: #fff;
+  }
+  .topo-conteudo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    flex-wrap: wrap;
+  }
+  .topo .rotulo {
+    color: #7C9DB3;
+  }
+  .topo-contato {
+    display: flex;
+    gap: 20px;
+    font-family: var(--f-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+  }
+  .topo-contato a {
+    color: #fff;
+    text-decoration: none;
+  }
+  .topo-contato a:hover {
+    color: var(--ciano);
+    text-decoration: underline;
+  }
+
+  .barra-conteudo {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .marca {
+    flex: none;
+    line-height: 0;
+  }
+  .marca img {
+    height: 36px;
+    width: auto;
+  }
+
+  .menu {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+    flex-wrap: wrap;
+  }
+  .menu-link {
+    text-decoration: none;
+    color: #D5E1E8;
+    font-size: 15.5px;
+    font-weight: 550;
+    padding: 8px 11px;
+    border-radius: var(--raio-p);
+    white-space: nowrap;
+    transition: background var(--transicao), color var(--transicao);
+  }
+  .menu-link:hover {
+    background: rgba(255, 255, 255, 0.09);
+    color: #fff;
+  }
+  .menu-link.ativo {
+    color: #fff;
+    box-shadow: inset 0 -2px 0 var(--ciano);
+    border-radius: 0;
+  }
+
+  .botao-topo {
+    flex: none;
+    padding: 11px 18px;
+    min-height: 44px;
+    font-size: 15px;
+  }
+
+  .abre-menu {
+    display: none;
+    margin-left: auto;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--raio-p);
+    width: 46px;
+    height: 44px;
+    cursor: pointer;
+    padding: 12px 11px;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .abre-menu span {
+    display: block;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform var(--transicao), opacity var(--transicao);
+  }
+  .abre-menu[aria-expanded='true'] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .abre-menu[aria-expanded='true'] span:nth-child(2) {
+    opacity: 0;
+  }
+  .abre-menu[aria-expanded='true'] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .menu-movel {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--noite);
+    padding: 14px 0 20px;
+  }
+  .menu-movel .faixa {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .menu-movel a {
+    text-decoration: none;
+    color: #E4EDF2;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 13px 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .menu-movel .botao {
+    margin-top: 14px;
+    border-bottom: 0;
+    color: #fff;
+  }
+  .menu-movel .tel-movel {
+    font-family: var(--f-mono);
+    text-align: center;
+    border-bottom: 0;
+    color: var(--ciano);
+    padding-top: 14px;
+  }
+
+  @media (max-width: 1000px) {
+    .menu,
+    .botao-topo {
+      display: none;
+    }
+    .abre-menu {
+      display: flex;
+    }
+  }
+  @media (min-width: 1001px) {
+    .menu-movel {
+      display: none !important;
+    }
+  }
+  @media (max-width: 560px) {
+    .topo .rotulo {
+      display: none;
+    }
+    .topo-conteudo {
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  const botao = document.querySelector<HTMLButtonElement>('.abre-menu');
+  const painel = document.getElementById('menu-movel');
+  botao?.addEventListener('click', () => {
+    const aberto = botao.getAttribute('aria-expanded') === 'true';
+    botao.setAttribute('aria-expanded', String(!aberto));
+    botao.setAttribute('aria-label', aberto ? 'Abrir menu' : 'Fechar menu');
+    if (painel) painel.hidden = aberto;
+  });
+</script>

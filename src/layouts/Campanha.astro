@@ -1,0 +1,341 @@
+---
+import Base from './Base.astro';
+import Formulario from '../componentes/Formulario.astro';
+import ProvaSocial from '../componentes/ProvaSocial.astro';
+import Faq from '../componentes/Faq.astro';
+import Icone from '../componentes/Icone.astro';
+import { empresa, zap } from '../dados/site';
+import { semQuebra } from '../dados/texto';
+
+/**
+ * Layout das landing pages de anuncio.
+ * Sem menu e sem saida lateral: quem chega aqui clicou procurando
+ * uma coisa so, e a pagina tem uma acao possivel.
+ */
+interface Props {
+  titulo: string;
+  descricao: string;
+  selo: string;
+  h1: string;
+  abertura: string;
+  destaques: string[];
+  dores: { icone: string; titulo: string; texto: string }[];
+  recursos: { titulo: string; texto: string }[];
+  faq: { p: string; r: string }[];
+  origem: string;
+  zapMensagem: string;
+}
+
+const { titulo, descricao, selo, h1, abertura, destaques, dores, recursos, faq, origem, zapMensagem } =
+  Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.p,
+    acceptedAnswer: { '@type': 'Answer', text: f.r },
+  })),
+};
+---
+
+<Base titulo={titulo} descricao={descricao} zapMensagem={zapMensagem} campanha schema={schema}>
+  <!-- barra minima: marca e telefone. Sem menu, de proposito. -->
+  <header class="barra-lp">
+    <div class="faixa barra-conteudo">
+      <img src="/marca/aucom.png" alt="Aucom" width="180" height="50" />
+      <div class="barra-contato">
+        <span class="rotulo">Atendimento em {empresa.cidade}/{empresa.uf}</span>
+        <a href={`tel:${empresa.telefoneLink}`}>{empresa.telefone}</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="lp-topo">
+    <img class="lp-foto" src="/img/rodovia-interior-sp.jpg" alt="" width="1920" height="1080" fetchpriority="high" />
+    <div class="lp-veu" aria-hidden="true"></div>
+
+    <div class="faixa lp-grade">
+      <div class="lp-texto">
+        <span class="selo-topo">{selo}</span>
+        <h1 set:html={semQuebra(h1)} />
+        <p class="subtitulo" set:html={semQuebra(abertura)} />
+        <ul class="lista check destaques">
+          {destaques.map((d) => <li set:html={d} />)}
+        </ul>
+        <div class="acoes">
+          <a href={zap(zapMensagem)} class="botao botao-zap" target="_blank" rel="noopener">
+            Falar no WhatsApp
+          </a>
+          <a href={`tel:${empresa.telefoneLink}`} class="botao botao-fantasma tel">{empresa.telefone}</a>
+        </div>
+      </div>
+
+      <div class="lp-form">
+        <Formulario
+          origem={origem}
+          titulo="Peça uma demonstração"
+          apoio="30 minutos, sem compromisso. Respondemos em até 1 dia útil."
+          compacto
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-prova">
+    <div class="faixa"><ProvaSocial /></div>
+  </section>
+
+  <section class="fundo-claro">
+    <div class="faixa">
+      <div class="cabeca"><h2>O que trava hoje</h2></div>
+      <div class="grade grade-3">
+        {dores.map((d) => (
+          <div class="cartao dor">
+            <span class="icone-selo claro"><Icone nome={d.icone} /></span>
+            <h3>{d.titulo}</h3>
+            <p>{d.texto}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="fundo-papel">
+    <div class="faixa">
+      <div class="cabeca"><h2>O que o sistema faz</h2></div>
+      <div class="grade grade-2">
+        {recursos.map((r) => (
+          <div class="cartao">
+            <h3>{r.titulo}</h3>
+            <p>{r.texto}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="fundo-claro">
+    <div class="faixa texto-largo"><Faq itens={faq} /></div>
+  </section>
+
+  <!-- fechamento: o formulario de novo, para quem rolou ate aqui -->
+  <section class="fundo-escuro">
+    <div class="faixa lp-fim">
+      <div>
+        <span class="rotulo">Último passo</span>
+        <h2>Veja funcionando com a sua operação</h2>
+        <p>
+          Sem compromisso e sem script de call center. Quem conduz a demonstração conhece transporte
+          e vai perguntar da sua frota antes de mostrar tela.
+        </p>
+        <div class="acoes">
+          <a href={zap(zapMensagem)} class="botao botao-zap" target="_blank" rel="noopener">
+            Falar no WhatsApp
+          </a>
+        </div>
+      </div>
+      <Formulario origem={`${origem}-fim`} titulo="Agendar demonstração" apoio="Respondemos em até 1 dia útil." compacto />
+    </div>
+  </section>
+
+  <footer class="rodape-lp">
+    <div class="faixa">
+      <span>© {new Date().getFullYear()} {empresa.nomeCompleto} — {empresa.cidade}/{empresa.uf}</span>
+      <a href="/politica-de-privacidade/">Política de privacidade</a>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  .barra-lp {
+    background: var(--noite);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 12px 0;
+  }
+  .barra-conteudo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .barra-lp img {
+    height: 34px;
+    width: auto;
+  }
+  .barra-contato {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1px;
+  }
+  .barra-contato .rotulo {
+    color: #7C9DB3;
+  }
+  .barra-contato a {
+    font-family: var(--f-mono);
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+  }
+  .barra-contato a:hover {
+    color: var(--ciano);
+  }
+
+  .lp-topo {
+    position: relative;
+    isolation: isolate;
+    color: #fff;
+    padding: clamp(36px, 5vw, 64px) 0 clamp(90px, 10vw, 130px);
+    background: var(--noite);
+  }
+  .lp-foto {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 55%;
+    z-index: -2;
+  }
+  .lp-veu {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      95deg,
+      rgba(4, 18, 29, 0.94) 0%,
+      rgba(5, 22, 35, 0.88) 32%,
+      rgba(6, 28, 45, 0.55) 66%,
+      rgba(7, 34, 54, 0.3) 100%
+    );
+  }
+  .lp-grade {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
+    gap: clamp(28px, 4vw, 52px);
+    align-items: center;
+  }
+  .lp-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .lp-texto h1 {
+    color: #fff;
+    text-shadow: 0 2px 40px rgba(3, 15, 25, 0.7);
+  }
+  .lp-texto .subtitulo {
+    color: #A8C4D6;
+    max-width: 54ch;
+  }
+  .selo-topo {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ciano);
+    background: rgba(32, 179, 227, 0.12);
+    border: 1px solid rgba(32, 179, 227, 0.32);
+    padding: 6px 12px;
+    border-radius: 100px;
+  }
+  .destaques li {
+    color: #D6E5EF;
+    font-size: 16.5px;
+  }
+  .destaques li :global(strong) {
+    color: #fff;
+  }
+  .destaques.check li::before {
+    border-color: var(--ciano);
+  }
+  .acoes {
+    display: flex;
+    gap: 11px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .tel {
+    font-family: var(--f-mono);
+  }
+  .lp-form :global(.form) {
+    box-shadow: var(--sombra-flutua);
+  }
+
+  .lp-prova {
+    padding: 0 0 clamp(28px, 4vw, 40px);
+    margin-top: clamp(-70px, -6vw, -44px);
+    position: relative;
+    z-index: 3;
+  }
+  .lp-prova :global(.campos) {
+    box-shadow: var(--sombra-alta);
+    border-color: transparent;
+  }
+
+  .dor {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .cartao h3 {
+    font-size: 18px;
+  }
+  .cartao p {
+    color: var(--tinta-2);
+    font-size: 15.5px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .texto-largo {
+    max-width: 900px;
+  }
+
+  .lp-fim {
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    gap: clamp(28px, 4vw, 52px);
+    align-items: center;
+  }
+  .lp-fim p {
+    max-width: 52ch;
+    margin: 12px 0 18px;
+  }
+
+  .rodape-lp {
+    background: var(--noite);
+    color: #7E96A4;
+    padding: 22px 0;
+    font-size: 13.5px;
+  }
+  .rodape-lp .faixa {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .rodape-lp a {
+    color: #7E96A4;
+    text-decoration: none;
+  }
+  .rodape-lp a:hover {
+    color: var(--ciano);
+  }
+
+  @media (max-width: 960px) {
+    .lp-grade,
+    .lp-fim {
+      grid-template-columns: 1fr;
+    }
+    .lp-veu {
+      background: linear-gradient(180deg, rgba(4, 18, 29, 0.85) 0%, rgba(5, 24, 38, 0.94) 60%);
+    }
+  }
+</style>

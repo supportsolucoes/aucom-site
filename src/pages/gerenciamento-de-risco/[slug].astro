@@ -1,0 +1,128 @@
+---
+import Base from '../../layouts/Base.astro';
+import HeroInterno from '../../componentes/HeroInterno.astro';
+import Formulario from '../../componentes/Formulario.astro';
+import CtaFinal from '../../componentes/CtaFinal.astro';
+import { modulosRisco } from '../../dados/site';
+
+// declarado fora de getStaticPaths de proposito: o Astro executa
+// getStaticPaths isolado, e este objeto so e usado no corpo da pagina
+const conteudo: Record<
+  string,
+  { title: string; descricao: string; h1: string; abertura: string; itens: { t: string; d: string }[]; zap: string }
+> = {
+  'cadastro-de-motoristas': {
+    title: 'Cadastro e Consulta de Motoristas para Transportadoras | Aucom',
+    descricao:
+      'Cadastro do motorista e do veículo, checagem antes da viagem e histórico de quem já rodou para a sua transportadora.',
+    h1: 'Cadastro e consulta de motoristas',
+    abertura:
+      'Antes de entregar uma carga a alguém, a transportadora precisa saber quem é essa pessoa, qual veículo ela vai levar e o que aconteceu nas viagens anteriores. Quando isso está em ficha de papel ou na memória de quem libera, o risco fica com quem pagou pela carga.',
+    itens: [
+      { t: 'Ficha completa do motorista', d: 'Documentos, CNH e validade, dados de contato e vínculo (próprio, agregado ou terceiro).' },
+      { t: 'Cadastro do veículo e do conjunto', d: 'Cavalo, carreta, placas, RNTRC, rastreador instalado e documentação com data de vencimento.' },
+      { t: 'Checagem antes de liberar', d: 'A viagem só é liberada quando o cadastro está completo e dentro da validade. O sistema avisa o que falta.' },
+      { t: 'Histórico por motorista', d: 'Viagens feitas, ocorrências registradas e avaliação — a informação que decide se ele roda de novo para você.' },
+      { t: 'Alerta de documento vencendo', d: 'CNH, licenciamento e vistoria avisados antes de virar problema na estrada.' },
+      { t: 'Registro de quem liberou', d: 'Cada liberação fica com nome e horário. Em transporte, saber quem autorizou vale tanto quanto a autorização.' },
+    ],
+    zap: 'Olá! Vim pela página de cadastro e consulta de motoristas e quero saber mais.',
+  },
+  'monitoramento-de-cargas': {
+    title: 'Monitoramento de Cargas e Ocorrências | Aucom',
+    descricao:
+      'Regras por tipo de carga e por rota, acompanhamento da viagem e registro de ocorrências dentro do mesmo sistema do CT-e.',
+    h1: 'Monitoramento de cargas e ocorrências',
+    abertura:
+      'Acompanhar a viagem só tem valor se alguém puder agir enquanto ela acontece. Depois que a carga sumiu, o relatório serve para o seguro — não para a operação.',
+    itens: [
+      { t: 'Regra por tipo de carga', d: 'Carga de alto valor exige checagem e acompanhamento adicionais; carga comum segue o fluxo normal.' },
+      { t: 'Rota combinada', d: 'A rota prevista fica registrada na viagem, e o desvio aparece para quem acompanha.' },
+      { t: 'Acompanhamento da viagem', d: 'Situação de cada carga em andamento, com a posição vinda do rastreador integrado.' },
+      { t: 'Ocorrência registrada na hora', d: 'Parada não prevista, atraso, avaria ou recusa, com horário, responsável e o que foi feito.' },
+      { t: 'Histórico para negociar seguro', d: 'Ocorrências organizadas por período, rota e tipo de carga — argumento na hora de renovar apólice.' },
+      { t: 'Ligação com o documento', d: 'Cada ocorrência fica amarrada ao CT-e e à viagem. Nada de planilha separada para reconstruir a história.' },
+    ],
+    zap: 'Olá! Vim pela página de monitoramento de cargas e quero saber mais.',
+  },
+};
+
+export function getStaticPaths() {
+  return modulosRisco.map((m) => ({ params: { slug: m.slug }, props: { modulo: m } }));
+}
+
+const { modulo } = Astro.props;
+const c = conteudo[modulo.slug];
+---
+
+<Base titulo={c.title} descricao={c.descricao} zapMensagem={c.zap}>
+  <HeroInterno
+    rotulo="Gerenciamento de risco"
+    titulo={c.h1}
+    texto={c.abertura}
+    migalhas={[
+      { texto: 'Gerenciamento de risco', href: '/gerenciamento-de-risco/' },
+      { texto: modulo.nome },
+    ]}
+  >
+    <a href="/demonstracao/" class="botao botao-acao">Agendar demonstração</a>
+  </HeroInterno>
+
+  <section class="fundo-claro">
+    <div class="faixa">
+      <div class="cabeca">
+        <span class="rotulo">O que está incluído</span>
+        <h2>Como funciona na prática</h2>
+      </div>
+      <div class="grade grade-2">
+        {c.itens.map((i) => (
+          <div class="cartao">
+            <h3>{i.t}</h3>
+            <p>{i.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="fundo-escuro">
+    <div class="faixa duas-colunas">
+      <div>
+        <span class="rotulo">Fala com a gente</span>
+        <h2>Veja funcionando com a sua operação</h2>
+        <p>Demonstração de 30 minutos, conduzida por quem conhece transporte.</p>
+      </div>
+      <Formulario origem={`erm-${modulo.slug}`} compacto titulo="Agendar demonstração" apoio="Respondemos em até 1 dia útil." />
+    </div>
+  </section>
+
+  <CtaFinal zapMensagem={c.zap} />
+</Base>
+
+<style>
+  .cartao h3 {
+    font-size: 18px;
+    margin-bottom: 7px;
+  }
+  .cartao p {
+    color: var(--tinta-2);
+    font-size: 15.5px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .duas-colunas {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+  }
+  .duas-colunas p {
+    margin-top: 12px;
+    max-width: 50ch;
+  }
+  @media (max-width: 900px) {
+    .duas-colunas {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

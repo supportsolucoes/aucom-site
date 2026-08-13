@@ -1,0 +1,85 @@
+---
+import { empresa, zap } from '../dados/site';
+
+interface Props {
+  titulo?: string;
+  texto?: string;
+  zapMensagem: string;
+}
+const {
+  titulo = 'Veja o sistema rodando com a sua operação',
+  texto = 'Demonstração de 30 minutos, conduzida por quem entende de transporte. Sem compromisso e sem script de call center.',
+  zapMensagem,
+} = Astro.props;
+---
+
+<section class="cta">
+  <div class="faixa cta-conteudo">
+    <div class="cta-texto">
+      <h2>{titulo}</h2>
+      <p>{texto}</p>
+    </div>
+    <div class="cta-acoes">
+      <a href="/demonstracao/" class="botao botao-acao">Agendar demonstração</a>
+      <a href={zap(zapMensagem)} class="botao botao-zap" target="_blank" rel="noopener">
+        Falar no WhatsApp
+      </a>
+      <a href={`tel:${empresa.telefoneLink}`} class="tel">
+        <span class="rotulo">ou ligue</span>
+        <strong>{empresa.telefone}</strong>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    background: var(--tinta);
+    color: #fff;
+  }
+  .cta-conteudo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 34px;
+    flex-wrap: wrap;
+  }
+  .cta-texto {
+    max-width: 54ch;
+  }
+  .cta h2 {
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .cta p {
+    color: #A9BECA;
+    margin: 0;
+    font-size: 17px;
+  }
+  .cta-acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    min-width: 260px;
+  }
+  .tel {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 4px;
+  }
+  .tel .rotulo {
+    color: #7E96A4;
+  }
+  .tel strong {
+    font-family: var(--f-mono);
+    font-size: 18px;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .tel:hover strong {
+    color: var(--ciano);
+  }
+</style>

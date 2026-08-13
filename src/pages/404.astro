@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import { modulos, empresa, zap } from '../dados/site';
+
+const zapMsg = 'Olá! Não encontrei o que procurava no site e queria uma ajuda.';
+---
+
+<Base
+  titulo="Página não encontrada | Aucom"
+  descricao="A página que você procurava não existe mais. Veja os atalhos para o TMS, planos e contato."
+  naoIndexar
+>
+  <section class="erro">
+    <div class="faixa">
+      <span class="codigo">404</span>
+      <h1>Essa página saiu de rota</h1>
+      <p class="subtitulo">
+        O endereço que você acessou não existe mais — talvez tenha mudado quando reorganizamos o site.
+        Abaixo estão os caminhos mais procurados.
+      </p>
+
+      <div class="grade grade-3 atalhos">
+        <a href="/tms/" class="cartao cartao-link">
+          <h3>Sistema TMS</h3>
+          <p>Documentos fiscais, frota, jornada e risco para transportadoras.</p>
+          <span class="seta">Ver <span aria-hidden="true">→</span></span>
+        </a>
+        {modulos.slice(0, 2).map((m) => (
+          <a href={`/tms/${m.slug}/`} class="cartao cartao-link">
+            <h3>{m.titulo}</h3>
+            <p>{m.resumo}</p>
+            <span class="seta">Ver <span aria-hidden="true">→</span></span>
+          </a>
+        ))}
+      </div>
+
+      <div class="ajuda">
+        <span class="rotulo">Não achou o que procurava?</span>
+        <div class="acoes">
+          <a href={zap(zapMsg)} class="botao botao-zap" target="_blank" rel="noopener">Falar no WhatsApp</a>
+          <a href={`tel:${empresa.telefoneLink}`} class="botao botao-vazado">{empresa.telefone}</a>
+          <a href="/" class="botao botao-vazado">Ir para o início</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .erro {
+    padding: clamp(50px, 8vw, 92px) 0;
+    background: var(--superficie);
+  }
+  .codigo {
+    font-family: var(--f-mono);
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    color: var(--sinal);
+    display: block;
+    margin-bottom: 12px;
+  }
+  .erro h1 {
+    margin-bottom: 14px;
+  }
+  .atalhos {
+    margin-top: 38px;
+  }
+  .ajuda {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--fio);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .acoes {
+    display: flex;
+    gap: 11px;
+    flex-wrap: wrap;
+  }
+</style>

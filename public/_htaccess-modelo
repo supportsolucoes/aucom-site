@@ -1,0 +1,82 @@
+# =====================================================================
+# Aucom — regras de servidor (Apache)
+#
+# COMO USAR: renomear para .htaccess na raiz do site publicado.
+# O nome vai com underline aqui so para o arquivo nao entrar em vigor
+# por engano durante o desenvolvimento.
+#
+# Estas regras resolvem tres achados do diagnostico:
+#   1. www e nao-www respondendo os dois (conteudo duplicado)
+#   2. URLs antigas do site de 2020 sem destino
+#   3. ausencia de cache e compressao
+# =====================================================================
+
+RewriteEngine On
+
+# ---------------------------------------------------------------------
+# 1. Um endereco so: força HTTPS e remove o www
+# ---------------------------------------------------------------------
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://aucom.com.br/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www\.aucom\.com\.br$ [NC]
+RewriteRule ^(.*)$ https://aucom.com.br/$1 [R=301,L]
+
+# /index.html responde no mesmo conteudo da raiz: manda para a raiz
+RewriteRule ^index\.html$ / [R=301,L]
+
+# ---------------------------------------------------------------------
+# 2. URLs do site antigo (2020) -> novas
+# ---------------------------------------------------------------------
+Redirect 301 /empresa/clientes.html              /clientes/
+Redirect 301 /empresa/politica-de-privacidade.html /politica-de-privacidade/
+Redirect 301 /empresa/termos-e-condicoes.html    /termos-e-condicoes/
+
+# a antiga pagina de erro do site velho
+Redirect 301 /404.html /404
+
+# ---------------------------------------------------------------------
+# 3. Compressao
+# ---------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/javascript
+  AddOutputFilterByType BROTLI_COMPRESS application/javascript application/json
+  AddOutputFilterByType BROTLI_COMPRESS image/svg+xml
+</IfModule>
+
+# ---------------------------------------------------------------------
+# 4. Cache dos estaticos (o HTML fica curto para nao segurar mudanca)
+# ---------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html                 "access plus 10 minutes"
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType font/woff2                "access plus 1 year"
+  ExpiresByType image/jpeg                "access plus 6 months"
+  ExpiresByType image/png                 "access plus 6 months"
+  ExpiresByType image/webp                "access plus 6 months"
+  ExpiresByType image/svg+xml             "access plus 6 months"
+</IfModule>
+
+# ---------------------------------------------------------------------
+# 5. Seguranca basica
+# ---------------------------------------------------------------------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  # Ligar o HSTS so depois de confirmar que todo o site abre em HTTPS:
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# ---------------------------------------------------------------------
+# 6. Pagina de erro propria
+# ---------------------------------------------------------------------
+ErrorDocument 404 /404.html

@@ -1,0 +1,120 @@
+---
+import Base from '../layouts/Base.astro';
+import Formulario from '../componentes/Formulario.astro';
+import { empresa, zap } from '../dados/site';
+
+const zapMsg = 'Olá! Quero agendar uma demonstração do sistema da Aucom.';
+---
+
+<Base
+  titulo="Agende uma Demonstração do TMS Aucom"
+  descricao="Demonstração de 30 minutos, sem compromisso, conduzida por quem conhece transporte. Escolha o melhor horário para ver o sistema com o perfil da sua operação."
+  zapMensagem={zapMsg}
+>
+  <section class="demo">
+    <div class="faixa demo-grade">
+      <div class="demo-texto">
+        <span class="rotulo">Demonstração</span>
+        <h1>Veja o sistema rodando com o perfil da sua operação</h1>
+        <p class="subtitulo">
+          Trinta minutos, sem compromisso e sem script de call center. Quem conduz conhece transporte
+          e vai perguntar sobre a sua frota antes de mostrar tela.
+        </p>
+
+        <ul class="lista check">
+          <li>Você diz onde dói hoje: documento, custo, jornada, risco</li>
+          <li>Mostramos exatamente a parte do sistema que resolve aquilo</li>
+          <li>Se não for o caso, a gente diz — não vendemos o que não serve</li>
+        </ul>
+
+        <div class="outros">
+          <span class="rotulo">Prefere falar agora?</span>
+          <div class="acoes">
+            <a href={zap(zapMsg)} class="botao botao-zap" target="_blank" rel="noopener">Falar no WhatsApp</a>
+            <a href={`tel:${empresa.telefoneLink}`} class="botao botao-fantasma tel">{empresa.telefone}</a>
+          </div>
+          <p class="horario">{empresa.horario}</p>
+        </div>
+      </div>
+
+      <div class="demo-form">
+        <Formulario
+          origem="pagina-demonstracao"
+          titulo="Agendar demonstração"
+          apoio="Preencha e retornamos em até 1 dia útil para combinar o melhor horário."
+        />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .demo {
+    background:
+      radial-gradient(90% 80% at 85% 0%, #10496E 0%, transparent 62%),
+      linear-gradient(160deg, var(--noite-2) 0%, var(--noite) 72%);
+    color: #fff;
+    min-height: calc(100vh - 130px);
+    display: flex;
+    align-items: center;
+    padding: clamp(40px, 6vw, 80px) 0;
+  }
+  .demo-grade {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(30px, 4vw, 60px);
+    align-items: center;
+  }
+  .demo-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .demo-texto .rotulo {
+    color: var(--ciano);
+  }
+  .demo-texto h1 {
+    color: #fff;
+    max-width: 18ch;
+  }
+  .demo-texto .subtitulo {
+    color: #A8C4D6;
+  }
+  .demo-texto li {
+    color: #D6E5EF;
+  }
+  .demo-texto .lista.check li::before {
+    border-color: var(--ciano);
+  }
+  .outros {
+    margin-top: 10px;
+    padding-top: 22px;
+    border-top: 1px solid var(--noite-fio);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .acoes {
+    display: flex;
+    gap: 11px;
+    flex-wrap: wrap;
+  }
+  .tel {
+    font-family: var(--f-mono);
+  }
+  .horario {
+    font-size: 14px;
+    color: #7C9DB3;
+    margin: 0;
+  }
+  @media (max-width: 900px) {
+    .demo-grade {
+      grid-template-columns: 1fr;
+    }
+    .demo-texto h1 {
+      max-width: none;
+    }
+  }
+</style>

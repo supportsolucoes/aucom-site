@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+import HeroInterno from '../../componentes/HeroInterno.astro';
+import Formulario from '../../componentes/Formulario.astro';
+import CtaFinal from '../../componentes/CtaFinal.astro';
+
+import { paginasErp } from '../../dados/conteudo-erp';
+
+export function getStaticPaths() {
+  return Object.entries(paginasErp).map(([slug, dados]) => ({ params: { slug }, props: { dados } }));
+}
+
+const { dados } = Astro.props;
+---
+
+<Base titulo={dados.title} descricao={dados.descricao} zapMensagem={dados.zap}>
+  <HeroInterno
+    rotulo="ERP"
+    titulo={dados.h1}
+    texto={dados.abertura}
+    migalhas={[{ texto: 'ERP', href: '/erp/' }, { texto: dados.nome }]}
+  >
+    <a href="/demonstracao/" class="botao botao-acao">Falar com um consultor</a>
+  </HeroInterno>
+
+  <section class="fundo-claro">
+    <div class="faixa">
+      <div class="cabeca">
+        <span class="rotulo">O que o sistema controla</span>
+        <h2>Módulos</h2>
+      </div>
+      <div class="grade grade-3">
+        {dados.itens.map((i) => (
+          <div class="cartao">
+            <h3>{i.t}</h3>
+            <p>{i.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="fundo-escuro">
+    <div class="faixa duas-colunas">
+      <div>
+        <span class="rotulo">Fala com a gente</span>
+        <h2>Veja o sistema com os dados do seu negócio</h2>
+        <p>Demonstração sem compromisso, com quem conhece o seu segmento.</p>
+      </div>
+      <Formulario origem={`erp-${dados.nome}`} compacto titulo="Agendar demonstração" apoio="Respondemos em até 1 dia útil." />
+    </div>
+  </section>
+
+  <CtaFinal zapMensagem={dados.zap} titulo="Quer conhecer o sistema?" />
+</Base>
+
+<style>
+  .cartao h3 {
+    font-size: 18px;
+    margin-bottom: 7px;
+  }
+  .cartao p {
+    color: var(--tinta-2);
+    font-size: 15.5px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .duas-colunas {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+  }
+  .duas-colunas p {
+    margin-top: 12px;
+  }
+  @media (max-width: 900px) {
+    .duas-colunas {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

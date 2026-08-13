@@ -1,0 +1,303 @@
+---
+interface Props {
+  titulo?: string;
+  apoio?: string;
+  origem: string;
+  compacto?: boolean;
+}
+const {
+  titulo = 'Agende uma demonstração',
+  apoio = 'Mostramos o sistema rodando com o perfil da sua operação. Sem compromisso, em 30 minutos.',
+  origem,
+  compacto = false,
+} = Astro.props;
+---
+
+<form
+  class:list={['form', { compacto }]}
+  action="/api/contato"
+  method="post"
+  data-form
+  novalidate
+>
+  <div class="form-cabeca">
+    <h3>{titulo}</h3>
+    <p>{apoio}</p>
+  </div>
+
+  <div class="linhas">
+    <label class="campo-form">
+      <span class="rotulo">Seu nome</span>
+      <input type="text" name="nome" required autocomplete="name" placeholder="Nome e sobrenome" />
+    </label>
+
+    <label class="campo-form">
+      <span class="rotulo">Transportadora</span>
+      <input type="text" name="empresa" required autocomplete="organization" placeholder="Razão social ou nome fantasia" />
+    </label>
+
+    <label class="campo-form">
+      <span class="rotulo">WhatsApp</span>
+      <input
+        type="tel"
+        name="whatsapp"
+        required
+        inputmode="tel"
+        autocomplete="tel"
+        placeholder="(14) 90000-0000"
+      />
+    </label>
+
+    <label class="campo-form">
+      <span class="rotulo">Quantos veículos</span>
+      <select name="frota" required>
+        <option value="">Selecione</option>
+        <option value="1-5">1 a 5 veículos</option>
+        <option value="6-20">6 a 20 veículos</option>
+        <option value="21-50">21 a 50 veículos</option>
+        <option value="50+">Mais de 50 veículos</option>
+        <option value="embarcador">Não tenho frota — sou embarcador</option>
+      </select>
+    </label>
+
+    <label class="campo-form largo">
+      <span class="rotulo">E-mail <span class="opc">— opcional</span></span>
+      <input type="email" name="email" autocomplete="email" placeholder="voce@suatransportadora.com.br" />
+    </label>
+
+    <label class="campo-form largo">
+      <span class="rotulo">O que você precisa resolver <span class="opc">— opcional</span></span>
+      <textarea name="mensagem" rows="3" placeholder="Ex.: hoje digitamos nota por nota para emitir o CT-e"></textarea>
+    </label>
+  </div>
+
+  <!-- armadilha de robo: pessoa nao ve, robo preenche -->
+  <div class="mel" aria-hidden="true">
+    <label>Não preencha este campo<input type="text" name="site" tabindex="-1" autocomplete="off" /></label>
+  </div>
+
+  <input type="hidden" name="origem" value={origem} />
+  <input type="hidden" name="pagina" value="" data-pagina />
+  <input type="hidden" name="rastreio" value="" data-rastreio />
+
+  <button type="submit" class="botao botao-acao enviar">
+    <span data-texto-envio>Agendar demonstração</span>
+  </button>
+
+  <p class="aviso">
+    Respondemos em até 1 dia útil. Seus dados são usados apenas para este contato, conforme a
+    <a href="/politica-de-privacidade/">política de privacidade</a>.
+  </p>
+
+  <p class="erro" data-erro hidden></p>
+</form>
+
+<style>
+  .form {
+    background: var(--superficie);
+    /* nao herda a cor do texto de fundos escuros (o topo da home) */
+    color: var(--tinta);
+    border: 1px solid var(--fio);
+    border-radius: var(--raio);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-shadow: var(--sombra);
+  }
+  .form-cabeca {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .form-cabeca h3 {
+    font-size: 21px;
+  }
+  .form-cabeca p {
+    font-size: 15px;
+    color: var(--tinta-2);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* subgrid alinha rotulo e campo entre as colunas: um rotulo que
+     quebra em duas linhas nao desalinha mais o campo vizinho */
+  .linhas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .campo-form {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 6px;
+    min-width: 0;
+  }
+  .campo-form.largo {
+    grid-column: 1 / -1;
+  }
+  @supports (grid-template-rows: subgrid) {
+    .linhas {
+      grid-auto-rows: auto;
+    }
+    .campo-form {
+      grid-row: span 2;
+      grid-template-rows: subgrid;
+    }
+    .campo-form.largo {
+      grid-row: span 2;
+    }
+  }
+  .campo-form .rotulo {
+    align-self: end;
+  }
+  .opc {
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--tinta-3);
+    font-size: 11px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-family: var(--f-ui);
+    font-size: 16px;
+    color: var(--tinta);
+    background: var(--papel);
+    border: 1px solid var(--fio-forte);
+    border-radius: var(--raio);
+    padding: 12px 13px;
+    min-height: 48px;
+    width: 100%;
+    transition: border-color var(--transicao), background var(--transicao);
+  }
+  textarea {
+    resize: vertical;
+    line-height: 1.5;
+    min-height: 84px;
+  }
+  input:hover,
+  select:hover,
+  textarea:hover {
+    border-color: var(--tinta-3);
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    background: var(--superficie);
+    border-color: var(--azul);
+    outline: 2px solid var(--azul-suave);
+    outline-offset: 0;
+  }
+  input[aria-invalid='true'],
+  select[aria-invalid='true'] {
+    border-color: var(--rejeitado);
+    background: var(--rejeitado-suave);
+  }
+  ::placeholder {
+    color: var(--tinta-3);
+  }
+
+  .mel {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .enviar {
+    width: 100%;
+    font-size: 17px;
+    min-height: 54px;
+  }
+  .enviar[disabled] {
+    opacity: 0.75;
+    cursor: progress;
+  }
+
+  .aviso {
+    font-size: 13px;
+    color: var(--tinta-3);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .erro {
+    font-size: 14.5px;
+    color: var(--rejeitado);
+    background: var(--rejeitado-suave);
+    padding: 11px 13px;
+    border-radius: var(--raio);
+    margin: 0;
+  }
+
+  /* no topo da pagina o formulario pede so o essencial:
+     cada campo a mais e gente que desiste */
+  .compacto .linhas {
+    grid-template-columns: 1fr 1fr;
+  }
+  .compacto .campo-form.largo {
+    display: none;
+  }
+
+  @media (max-width: 560px) {
+    .form {
+      padding: 20px;
+    }
+    .linhas {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-form]').forEach((form) => {
+    const pagina = form.querySelector<HTMLInputElement>('[data-pagina]');
+    const rastreio = form.querySelector<HTMLInputElement>('[data-rastreio]');
+    const erro = form.querySelector<HTMLElement>('[data-erro]');
+    const botao = form.querySelector<HTMLButtonElement>('button[type=submit]');
+    const texto = form.querySelector<HTMLElement>('[data-texto-envio]');
+
+    if (pagina) pagina.value = location.pathname;
+    if (rastreio) {
+      try {
+        rastreio.value = localStorage.getItem('aucom_origem') || '';
+      } catch {}
+    }
+
+    form.addEventListener('submit', (e) => {
+      // validacao propria: mensagem clara em vez do balao do navegador
+      const invalidos = Array.from(
+        form.querySelectorAll<HTMLInputElement>('[required]')
+      ).filter((c) => !c.value.trim());
+
+      form.querySelectorAll('[aria-invalid]').forEach((c) => c.removeAttribute('aria-invalid'));
+
+      if (invalidos.length) {
+        e.preventDefault();
+        invalidos.forEach((c) => c.setAttribute('aria-invalid', 'true'));
+        invalidos[0].focus();
+        if (erro) {
+          erro.textContent =
+            invalidos.length === 1
+              ? 'Falta preencher um campo para enviarmos seu contato.'
+              : `Faltam ${invalidos.length} campos para enviarmos seu contato.`;
+          erro.hidden = false;
+        }
+        return;
+      }
+
+      if (erro) erro.hidden = true;
+      if (botao) botao.disabled = true;
+      if (texto) texto.textContent = 'Enviando…';
+
+      const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
+      dl.push({
+        event: 'envio_formulario',
+        origem: form.querySelector<HTMLInputElement>('[name=origem]')?.value,
+        frota: form.querySelector<HTMLSelectElement>('[name=frota]')?.value,
+      });
+    });
+  });
+</script>

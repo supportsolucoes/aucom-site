@@ -1,0 +1,215 @@
+---
+import Base from '../../layouts/Base.astro';
+import HeroInterno from '../../componentes/HeroInterno.astro';
+import GradeModulos from '../../componentes/GradeModulos.astro';
+import ProvaSocial from '../../componentes/ProvaSocial.astro';
+import Formulario from '../../componentes/Formulario.astro';
+import Faq from '../../componentes/Faq.astro';
+import CtaFinal from '../../componentes/CtaFinal.astro';
+import { faqTms, empresa, zap } from '../../dados/site';
+
+const zapMsg = 'Olá! Vim pela página do TMS e quero saber mais sobre o sistema para a minha transportadora.';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqTms.map((f) => ({
+    '@type': 'Question',
+    name: f.p,
+    acceptedAnswer: { '@type': 'Answer', text: f.r },
+  })),
+};
+---
+
+<Base
+  titulo="Software TMS para Transportadora: CT-e, MDF-e e Frota | Aucom"
+  descricao="Controle toda a operação da sua transportadora: documentos fiscais, coleta e entrega, frota própria e agregados, jornada do motorista e rastreamento. Veja como funciona."
+  zapMensagem={zapMsg}
+  schema={schema}
+>
+  <HeroInterno
+    rotulo="TMS · Sistema de gestão de transporte"
+    titulo="Software TMS para transportadoras de carga"
+    texto="Um sistema para a operação inteira: emitir documento fiscal, montar viagem, controlar frota e agregado, acompanhar a entrega e fechar o custo — sem planilha paralela e sem sistema de terceiro no meio."
+    migalhas={[{ texto: 'TMS' }]}
+    foto="rodovia"
+  >
+    <div class="acoes-hero">
+      <a href="/demonstracao/" class="botao botao-acao">Agendar demonstração</a>
+      <a href={zap(zapMsg)} class="botao botao-fantasma" target="_blank" rel="noopener">
+        Falar no WhatsApp
+      </a>
+    </div>
+  </HeroInterno>
+
+  <section class="fundo-claro">
+    <div class="faixa">
+      <ProvaSocial />
+    </div>
+  </section>
+
+  <section class="fundo-papel">
+    <div class="faixa">
+      <div class="cabeca">
+        <span class="rotulo">O que é um TMS</span>
+        <h2>Para que serve um sistema de gestão de transporte</h2>
+      </div>
+      <div class="dois-textos">
+        <p>
+          TMS é a sigla de <strong>Transportation Management System</strong> — sistema de gestão de
+          transporte. É o software que cuida da operação de uma transportadora de ponta a ponta: da
+          coleta ao canhoto, do documento fiscal ao acerto do agregado.
+        </p>
+        <p>
+          Na prática, ele responde três perguntas que toda transportadora precisa responder todo dia:
+          <strong>o documento saiu certo?</strong>, <strong>onde está a carga?</strong> e
+          <strong>quanto essa viagem deu de lucro?</strong> Quando cada uma dessas respostas mora em um
+          lugar diferente — um sistema para emitir CT-e, uma planilha para custo, o WhatsApp do motorista
+          para saber da carga — é aí que a operação começa a vazar dinheiro.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="fundo-claro">
+    <div class="faixa">
+      <div class="cabeca">
+        <span class="rotulo">Módulos</span>
+        <h2>O que o Aucom TMS faz</h2>
+        <p>
+          Cada módulo resolve uma parte do dia da transportadora — e todos falam entre si, porque são o
+          mesmo sistema.
+        </p>
+      </div>
+      <GradeModulos />
+    </div>
+  </section>
+
+  <section class="fundo-escuro">
+    <div class="faixa">
+      <div class="cabeca">
+        <span class="rotulo">Integrações</span>
+        <h2>Funciona com o que você já usa</h2>
+      </div>
+      <div class="grade grade-4 integra">
+        <div class="cartao-esc">
+          <h3>SEFAZ</h3>
+          <p>CT-e, MDF-e e eventos fiscais direto com a Receita do seu estado.</p>
+        </div>
+        <div class="cartao-esc">
+          <h3>Rastreadores</h3>
+          <p>Posição do veículo dos principais rastreadores do mercado, dentro da viagem.</p>
+        </div>
+        <div class="cartao-esc">
+          <h3>Bancos</h3>
+          <p>Boleto, remessa e retorno para o financeiro do frete.</p>
+        </div>
+        <div class="cartao-esc">
+          <h3>Contabilidade</h3>
+          <p>Exportação dos arquivos que o seu contador pede, no formato que ele usa.</p>
+        </div>
+        <div class="cartao-esc">
+          <h3>Sistemas do embarcador</h3>
+          <p>Recebimento de XML e troca de informação de coleta e entrega.</p>
+        </div>
+        <div class="cartao-esc">
+          <h3>Aplicativo do motorista</h3>
+          <p>Ocorrência, canhoto e comprovante de entrega direto do celular.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fundo-claro">
+    <div class="faixa duas-colunas">
+      <div>
+        <div class="cabeca">
+          <span class="rotulo">Implantação</span>
+          <h2>Como é a troca de sistema</h2>
+          <p>
+            A virada é planejada, com data marcada e a nossa equipe acompanhando. Você não para de
+            emitir em nenhum momento.
+          </p>
+        </div>
+        <ol class="etapas">
+          <li><strong>Diagnóstico.</strong> Entendemos a operação e definimos o prazo. Sem surpresa depois.</li>
+          <li><strong>Migração.</strong> Clientes, motoristas, veículos, tabelas de frete e histórico.</li>
+          <li><strong>Treinamento.</strong> Sua equipe aprende com os dados dela dentro do sistema.</li>
+          <li><strong>Virada acompanhada.</strong> Gente da Aucom junto até o primeiro CT-e sair autorizado.</li>
+        </ol>
+      </div>
+      <div class="lado-form">
+        <Formulario origem="tms-pilar" />
+      </div>
+    </div>
+  </section>
+
+  <section class="fundo-papel">
+    <div class="faixa texto-largo">
+      <Faq itens={faqTms} />
+    </div>
+  </section>
+
+  <CtaFinal zapMensagem={zapMsg} />
+</Base>
+
+<style>
+  .acoes-hero {
+    display: flex;
+    gap: 11px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .dois-textos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 22px 40px;
+    max-width: 96ch;
+  }
+  .dois-textos p {
+    margin: 0;
+    color: var(--tinta-2);
+  }
+  .cartao-esc {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--noite-fio);
+    border-radius: var(--raio);
+    padding: 18px;
+  }
+  .cartao-esc h3 {
+    font-size: 17px;
+    margin-bottom: 6px;
+    color: #fff;
+  }
+  .cartao-esc p {
+    font-size: 14.5px;
+    color: #90AEC1;
+    margin: 0;
+    line-height: 1.5;
+  }
+  .duas-colunas {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: start;
+  }
+  .etapas {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: var(--tinta-2);
+  }
+  .etapas strong {
+    color: var(--tinta);
+  }
+  .texto-largo {
+    max-width: 900px;
+  }
+  @media (max-width: 900px) {
+    .duas-colunas {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,52 @@
+---
+/**
+ * PENDENTE DE ARTE: a Aucom só disponibiliza publicamente o logo
+ * colorido em versão vertical e o horizontal em branco (o header do
+ * site antigo era escuro). Aqui o símbolo é recortado do arquivo
+ * vertical e o nome vem em texto, para funcionar num header claro.
+ * Quando o cliente enviar o logo horizontal em SVG, trocar por ele.
+ */
+interface Props {
+  claro?: boolean;
+  altura?: number;
+}
+const { claro = false, altura = 38 } = Astro.props;
+---
+
+<span class:list={['marca-lockup', { claro }]} style={`--h:${altura}px`}>
+  <span class="simbolo">
+    <img src="/marca/aucom-simbolo.png" alt="" width="120" height="86" loading="eager" />
+  </span>
+  <span class="nome">Aucom</span>
+</span>
+
+<style>
+  .marca-lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1;
+  }
+  .simbolo {
+    display: block;
+    width: calc(var(--h) * 1.16);
+    aspect-ratio: 1 / 0.72;
+    overflow: hidden;
+    flex: none;
+  }
+  .simbolo img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .nome {
+    font-size: calc(var(--h) * 0.62);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    color: var(--azul);
+    padding-bottom: 2px;
+  }
+  .claro .nome {
+    color: #fff;
+  }
+</style>

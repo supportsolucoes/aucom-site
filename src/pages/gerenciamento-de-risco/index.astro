@@ -1,0 +1,183 @@
+---
+import Base from '../../layouts/Base.astro';
+import HeroInterno from '../../componentes/HeroInterno.astro';
+import Formulario from '../../componentes/Formulario.astro';
+import Faq from '../../componentes/Faq.astro';
+import CtaFinal from '../../componentes/CtaFinal.astro';
+import Icone from '../../componentes/Icone.astro';
+import { modulosRisco, zap } from '../../dados/site';
+
+const zapMsg = 'Olá! Vim pela página de gerenciamento de risco e quero saber como funciona junto com o TMS.';
+
+const faq = [
+  {
+    p: 'Preciso contratar uma empresa de gerenciamento de risco separada?',
+    r: 'Não para a parte de sistema. O cadastro do motorista, as regras por tipo de carga, o acompanhamento da viagem e o histórico de ocorrências ficam no mesmo sistema que emite seus documentos. Serviços de campo (escolta, pronta-resposta) continuam sendo contratados de quem presta esse serviço — mas a informação fica organizada em um lugar só.',
+  },
+  {
+    p: 'Dá para exigir regras diferentes por tipo de carga?',
+    r: 'Sim. Carga de alto valor pode exigir checagem adicional, rota definida e acompanhamento; carga comum segue o fluxo normal. As regras são configuradas por perfil de operação.',
+  },
+  {
+    p: 'O que fica registrado de uma ocorrência?',
+    r: 'Data, hora, viagem, motorista, veículo, tipo de ocorrência e o que foi feito. Esse histórico é o que permite negociar seguro com base em fato e não aceitar qualquer prêmio.',
+  },
+  {
+    p: 'Funciona para transportadora que usa agregado?',
+    r: 'Especialmente. É justamente com terceiro e agregado que a checagem antes da viagem faz mais diferença — porque o veículo não é seu e o motorista não é do seu quadro.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.p,
+    acceptedAnswer: { '@type': 'Answer', text: f.r },
+  })),
+};
+---
+
+<Base
+  titulo="Gerenciamento de Risco para Transportadoras (ERM) | Aucom"
+  descricao="Cadastro e consulta de motoristas, regras por tipo de carga, monitoramento de viagem e histórico de ocorrências — no mesmo sistema que emite seus documentos."
+  zapMensagem={zapMsg}
+  schema={schema}
+>
+  <HeroInterno
+    rotulo="ERM · Gerenciamento de risco"
+    titulo="Gerenciamento de risco integrado ao seu TMS"
+    texto="Quem entrega a carga, em qual veículo, por qual rota e com qual histórico. Tudo isso vive junto do CT-e e da viagem — e não num sistema separado, de outro fornecedor, que não conversa com a sua operação."
+    migalhas={[{ texto: 'Gerenciamento de risco' }]}
+    foto="carreta"
+  >
+    <div class="acoes-hero">
+      <a href="/demonstracao/" class="botao botao-acao">Agendar demonstração</a>
+      <a href={zap(zapMsg)} class="botao botao-fantasma" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </div>
+  </HeroInterno>
+
+  <section class="fundo-claro">
+    <div class="faixa">
+      <div class="cabeca">
+        <span class="rotulo">Por que isso importa</span>
+        <h2>Risco em transporte não é só roubo de carga</h2>
+      </div>
+      <div class="grade grade-3">
+        <div class="cartao risco">
+          <span class="icone-selo claro"><Icone nome="escudo" /></span>
+          <h3>Quem está dirigindo</h3>
+          <p>
+            Motorista terceiro ou agregado sem checagem é a porta de entrada da maior parte dos
+            problemas — e a primeira pergunta que a seguradora faz depois do sinistro.
+          </p>
+        </div>
+        <div class="cartao risco">
+          <span class="icone-selo claro"><Icone nome="mapa" /></span>
+          <h3>Por onde a carga passa</h3>
+          <p>
+            Rota fora do combinado, parada em local não previsto e desvio de horário são sinais que
+            só servem se alguém vir na hora.
+          </p>
+        </div>
+        <div class="cartao risco">
+          <span class="icone-selo claro"><Icone nome="alerta" /></span>
+          <h3>O que já aconteceu antes</h3>
+          <p>
+            Sem histórico organizado, a transportadora repete o mesmo problema com o mesmo perfil de
+            carga e não tem argumento na hora de renovar o seguro.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fundo-papel">
+    <div class="faixa">
+      <div class="cabeca">
+        <span class="rotulo">Módulos</span>
+        <h2>O que está incluído</h2>
+      </div>
+      <div class="grade grade-2">
+        {modulosRisco.map((m) => (
+          <a href={`/gerenciamento-de-risco/${m.slug}/`} class="cartao cartao-link">
+            <span class="icone-selo"><Icone nome="escudo" /></span>
+            <h3>{m.nome}</h3>
+            <p>{m.resumo}</p>
+            <span class="seta">Ver detalhes <span aria-hidden="true">→</span></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="fundo-escuro">
+    <div class="faixa duas-colunas">
+      <div>
+        <span class="rotulo">O diferencial</span>
+        <h2>Um fornecedor, um contrato, um telefone</h2>
+        <p>
+          A maioria das transportadoras compra o TMS de uma empresa e o gerenciamento de risco de
+          outra. Quando acontece uma ocorrência, ninguém tem a história inteira: um sistema sabe do
+          documento, o outro sabe da viagem, e o dono da transportadora junta os pedaços no telefone.
+        </p>
+        <p>
+          Aqui é um sistema só. A ocorrência nasce ligada à viagem, que está ligada ao CT-e, que está
+          ligado ao cliente. E quando você liga para o suporte, quem atende enxerga tudo.
+        </p>
+      </div>
+      <Formulario origem="erm-pilar" compacto titulo="Ver funcionando" apoio="Demonstração de 30 minutos, sem compromisso." />
+    </div>
+  </section>
+
+  <section class="fundo-claro">
+    <div class="faixa texto-largo">
+      <Faq itens={faq} />
+    </div>
+  </section>
+
+  <CtaFinal zapMensagem={zapMsg} />
+</Base>
+
+<style>
+  .acoes-hero {
+    display: flex;
+    gap: 11px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .risco {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .risco h3 {
+    font-size: 18.5px;
+  }
+  .risco p {
+    color: var(--tinta-2);
+    font-size: 15.5px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .duas-colunas {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+  }
+  .duas-colunas p {
+    max-width: 54ch;
+    margin-top: 12px;
+  }
+  .texto-largo {
+    max-width: 900px;
+  }
+  @media (max-width: 900px) {
+    .duas-colunas {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+     <title>Aucom - Ops! Página não encontrada</title>
+     <meta name="robots" content="noindex">
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="Conheça a Aucom, uma Empresa de Sistemas para Gestão Empresarial localizada em Bauru-SP, especializada em desenvolvimento de Sistemas de Gestão Empresarial.">
+     <meta name="keywords" content="sistemas, erp, tms, gestão empresarial, software">
+     <meta name="author" content="Aucom">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+     <meta property="og:image" content="https://www.aucom.com.br/images/logo-simples-vertical.jpg" />
+     <link rel="icon" href="favicon.png">
+     <link rel="shortcut icon" href="favicon.png">
+     <link rel="apple-touch-icon" href="favicon.png">
+     <link rel="stylesheet" href="css/bootstrap.min.css">
+     <link rel="stylesheet" href="css/font-awesome.min.css">
+     <link rel="stylesheet" href="css/animate.css">
+     <link rel="stylesheet" href="css/owl.carousel.css">
+     <link rel="stylesheet" href="css/owl.theme.default.min.css">
+     <link rel='stylesheet' id='whatsappme-css'  href='css/whatsappme.css?ver=2.1.3' type='text/css' media='all' />
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="css/tooplate-style.css">
+
+</head>
+<body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+
+    <!-- PRE LOADER -->
+    <section class="preloader">
+        <div class="spinner">
+
+            <span class="spinner-rotate"></span>
+
+        </div>
+        <img src="../images/logo2.png" width="38" style="margin: 0px 0px -20px -7px;">
+    </section>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 col-sm-5">
+                    <div class="nav navbar-nav navbar-left" style="margin-top: 10px;">
+                        <a href=""><img src="./images/flag-pt.png" style="margin:0"></a>
+                        <a href="#top" class="smoothScroll">pt-BR <!--<i class="fa fa-sort-desc" aria-hidden="true" style="vertical-align: text-top;">--></i></a>
+                    </div>
+                </div>
+
+                <div class="col-md-8 col-sm-7 text-align-right">
+                    <span class="phone-icon"><i class="fa fa-phone"></i> (14) 3879-0200</span>
+                    <span class="email-icon"><i class="fa fa-comment"></i> <a href="mailto:contato@aucom.com.br">Suporte</a></span>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+
+    <!-- MENU -->
+    <section class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                </button>
+
+                <!-- lOGO TEXT HERE -->
+                <a href="index.html"><img style="width: 200px;" src="images/logo3.png" /></a>
+            </div>
+
+            <!-- MENU LINKS -->
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#solucoes" class="smoothScroll">Soluções <!--<i class="fa fa-sort-desc" aria-hidden="true" style="vertical-align: text-top;"></i>--></a></li>
+                    <li><a href="#segmentos" class="smoothScroll">Segmentos <!--<i class="fa fa-sort-desc" aria-hidden="true" style="vertical-align: text-top;"></i>--></a></li>
+                    <li><a href="#plataformas" class="smoothScroll">Plataformas <!--<i class="fa fa-sort-desc" aria-hidden="true" style="vertical-align: text-top;"></i>--></a></li>
+                    <li class="appointment-btn"><a href="#proposta">Solicite uma Proposta</a></li>
+                    <li class="appointment-btn"><a href="https://cliente.aucom.com.br">Acesso Cliente <i class="fa fa-user-o" aria-hidden="true" style="margin: 0px 5px;"></i></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="sobre" style="background: #e6e6e6;">
+        <div class="container">
+            <div class="row" style="margin:100px 0px 200px 0px">
+                <div class="col-md-12 col-sm-12" style="text-align:center">
+                    <h3>
+                        Ops! Página não foi encontrada :(
+                    </h3>
+                    <h4><a href="index.html" style="color:#1d93cc">Retornar página inicial</a></h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer data-stellar-background-ratio="5"  id="proposta">
+        <div class="container">
+            <a href="index.html"><img src="images/logo3.png" width="150" /></a>
+
+            <div class="row" style="margin-top:25px">
+                <div class="col-md-3 col-sm-3">
+                    <div class="footer-thumb">
+                        <h4 class="wow fadeInUp" data-wow-delay="0.4s">EMPRESA</h4>
+                        <div class="contact-info" style="margin-top:-10px">
+                            <p><a href="#sobre">Sobre-nós</a></p>
+                            <p><a href="https://cliente.aucom.com.br">Área do Cliente</a></p>
+                            <p><a href="empresa/termos-e-condicoes.html">Termos e Condições</a></p>
+                            <p><a href="empresa/politica-de-privacidade.html">Política de Privacidade</a></p>
+                            <p><a href="empresa/clientes.html">Clientes</a></p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 col-sm-4">
+                    <div class="footer-thumb">
+                        <h4 class="wow fadeInUp" data-wow-delay="0.4s">SOLUÇÕES</h4>
+                        <div class="contact-info" style="margin-top:-10px">
+                            <p><a href="#segmentos">Segmentos</a></p>
+                            <p><a href="#plataformas">Plataformas</a></p>
+                            <p><a href="#solucoes">ERP - Gestão Empresarial</a></p>
+                            <p><a href="#solucoes">TMS - Gerenciamento de Transporte</a></p>
+                            <p><a href="#solucoes">ERM - Gestão de Risco</a></p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12 col-md-12" style="margin-top:25px">
+                    <div class="footer-thumb">
+                        <div class="opening-hours">
+                            <h4 class="wow fadeInUp" data-wow-delay="0.4s">Social</h4>
+                        </div>
+
+                        <ul class="social-icon">
+                            <li><a href="https://www.facebook.com/aucom.informatica" class="fa fa-facebook" attr="facebook icon"></a></li>
+                            <li><a href="https://www.youtube.com/channel/UCgOEpB1P0La2Ts1ie8A30dg" class="fa fa-youtube"></a></li>
+                            <li><a href="https://www.linkedin.com/company/aucom-informatica" class="fa fa-linkedin"></a></li>
+                            <li><a href="https://www.instagram.com/aucom.informatica" class="fa fa-instagram"></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 border-top">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="copyright-text">
+                            <p>Desenvolvido por Aucom</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="footer-thumb">
+                            <p style="text-align: right;">© Copyright 2020 Aucom – Sistemas para Gestão Empresarial.<br /> Todos os direitos reservados</p>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 text-align-center">
+                        <div class="angle-up-btn">
+                            <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <div class="whatsappme whatsappme--right whatsappme--show">
+        <a target="_blank" href="https://api.whatsapp.com/send?phone=5514982270077&text=Ol%C3%A1,%20poderia%20me%20ajudar?">
+            <div class="whatsappme__button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" fill="currentColor"></path></svg>
+                <div class="whatsappme__badge">1</div>
+            </div>
+        </a>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.sticky.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/smoothscroll.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script src='js/whatsappme.js?ver=2.1.3'></script>
+    <script>
+        // EMAIL
+        function EnviarEMAIL() {
+            document.getElementById("appointment-form").action = "enviarEMAIL.php";
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroInterno from '../componentes/HeroInterno.astro';
+import { empresa } from '../dados/site';
+
+const atualizado = '13 de agosto de 2026';
+---
+
+<Base
+  titulo="Termos e Condições de Uso | Aucom"
+  descricao="Termos e condições de uso do site da Aucom Informática."
+>
+  <HeroInterno
+    rotulo="Legal"
+    titulo="Termos e condições de uso"
+    texto={`Regras de uso deste site. Atualizadas em ${atualizado}.`}
+    migalhas={[{ texto: 'Termos e condições' }]}
+  />
+
+  <section class="fundo-claro">
+    <div class="faixa legal">
+      <h2>Sobre este site</h2>
+      <p>
+        Este site é mantido por {empresa.nomeCompleto}, de {empresa.cidade}/{empresa.uf}, para
+        apresentar seus sistemas e receber contatos comerciais.
+      </p>
+
+      <h2>Conteúdo</h2>
+      <p>
+        As informações sobre funcionalidades, prazos e condições têm caráter informativo. O que vale
+        para cada cliente é o que estiver na proposta comercial e no contrato assinado entre as partes.
+      </p>
+
+      <h2>Propriedade intelectual</h2>
+      <p>
+        Marca, logotipo, textos, imagens e o software apresentado pertencem à Aucom ou a seus
+        licenciadores. A reprodução sem autorização não é permitida.
+      </p>
+
+      <h2>Uso dos formulários</h2>
+      <p>
+        Ao enviar um formulário, você declara que os dados informados são verdadeiros e que autoriza o
+        contato comercial da Aucom. O tratamento desses dados está descrito na
+        <a href="/politica-de-privacidade/">política de privacidade</a>.
+      </p>
+
+      <h2>Links para outros sites</h2>
+      <p>
+        Podemos indicar endereços de terceiros, como a área do cliente e redes sociais. Não respondemos
+        pelo conteúdo ou pelas práticas de privacidade desses sites.
+      </p>
+
+      <h2>Disponibilidade</h2>
+      <p>
+        Procuramos manter o site sempre no ar, mas ele pode ficar indisponível por manutenção ou por
+        motivos fora do nosso controle.
+      </p>
+
+      <h2>Foro</h2>
+      <p class="pendente">
+        <strong>Para a Aucom completar:</strong> foro eleito e razão social completa, com CNPJ, para
+        fechar esta cláusula com o jurídico.
+      </p>
+
+      <h2>Contato</h2>
+      <p>
+        Dúvidas sobre estes termos: <a href={`mailto:${empresa.email}`}>{empresa.email}</a> ou
+        <a href={`tel:${empresa.telefoneLink}`}>{empresa.telefone}</a>.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal {
+    max-width: 74ch;
+  }
+  .legal h2 {
+    font-size: 24px;
+    margin: 34px 0 12px;
+  }
+  .legal h2:first-child {
+    margin-top: 0;
+  }
+  .legal p {
+    color: var(--tinta-2);
+  }
+  .pendente {
+    font-size: 13px;
+    color: var(--tinta-3) !important;
+    border: 1px dashed var(--fio-forte);
+    border-radius: var(--raio-p);
+    padding: 11px 14px;
+  }
+  .pendente strong {
+    color: var(--sinal-esc);
+  }
+</style>

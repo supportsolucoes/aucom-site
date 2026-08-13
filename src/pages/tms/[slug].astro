@@ -1,0 +1,168 @@
+---
+import Base from '../../layouts/Base.astro';
+import HeroInterno from '../../componentes/HeroInterno.astro';
+import GradeModulos from '../../componentes/GradeModulos.astro';
+import Formulario from '../../componentes/Formulario.astro';
+import Faq from '../../componentes/Faq.astro';
+import CtaFinal from '../../componentes/CtaFinal.astro';
+import Icone from '../../componentes/Icone.astro';
+import { modulos } from '../../dados/site';
+import { conteudo } from '../../dados/conteudo-modulos';
+
+export function getStaticPaths() {
+  return modulos.map((m) => ({ params: { slug: m.slug }, props: { modulo: m } }));
+}
+
+const { modulo } = Astro.props;
+const c = conteudo[modulo.slug];
+
+const schema = c.faq
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: c.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.p,
+        acceptedAnswer: { '@type': 'Answer', text: f.r },
+      })),
+    }
+  : undefined;
+---
+
+<Base titulo={c.title} descricao={c.descricao} zapMensagem={c.zap} schema={schema}>
+  <HeroInterno
+    rotulo={`TMS · ${modulo.nome}`}
+    titulo={c.h1}
+    texto={c.abertura}
+    migalhas={[{ texto: 'TMS', href: '/tms/' }, { texto: modulo.nome }]}
+  >
+    <div class="acoes-hero">
+      <a href="/demonstracao/" class="botao botao-acao">Agendar demonstração</a>
+    </div>
+  </HeroInterno>
+
+  <!-- a dor, nomeada como o transportador nomeia -->
+  <section class="fundo-claro">
+    <div class="faixa">
+      <div class="bloco-dor">
+        <span class="icone-selo claro"><Icone nome="alerta" /></span>
+        <div>
+          <span class="rotulo">O problema</span>
+          <h2>{c.dor.titulo}</h2>
+          <p>{c.dor.texto}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fundo-papel">
+    <div class="faixa">
+      <div class="cabeca">
+        <span class="rotulo">Como o sistema resolve</span>
+        <h2>O que está incluído</h2>
+      </div>
+      <div class="grade grade-3">
+        {c.recursos.map((r) => (
+          <div class="cartao recurso">
+            <h3>{r.titulo}</h3>
+            <p>{r.texto}</p>
+          </div>
+        ))}
+      </div>
+      {c.fechamento && <p class="fechamento">{c.fechamento}</p>}
+    </div>
+  </section>
+
+  {c.faq && (
+    <section class="fundo-claro">
+      <div class="faixa texto-largo">
+        <Faq itens={c.faq} titulo="Dúvidas sobre este módulo" />
+      </div>
+    </section>
+  )}
+
+  <section class="fundo-escuro">
+    <div class="faixa duas-colunas">
+      <div>
+        <span class="rotulo">Fala com a gente</span>
+        <h2>Quer ver este módulo funcionando?</h2>
+        <p>
+          Mostramos com dados parecidos com os da sua operação. Em 30 minutos você entende se resolve
+          o seu caso — e, se não resolver, a gente diz.
+        </p>
+      </div>
+      <Formulario origem={`tms-${modulo.slug}`} compacto titulo="Agendar demonstração" apoio="Respondemos em até 1 dia útil." />
+    </div>
+  </section>
+
+  <section class="fundo-claro">
+    <div class="faixa">
+      <GradeModulos excluir={modulo.slug} titulo="Outros módulos do TMS" />
+    </div>
+  </section>
+
+  <CtaFinal zapMensagem={c.zap} />
+</Base>
+
+<style>
+  .acoes-hero {
+    margin-top: 8px;
+  }
+  .bloco-dor {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    max-width: 82ch;
+  }
+  .bloco-dor .rotulo {
+    margin-bottom: 8px;
+  }
+  .bloco-dor h2 {
+    margin-bottom: 12px;
+  }
+  .bloco-dor p {
+    color: var(--tinta-2);
+    font-size: 18px;
+    margin: 0;
+  }
+  .recurso h3 {
+    font-size: 18px;
+    margin-bottom: 7px;
+  }
+  .recurso p {
+    color: var(--tinta-2);
+    font-size: 15.5px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .fechamento {
+    margin: 26px 0 0;
+    max-width: 78ch;
+    font-size: 18px;
+    color: var(--tinta-2);
+    border-left: 3px solid var(--sinal);
+    padding-left: 18px;
+  }
+  .duas-colunas {
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+  }
+  .duas-colunas p {
+    max-width: 52ch;
+    margin-top: 12px;
+  }
+  .texto-largo {
+    max-width: 900px;
+  }
+  @media (max-width: 900px) {
+    .duas-colunas {
+      grid-template-columns: 1fr;
+    }
+    .bloco-dor {
+      flex-direction: column;
+      gap: 14px;
+    }
+  }
+</style>

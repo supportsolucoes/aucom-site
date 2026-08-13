@@ -1,0 +1,158 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroInterno from '../componentes/HeroInterno.astro';
+import Faq from '../componentes/Faq.astro';
+import CtaFinal from '../componentes/CtaFinal.astro';
+import { planos, zap } from '../dados/site';
+
+const zapMsg = 'Olá! Vi a página de planos e queria entender qual faixa atende a minha transportadora.';
+
+const faq = [
+  {
+    p: 'Por que não tem preço fechado na tabela?',
+    r: 'Porque o valor depende de quantos veículos, quantos usuários e quais módulos a operação usa. O que não muda é o que está incluído em cada faixa — e isso está na tabela acima. Na conversa você recebe o valor exato para o seu caso, sem enrolação.',
+  },
+  {
+    p: 'A implantação é cobrada à parte?',
+    r: 'A implantação, a migração dos dados e o treinamento inicial entram na proposta e são apresentados de forma separada, para você saber exatamente o que está pagando.',
+  },
+  {
+    p: 'Tem fidelidade?',
+    r: 'As condições são apresentadas na proposta. O que garantimos é que você saberá delas antes de assinar, não depois.',
+  },
+  {
+    p: 'Posso começar com uma parte e crescer depois?',
+    r: 'Sim. A maioria começa pela emissão de documentos e frota, e depois liga jornada, risco e portal do embarcador conforme a operação cresce.',
+  },
+];
+---
+
+<Base
+  titulo="Planos e Preços do TMS Aucom para Transportadoras"
+  descricao="Planos por porte de operação, com implantação, migração de dados e suporte. Veja qual faixa atende a sua transportadora e peça uma proposta."
+  zapMensagem={zapMsg}
+>
+  <HeroInterno
+    rotulo="Planos"
+    titulo="Quanto custa o TMS da Aucom"
+    texto="O investimento acompanha o tamanho da operação. Abaixo está o que entra em cada faixa; o valor exato sai na proposta, depois de entendermos a sua frota."
+    migalhas={[{ texto: 'Planos' }]}
+  />
+
+  <section class="fundo-claro">
+    <div class="faixa">
+      <div class="grade grade-3 planos">
+        {planos.map((p) => (
+          <div class:list={['cartao', 'plano', { destaque: p.destaque }]}>
+            {p.destaque && <span class="selo selo-novo">mais contratado</span>}
+            <h2>{p.nome}</h2>
+            <span class="porte">{p.porte}</span>
+            <p class="resumo">{p.resumo}</p>
+            <ul class="lista check">
+              {p.itens.map((i) => <li>{i}</li>)}
+            </ul>
+            <a href="/demonstracao/" class:list={['botao', p.destaque ? 'botao-acao' : 'botao-vazado']}>
+              Pedir proposta
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <p class="pendente">
+        <strong>Para a Aucom preencher:</strong> definir a política de preço a ser publicada — tabela
+        fechada, faixa por porte ("a partir de R$ X") ou apenas o que está incluído. Página sem
+        nenhuma referência de investimento perde o contato para o concorrente que publica.
+      </p>
+    </div>
+  </section>
+
+  <section class="fundo-papel">
+    <div class="faixa">
+      <div class="cabeca">
+        <span class="rotulo">Em qualquer faixa</span>
+        <h2>O que está sempre incluído</h2>
+      </div>
+      <div class="grade grade-4">
+        <div class="cartao"><h3>Implantação assistida</h3><p>Diagnóstico, configuração e acompanhamento na virada.</p></div>
+        <div class="cartao"><h3>Migração dos dados</h3><p>Clientes, motoristas, veículos, tabelas e histórico.</p></div>
+        <div class="cartao"><h3>Treinamento da equipe</h3><p>Com os dados da sua operação, não em base de exemplo.</p></div>
+        <div class="cartao"><h3>Suporte de gente que entende</h3><p>Equipe própria em Bauru, por telefone e WhatsApp.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fundo-claro">
+    <div class="faixa texto-largo">
+      <Faq itens={faq} titulo="Sobre investimento e contrato" />
+    </div>
+  </section>
+
+  <CtaFinal zapMensagem={zapMsg} titulo="Peça uma proposta para a sua operação" />
+</Base>
+
+<style>
+  .planos {
+    align-items: start;
+  }
+  .plano {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    height: 100%;
+  }
+  .plano.destaque {
+    border-color: var(--azul);
+    box-shadow: var(--sombra-alta);
+  }
+  .plano h2 {
+    font-size: 24px;
+  }
+  .porte {
+    font-family: var(--f-mono);
+    font-size: 13px;
+    color: var(--azul);
+    letter-spacing: 0.02em;
+  }
+  .resumo {
+    color: var(--tinta-2);
+    font-size: 15.5px;
+    margin: 0;
+  }
+  .plano ul {
+    margin-bottom: 8px;
+  }
+  .plano li {
+    font-size: 15px;
+    color: var(--tinta-2);
+  }
+  .plano .botao {
+    margin-top: auto;
+    width: 100%;
+  }
+  .cartao h3 {
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+  .cartao p {
+    color: var(--tinta-2);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .pendente {
+    margin: 26px 0 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--tinta-3);
+    border: 1px dashed var(--fio-forte);
+    border-radius: var(--raio-p);
+    padding: 11px 14px;
+  }
+  .pendente strong {
+    color: var(--sinal-esc);
+  }
+  .texto-largo {
+    max-width: 900px;
+  }
+</style>

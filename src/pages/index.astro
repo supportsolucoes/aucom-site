@@ -1,0 +1,577 @@
+---
+import Base from '../layouts/Base.astro';
+import ProvaSocial from '../componentes/ProvaSocial.astro';
+import GradeModulos from '../componentes/GradeModulos.astro';
+import Formulario from '../componentes/Formulario.astro';
+import Faq from '../componentes/Faq.astro';
+import CtaFinal from '../componentes/CtaFinal.astro';
+import Icone from '../componentes/Icone.astro';
+import { Image } from 'astro:assets';
+import fotoRodovia from '../imagens/rodovia-interior-sp.jpg';
+import fotoCarreta from '../imagens/carreta-rodovia-br.jpg';
+import { empresa, zap, faqTms } from '../dados/site';
+
+const zapMsg = 'Olá! Vim pelo site da Aucom e quero saber mais sobre o sistema TMS.';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Aucom TMS',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, Windows',
+  description:
+    'Sistema TMS para transportadoras: emissão de CT-e, MDF-e e CIOT, importação de XML de nota fiscal, gestão de frota e agregados, jornada do motorista e gerenciamento de risco.',
+  offers: { '@type': 'Offer', priceCurrency: 'BRL', category: 'Assinatura' },
+  provider: { '@type': 'Organization', name: 'Aucom Informática' },
+};
+---
+
+<Base
+  titulo="Sistema TMS para Transportadoras | Aucom — 30 anos"
+  descricao="TMS completo para transportadoras: emissão de CT-e, MDF-e e CIOT, importação de XML de nota fiscal, gestão de frota e agregados, jornada e gerenciamento de risco. 30 anos de mercado. Peça uma demonstração."
+  zapMensagem={zapMsg}
+  schema={schema}
+>
+  <!-- ================= TOPO ================= -->
+  <section class="topo">
+    <Image
+      class="topo-foto"
+      src={fotoRodovia}
+      alt=""
+      widths={[900, 1400, 1920]}
+      sizes="100vw"
+      format="webp"
+      quality={72}
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="topo-veu" aria-hidden="true"></div>
+
+    <div class="faixa topo-grade">
+      <div class="topo-conteudo">
+        <span class="selo-topo">TMS · Gerenciamento de risco · ERP</span>
+        <h1>Sistema TMS para transportadoras: CT-e, MDF-e, CIOT, frota, jornada e risco no mesmo lugar.</h1>
+        <p class="subtitulo">
+          Há {empresa.anos} anos automatizando a operação de transportadoras no interior de São Paulo —
+          do escritório ao motorista na estrada, com o risco sob controle.
+        </p>
+
+        <ul class="lista check destaques">
+          <li>Importe o XML da nota e gere o CT-e <strong>sem digitar</strong></li>
+          <li>MDF-e, DACTE e CIOT saem junto com a viagem</li>
+          <li>Gerenciamento de risco no mesmo sistema, com um suporte só</li>
+        </ul>
+
+        <div class="acoes">
+          <a href={zap(zapMsg)} class="botao botao-zap" target="_blank" rel="noopener">
+            Falar no WhatsApp
+          </a>
+          <a href={`tel:${empresa.telefoneLink}`} class="botao botao-fantasma tel-botao">
+            {empresa.telefone}
+          </a>
+        </div>
+      </div>
+
+      <div class="topo-form">
+        <Formulario
+          origem="home-topo"
+          titulo="Veja o sistema rodando"
+          apoio="Demonstração de 30 minutos, com quem entende de transporte. Respondemos em até 1 dia útil."
+          compacto
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROVA ================= -->
+  <section class="prova-secao">
+    <div class="faixa">
+      <ProvaSocial />
+    </div>
+  </section>
+
+  <!-- ================= DORES ================= -->
+  <section class="fundo-claro">
+    <div class="faixa">
+      <div class="cabeca">
+        <span class="rotulo">O dia a dia de quem transporta</span>
+        <h2>Se algum destes travamentos acontece na sua operação, o sistema resolve</h2>
+      </div>
+
+      <div class="grade grade-3">
+        <div class="cartao dor">
+          <span class="icone-selo claro"><Icone nome="alerta" /></span>
+          <span class="selo selo-erro">Rejeição</span>
+          <h3>CT-e rejeitado pela SEFAZ</h3>
+          <p>
+            O caminhão está carregado e o documento não passa. A conferência acontece antes do envio,
+            e a contingência entra automaticamente quando a SEFAZ cai.
+          </p>
+        </div>
+        <div class="cartao dor">
+          <span class="icone-selo claro"><Icone nome="xml" /></span>
+          <span class="selo selo-erro">Retrabalho</span>
+          <h3>Digitar nota por nota</h3>
+          <p>
+            Cada conhecimento redigitado é tempo perdido e chance de erro. O XML do embarcador entra
+            e vira CT-e, com peso, valor e destinatário já preenchidos.
+          </p>
+        </div>
+        <div class="cartao dor">
+          <span class="icone-selo claro"><Icone nome="dinheiro" /></span>
+          <span class="selo selo-erro">Prejuízo mudo</span>
+          <h3>Não saber o custo da viagem</h3>
+          <p>
+            Frete bom e viagem no vermelho convivem quando ninguém mede. Custo por veículo, por rota e
+            por viagem, com o acerto do agregado no mesmo lugar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MÓDULOS ================= -->
+  <section class="fundo-papel">
+    <div class="faixa">
+      <div class="cabeca">
+        <span class="rotulo">O que o TMS faz</span>
+        <h2>Um sistema, a operação inteira</h2>
+        <p>
+          Cada módulo resolve uma parte do dia da transportadora — e todos falam entre si, porque são
+          o mesmo sistema, não integrações remendadas.
+        </p>
+      </div>
+      <GradeModulos />
+    </div>
+  </section>
+
+  <!-- ================= DIFERENCIAL ================= -->
+  <section class="fundo-escuro">
+    <div class="faixa dif">
+      <div class="dif-texto">
+        <span class="rotulo">O que a Aucom tem e o mercado não tem</span>
+        <h2>Transporte e gerenciamento de risco no mesmo sistema</h2>
+        <p>
+          A maior parte dos fornecedores vende o TMS e manda você contratar o gerenciamento de risco
+          à parte. São dois contratos, dois suportes e dois sistemas que não conversam — e, quando
+          acontece uma ocorrência, ninguém tem a história inteira.
+        </p>
+        <p>
+          Aqui o cadastro do motorista, a regra por tipo de carga e o histórico de ocorrências vivem
+          junto do CT-e e da viagem. Um fornecedor, um telefone para ligar.
+        </p>
+        <a href="/gerenciamento-de-risco/" class="botao botao-azul">Ver gerenciamento de risco</a>
+      </div>
+
+      <div class="dif-compara">
+        <div class="compara-col">
+          <span class="rotulo">Do jeito comum</span>
+          <ul class="lista">
+            <li>TMS de um fornecedor</li>
+            <li>Gerenciamento de risco de outro</li>
+            <li>Dois contratos e dois suportes</li>
+            <li>Dados que não se cruzam</li>
+          </ul>
+        </div>
+        <div class="compara-col forte">
+          <span class="rotulo">Com a Aucom</span>
+          <ul class="lista check">
+            <li>Transporte e risco no mesmo sistema</li>
+            <li>Um contrato, um suporte</li>
+            <li>Ocorrência ligada à viagem e ao CT-e</li>
+            <li>Quem atende conhece transporte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= IMPLANTAÇÃO ================= -->
+  <section class="fundo-claro">
+    <div class="faixa">
+      <div class="implanta-topo">
+        <div class="cabeca">
+          <span class="rotulo">A parte que assusta</span>
+          <h2>Trocar de sistema sem parar de faturar</h2>
+          <p>
+            O medo legítimo de toda transportadora é a virada dar errado e a emissão parar. Por isso a
+            implantação é feita em paralelo, com data marcada e gente da Aucom acompanhando no dia.
+          </p>
+        </div>
+        <figure class="foto-patio">
+          <Image
+            src={fotoCarreta}
+            alt="Carreta com container em rodovia brasileira"
+            widths={[600, 900, 1400]}
+            sizes="(max-width: 820px) 100vw, 45vw"
+            format="webp"
+            quality={74}
+            loading="lazy"
+          />
+        </figure>
+      </div>
+
+      <ol class="passos">
+        <li>
+          <span class="rotulo">Etapa 1</span>
+          <h3>Diagnóstico</h3>
+          <p>Entendemos sua operação e o que dá para trazer do sistema atual. O prazo é fechado aqui.</p>
+        </li>
+        <li>
+          <span class="rotulo">Etapa 2</span>
+          <h3>Migração dos dados</h3>
+          <p>Clientes, motoristas, veículos, tabelas de frete e histórico de documentos.</p>
+        </li>
+        <li>
+          <span class="rotulo">Etapa 3</span>
+          <h3>Treinamento</h3>
+          <p>Sua equipe aprende no sistema já com os dados dela dentro, não em base de exemplo.</p>
+        </li>
+        <li>
+          <span class="rotulo">Etapa 4</span>
+          <h3>Virada acompanhada</h3>
+          <p>No dia da virada tem gente da Aucom junto, até o primeiro CT-e sair autorizado.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= SEGMENTOS ================= -->
+  <section class="fundo-papel">
+    <div class="faixa">
+      <div class="cabeca">
+        <span class="rotulo">Também da Aucom</span>
+        <h2>Não é só transporte</h2>
+        <p>
+          Antes de atender transportadora, a Aucom automatizou loja, atacado e posto de combustível —
+          e continua atendendo. Se a sua operação é essa, o ERP é o caminho.
+        </p>
+      </div>
+      <div class="grade grade-2">
+        <a href="/erp/varejo-e-atacado/" class="cartao cartao-link">
+          <h3>ERP para varejo e atacado</h3>
+          <p>Estoque, vendas, fiscal e financeiro para lojas, distribuidoras e atacadistas.</p>
+          <span class="seta">Ver o ERP →</span>
+        </a>
+        <a href="/erp/postos-de-combustivel/" class="cartao cartao-link">
+          <h3>ERP para postos de combustível</h3>
+          <p>Bombas, tanques, conveniência e o fiscal do combustível em um sistema só.</p>
+          <span class="seta">Ver o ERP →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="fundo-claro">
+    <div class="faixa texto-largo">
+      <Faq itens={faqTms} />
+    </div>
+  </section>
+
+  <CtaFinal zapMensagem={zapMsg} />
+</Base>
+
+<style>
+  /* ---------- topo ----------
+     Foto da estrada em tela cheia, com veu azul-noite por cima:
+     a imagem da o impacto, o veu garante que o texto continue
+     legivel em qualquer tela. */
+  .topo {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    padding-top: clamp(40px, 5vw, 68px);
+    padding-bottom: clamp(96px, 11vw, 140px);
+    background: var(--noite);
+  }
+  .topo-foto {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 55%;
+    z-index: -2;
+  }
+  /* o veu escurece onde o texto passa e vai abrindo para a direita,
+     onde o caminhao aparece limpo */
+  .topo-veu {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(
+        95deg,
+        rgba(4, 18, 29, 0.94) 0%,
+        rgba(5, 22, 35, 0.88) 30%,
+        rgba(6, 28, 45, 0.55) 62%,
+        rgba(7, 34, 54, 0.28) 100%
+      ),
+      linear-gradient(180deg, rgba(4, 18, 29, 0.5) 0%, transparent 26%, rgba(4, 18, 29, 0.6) 100%);
+  }
+
+  /* texto a esquerda, formulario a direita: o espaco que sobrava
+     vira o caminho mais curto para o contato */
+  .topo-grade {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+  }
+  .topo-conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .topo h1 {
+    color: #fff;
+    text-shadow: 0 2px 40px rgba(3, 15, 25, 0.7);
+  }
+  .tel-botao {
+    font-family: var(--f-mono);
+    letter-spacing: -0.01em;
+  }
+  .topo-form :global(.form) {
+    box-shadow: var(--sombra-flutua);
+  }
+  .topo .subtitulo {
+    color: #A8C4D6;
+  }
+  .selo-topo {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ciano);
+    background: rgba(32, 179, 227, 0.12);
+    border: 1px solid rgba(32, 179, 227, 0.32);
+    padding: 6px 12px;
+    border-radius: 100px;
+  }
+  .destaques {
+    gap: 10px;
+  }
+  .destaques li {
+    font-size: 16.5px;
+    color: #D6E5EF;
+  }
+  .destaques li strong {
+    color: #fff;
+  }
+  .destaques.check li::before {
+    border-color: var(--ciano);
+  }
+  .acoes {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+  .assinatura-topo {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin: 8px 0 0;
+  }
+  .assinatura-topo .rotulo {
+    color: #7C9DB3;
+  }
+  .assinatura-topo a {
+    font-family: var(--f-mono);
+    font-size: 19px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    color: #fff;
+  }
+  .assinatura-topo a:hover {
+    color: var(--ciano);
+  }
+  .subtitulo {
+    max-width: 56ch;
+  }
+
+  /* a faixa de numeros sobe sobre o azul: costura o hero
+     ao corpo da pagina em vez de emendar duas cores secas */
+  .prova-secao {
+    padding-top: 0;
+    padding-bottom: clamp(30px, 4vw, 44px);
+    margin-top: clamp(-70px, -6vw, -44px);
+    position: relative;
+    z-index: 3;
+  }
+  .prova-secao :global(.campos) {
+    box-shadow: var(--sombra-alta);
+    border-color: transparent;
+  }
+
+  /* ---------- dores ---------- */
+  .dor {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    align-items: flex-start;
+  }
+  .dor h3 {
+    font-size: 19px;
+  }
+  .dor p {
+    color: var(--tinta-2);
+    font-size: 15.5px;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* ---------- diferencial ---------- */
+  .dif {
+    display: grid;
+    grid-template-columns: 1fr 0.92fr;
+    gap: clamp(26px, 4vw, 52px);
+    align-items: center;
+  }
+  .dif-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .dif-texto h2 {
+    color: #fff;
+  }
+  .dif-texto .rotulo {
+    color: var(--ciano);
+  }
+  .dif-texto p {
+    color: #A8C4D6;
+    margin: 0;
+    max-width: 54ch;
+  }
+  .dif-texto .botao {
+    margin-top: 8px;
+  }
+  .dif-compara {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .compara-col {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--noite-fio);
+    border-radius: var(--raio);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+  .compara-col .rotulo {
+    color: #7C9DB3;
+  }
+  .compara-col.forte {
+    background: rgba(32, 179, 227, 0.09);
+    border-color: var(--ciano);
+    box-shadow: 0 20px 44px -26px rgba(32, 179, 227, 0.9);
+  }
+  .compara-col.forte .rotulo {
+    color: var(--ciano);
+  }
+  .compara-col li {
+    font-size: 15px;
+    color: #90AEC1;
+  }
+  .compara-col.forte li {
+    color: #EAF4FA;
+  }
+  .compara-col:not(.forte) li::before {
+    background: #3D5F76;
+  }
+  .compara-col.forte li::before {
+    border-color: var(--ciano);
+  }
+
+  /* ---------- implantação ---------- */
+  .implanta-topo {
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    gap: clamp(24px, 4vw, 48px);
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  .implanta-topo .cabeca {
+    margin-bottom: 0;
+  }
+  .foto-patio {
+    margin: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--sombra-alta);
+    aspect-ratio: 7 / 5;
+  }
+  .foto-patio img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ---------- passos ---------- */
+  .passos {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+    gap: 1px;
+    background: var(--fio);
+    border: 1px solid var(--fio);
+    border-radius: var(--raio);
+    overflow: hidden;
+  }
+  .passos li {
+    background: var(--superficie);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .passos h3 {
+    font-size: 18px;
+  }
+  .passos p {
+    font-size: 15px;
+    color: var(--tinta-2);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .texto-largo {
+    max-width: 900px;
+  }
+
+  @media (max-width: 960px) {
+    .dif,
+    .topo-grade {
+      grid-template-columns: 1fr;
+    }
+    .topo-veu {
+      background: linear-gradient(180deg, rgba(4, 18, 29, 0.82) 0%, rgba(5, 24, 38, 0.93) 60%);
+    }
+  }
+  @media (max-width: 820px) {
+    .implanta-topo {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 520px) {
+    .dif-compara {
+      grid-template-columns: 1fr;
+    }
+    .acoes .botao {
+      width: 100%;
+    }
+  }
+</style>

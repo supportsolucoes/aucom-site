@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Paginas de campanha e de confirmacao nao entram na busca organica:
+# elas existem para receber clique de anuncio e registrar conversao.
+Disallow: /lp/
+Disallow: /obrigado/
+
+Sitemap: https://aucom.com.br/sitemap-index.xml

@@ -1,0 +1,141 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroInterno from '../componentes/HeroInterno.astro';
+import CtaFinal from '../componentes/CtaFinal.astro';
+import { empresa } from '../dados/site';
+
+const zapMsg = 'Olá! Vim pela página sobre a Aucom e quero conhecer os sistemas.';
+---
+
+<Base
+  titulo="Sobre a Aucom — Sistemas para Transportadoras há 30 anos"
+  descricao="A Aucom desenvolve sistemas de gestão em Bauru, interior de São Paulo, há mais de 30 anos. TMS, gerenciamento de risco e ERP, com equipe e suporte próprios."
+  zapMensagem={zapMsg}
+>
+  <HeroInterno
+    rotulo="Sobre"
+    titulo="Trinta anos automatizando operação no interior de São Paulo"
+    texto="A Aucom nasceu em Bauru fazendo automação comercial e hoje é uma casa de software de transporte — com clientes que atravessaram décadas junto com a gente."
+    migalhas={[{ texto: 'Sobre' }]}
+    foto="rodovia"
+  />
+
+  <section class="fundo-claro">
+    <div class="faixa dois">
+      <div class="texto-coluna">
+        <h2>Uma empresa de interior, e isso é uma vantagem</h2>
+        <p>
+          Software de transportadora não se vende por catálogo. Quem compra precisa saber que, quando o
+          CT-e travar numa sexta às 17h com o caminhão carregado, tem alguém do outro lado que entende
+          o problema e atende.
+        </p>
+        <p>
+          A Aucom está em Bauru desde o começo. Atendemos transportadora, loja, atacado e posto no
+          interior paulista — muitos clientes há mais de dez anos. Não somos a maior empresa do
+          mercado, e é justamente por isso que o cliente fala com quem resolve, e não com um número de
+          protocolo.
+        </p>
+
+        <h2>O que fazemos hoje</h2>
+        <p>
+          Três linhas de produto que se conectam: o <a href="/tms/">TMS</a> para a operação de
+          transporte, o <a href="/gerenciamento-de-risco/">gerenciamento de risco</a> integrado a ele, e
+          o <a href="/erp/">ERP</a> para comércio, atacado e postos — a linha com que a empresa começou
+          e que continua atendendo.
+        </p>
+        <p>
+          Trabalhamos com sistema no escritório, aplicativo na mão do motorista, acesso pela web e
+          integração via API — porque uma transportadora não roda em um lugar só.
+        </p>
+      </div>
+
+      <aside class="ficha">
+        <span class="rotulo">A empresa</span>
+        <dl>
+          <div><dt>Onde fica</dt><dd>{empresa.cidade} — {empresa.uf}</dd></div>
+          <div><dt>No mercado desde</dt><dd>1995</dd></div>
+          <div><dt>Produtos</dt><dd>TMS, gerenciamento de risco e ERP</dd></div>
+          <div><dt>Atendimento</dt><dd>{empresa.horario}</dd></div>
+          <div><dt>Telefone</dt><dd><a href={`tel:${empresa.telefoneLink}`}>{empresa.telefone}</a></dd></div>
+          <div><dt>E-mail</dt><dd><a href={`mailto:${empresa.email}`}>{empresa.email}</a></dd></div>
+        </dl>
+        <p class="pendente">
+          <strong>Confirmar com a Aucom:</strong> ano de fundação exato, número de colaboradores,
+          endereço completo e razão social, para fechar esta ficha e os dados estruturados do site.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <CtaFinal zapMensagem={zapMsg} titulo="Quer conhecer os sistemas?" />
+</Base>
+
+<style>
+  .dois {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: start;
+  }
+  .texto-coluna {
+    max-width: 68ch;
+  }
+  .texto-coluna h2 {
+    margin-bottom: 14px;
+  }
+  .texto-coluna h2 + p {
+    margin-bottom: 14px;
+  }
+  .texto-coluna p {
+    color: var(--tinta-2);
+    margin-bottom: 30px;
+  }
+  .ficha {
+    background: var(--superficie);
+    border: 1px solid var(--fio);
+    border-radius: var(--raio);
+    padding: 24px;
+    box-shadow: var(--sombra);
+    position: sticky;
+    top: 120px;
+  }
+  .ficha dl {
+    margin: 16px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .ficha dt {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--tinta-3);
+    margin-bottom: 3px;
+  }
+  .ficha dd {
+    margin: 0;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .pendente {
+    margin: 22px 0 0;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--tinta-3);
+    border: 1px dashed var(--fio-forte);
+    border-radius: var(--raio-p);
+    padding: 10px 12px;
+  }
+  .pendente strong {
+    color: var(--sinal-esc);
+  }
+  @media (max-width: 900px) {
+    .dois {
+      grid-template-columns: 1fr;
+    }
+    .ficha {
+      position: static;
+    }
+  }
+</style>

@@ -1,0 +1,152 @@
+---
+import '../styles/global.css';
+import Cabecalho from '../componentes/Cabecalho.astro';
+import Rodape from '../componentes/Rodape.astro';
+import ZapFlutuante from '../componentes/ZapFlutuante.astro';
+import { empresa } from '../dados/site';
+
+interface Props {
+  titulo: string;
+  descricao: string;
+  /** Mensagem que o WhatsApp abre ja escrita, especifica desta pagina. */
+  zapMensagem?: string;
+  /** Landing page de campanha: sem menu, sem saida lateral. */
+  campanha?: boolean;
+  naoIndexar?: boolean;
+  schema?: object;
+}
+
+const {
+  titulo,
+  descricao,
+  zapMensagem = 'Olá! Vim pelo site da Aucom e quero saber mais sobre o sistema.',
+  campanha = false,
+  naoIndexar = false,
+  schema,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+/**
+ * Ambiente de teste (GitHub Pages): o site inteiro sai com noindex.
+ * Sem isto, a versao de teste concorreria no Google com o site real
+ * da Aucom — conteudo duplicado com o proprio cliente.
+ */
+const ambienteTeste = Boolean(import.meta.env.BASE_URL && import.meta.env.BASE_URL !== '/');
+
+const organizacao = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Aucom Informática',
+  url: 'https://aucom.com.br',
+  logo: 'https://aucom.com.br/marca/aucom.png',
+  telephone: empresa.telefone,
+  email: empresa.email,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: empresa.cidade,
+    addressRegion: empresa.uf,
+    addressCountry: 'BR',
+  },
+  sameAs: Object.values(empresa.sociais),
+};
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{titulo}</title>
+    <meta name="description" content={descricao} />
+    <link rel="canonical" href={canonical} />
+    {(naoIndexar || ambienteTeste) && <meta name="robots" content="noindex, nofollow" />}
+    {ambienteTeste && <meta name="googlebot" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Aucom" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descricao} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://aucom.com.br/marca/aucom-og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link
+      rel="preload"
+      href="/fontes/archivo.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <meta name="theme-color" content="#071C2C" />
+    <link rel="icon" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizacao)} />
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+
+    <!--
+      Aqui entra o Google Tag Manager quando a Aucom liberar o contêiner.
+      Etapa 1 do plano: sem isso, nada do que o site produz é medido.
+      <script>(function(w,d,s,l,i){...})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+    -->
+  </head>
+
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+    {!campanha && <Cabecalho />}
+
+    <main id="conteudo">
+      <slot />
+    </main>
+
+    {!campanha && <Rodape />}
+
+    <ZapFlutuante mensagem={zapMensagem} campanha={campanha} />
+
+    <script>
+      // Marca os cliques que hoje sao invisiveis: WhatsApp e telefone.
+      // Empurra para o dataLayer; o GTM le e manda para o Ads e o GA4.
+      document.addEventListener('click', (e) => {
+        const alvo = (e.target as HTMLElement)?.closest?.('a');
+        if (!alvo) return;
+        const href = alvo.getAttribute('href') || '';
+        const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
+
+        if (href.includes('wa.me')) {
+          dl.push({ event: 'clique_whatsapp', origem: location.pathname });
+        } else if (href.startsWith('tel:')) {
+          dl.push({ event: 'clique_telefone', origem: location.pathname });
+        }
+      });
+
+      // Guarda de onde a pessoa veio (anuncio, campanha, palavra) para
+      // que o formulario envie junto. E o que permite, la na frente,
+      // saber qual campanha traz cliente que fecha.
+      (function guardarOrigem() {
+        const p = new URLSearchParams(location.search);
+        const campos = ['gclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+        let achou = false;
+        const dados: Record<string, string> = {};
+        campos.forEach((c) => {
+          const v = p.get(c);
+          if (v) {
+            dados[c] = v;
+            achou = true;
+          }
+        });
+        if (achou) {
+          dados.primeira_pagina = location.pathname;
+          dados.data = new Date().toISOString();
+          try {
+            localStorage.setItem('aucom_origem', JSON.stringify(dados));
+          } catch {}
+        }
+      })();
+    </script>
+  </body>
+</html>

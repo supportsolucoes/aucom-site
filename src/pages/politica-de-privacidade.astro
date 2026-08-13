@@ -1,0 +1,119 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroInterno from '../componentes/HeroInterno.astro';
+import { empresa } from '../dados/site';
+
+const atualizado = '13 de agosto de 2026';
+---
+
+<Base
+  titulo="Política de Privacidade | Aucom"
+  descricao="Como a Aucom coleta, usa e protege os dados enviados pelo site, conforme a Lei Geral de Proteção de Dados."
+>
+  <HeroInterno
+    rotulo="Legal"
+    titulo="Política de privacidade"
+    texto={`Como tratamos os dados que você envia pelo site. Atualizada em ${atualizado}.`}
+    migalhas={[{ texto: 'Política de privacidade' }]}
+  />
+
+  <section class="fundo-claro">
+    <div class="faixa legal">
+      <h2>Quem é o responsável pelos dados</h2>
+      <p>
+        {empresa.nomeCompleto}, com sede em {empresa.cidade}/{empresa.uf}, é a controladora dos dados
+        pessoais coletados neste site. Contato: <a href={`mailto:${empresa.email}`}>{empresa.email}</a>.
+      </p>
+      <p class="pendente">
+        <strong>Para a Aucom completar:</strong> razão social, CNPJ, endereço completo e o e-mail do
+        encarregado de dados (DPO), exigido pela LGPD.
+      </p>
+
+      <h2>Quais dados coletamos</h2>
+      <ul class="lista">
+        <li>
+          <strong>Dados que você envia:</strong> nome, empresa, telefone/WhatsApp, e-mail, porte da
+          frota e a mensagem escrita nos formulários do site.
+        </li>
+        <li>
+          <strong>Dados de navegação:</strong> páginas visitadas, origem do acesso (incluindo a
+          campanha de anúncio, quando houver), tipo de dispositivo e navegador.
+        </li>
+      </ul>
+
+      <h2>Para que usamos</h2>
+      <ul class="lista">
+        <li>Responder ao seu contato e apresentar nossos sistemas.</li>
+        <li>Preparar propostas comerciais adequadas ao porte da sua operação.</li>
+        <li>Entender quais canais de divulgação trazem contatos, para investir melhor.</li>
+      </ul>
+      <p>
+        Não vendemos seus dados e não os usamos para finalidade diferente daquela pela qual você nos
+        procurou.
+      </p>
+
+      <h2>Com quem compartilhamos</h2>
+      <p>
+        Apenas com prestadores que viabilizam a operação do site e do atendimento — hospedagem, envio
+        de e-mail, ferramentas de análise de tráfego e de gestão de contatos. Todos tratam os dados em
+        nosso nome e sob nossa instrução.
+      </p>
+
+      <h2>Cookies e medição</h2>
+      <p>
+        Usamos cookies necessários ao funcionamento do site e, mediante seu consentimento, cookies de
+        medição e de publicidade, que nos permitem saber quais páginas e anúncios geram contato. Você
+        pode recusar os cookies não essenciais sem perder acesso ao conteúdo.
+      </p>
+
+      <h2>Seus direitos</h2>
+      <p>
+        A LGPD garante a você confirmar a existência de tratamento, acessar seus dados, corrigi-los,
+        pedir anonimização ou exclusão, revogar consentimento e solicitar portabilidade. Para exercer
+        qualquer um desses direitos, escreva para
+        <a href={`mailto:${empresa.email}`}>{empresa.email}</a>.
+      </p>
+
+      <h2>Por quanto tempo guardamos</h2>
+      <p>
+        Mantemos os dados de contato pelo tempo necessário ao relacionamento comercial e às obrigações
+        legais. Depois disso, são eliminados ou anonimizados.
+      </p>
+
+      <h2>Alterações</h2>
+      <p>
+        Se esta política mudar, publicamos a nova versão nesta mesma página, com a data de atualização.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal {
+    max-width: 74ch;
+  }
+  .legal h2 {
+    font-size: 24px;
+    margin: 34px 0 12px;
+  }
+  .legal h2:first-child {
+    margin-top: 0;
+  }
+  .legal p,
+  .legal li {
+    color: var(--tinta-2);
+  }
+  .legal ul {
+    margin-bottom: 16px;
+  }
+  .pendente {
+    font-size: 13px;
+    color: var(--tinta-3) !important;
+    border: 1px dashed var(--fio-forte);
+    border-radius: var(--raio-p);
+    padding: 11px 14px;
+  }
+  .pendente strong {
+    color: var(--sinal-esc);
+  }
+</style>

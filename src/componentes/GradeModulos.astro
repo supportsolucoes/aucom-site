@@ -1,0 +1,53 @@
+---
+import { modulos } from '../dados/site';
+import Icone from './Icone.astro';
+
+interface Props {
+  excluir?: string;
+  titulo?: string;
+}
+const { excluir, titulo } = Astro.props;
+const lista = excluir ? modulos.filter((m) => m.slug !== excluir) : modulos;
+
+const icones: Record<string, string> = {
+  'emissao-cte-mdfe': 'documento',
+  'importacao-xml-nfe': 'xml',
+  'ciot-pagamento-de-frete': 'dinheiro',
+  'gestao-de-frota': 'caminhao',
+  'controle-de-jornada': 'relogio',
+  'roteirizacao-e-rastreamento': 'mapa',
+  'coleta-e-entrega': 'caixa',
+  'portal-do-embarcador': 'monitor',
+};
+---
+
+{titulo && <h2 class="titulo-grade">{titulo}</h2>}
+
+<div class="grade grade-3">
+  {lista.map((m) => (
+    <a href={`/tms/${m.slug}/`} class="cartao cartao-link mod">
+      <div class="cabeca-cartao">
+        <span class:list={['icone-selo', { acao: m.selo }]}>
+          <Icone nome={icones[m.slug] ?? 'caixa'} />
+        </span>
+        {m.selo && <span class="selo selo-novo">{m.selo}</span>}
+      </div>
+      <h3>{m.titulo}</h3>
+      <p>{m.resumo}</p>
+      <span class="seta">Ver detalhes <span aria-hidden="true">→</span></span>
+    </a>
+  ))}
+</div>
+
+<style>
+  .titulo-grade {
+    margin-bottom: 22px;
+  }
+  .cabeca-cartao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+</style>

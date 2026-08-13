@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import { empresa, zap, modulos } from '../dados/site';
+
+const zapMsg = 'Olá! Acabei de enviar um contato pelo site da Aucom.';
+---
+
+<Base
+  titulo="Contato recebido | Aucom"
+  descricao="Recebemos seu contato. Nossa equipe responde em até 1 dia útil."
+  zapMensagem={zapMsg}
+  naoIndexar
+>
+  <section class="ok">
+    <div class="faixa ok-conteudo">
+      <span class="marca-ok" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m4 12.5 5.2 5.2L20 7" />
+        </svg>
+      </span>
+
+      <h1>Recebemos seu contato</h1>
+      <p class="subtitulo">
+        Nossa equipe responde em até <strong>1 dia útil</strong>. Se preferir adiantar, chame no
+        WhatsApp — atendemos {empresa.horario.toLowerCase()}.
+      </p>
+
+      <div class="acoes">
+        <a href={zap(zapMsg)} class="botao botao-zap" target="_blank" rel="noopener">Falar no WhatsApp agora</a>
+        <a href={`tel:${empresa.telefoneLink}`} class="botao botao-vazado">{empresa.telefone}</a>
+      </div>
+
+      <div class="enquanto">
+        <span class="rotulo">Enquanto isso</span>
+        <div class="grade grade-3">
+          {modulos.slice(0, 3).map((m) => (
+            <a href={`/tms/${m.slug}/`} class="cartao cartao-link">
+              <h3>{m.titulo}</h3>
+              <p>{m.resumo}</p>
+              <span class="seta">Ver <span aria-hidden="true">→</span></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ok {
+    padding: clamp(50px, 8vw, 96px) 0;
+    background: var(--superficie);
+  }
+  .ok-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+  }
+  .marca-ok {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--emitido-suave);
+    color: var(--emitido);
+    margin-bottom: 6px;
+  }
+  .ok h1 {
+    max-width: 20ch;
+  }
+  .ok .subtitulo {
+    max-width: 54ch;
+  }
+  .acoes {
+    display: flex;
+    gap: 11px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 6px;
+  }
+  .enquanto {
+    margin-top: 48px;
+    padding-top: 34px;
+    border-top: 1px solid var(--fio);
+    width: 100%;
+    text-align: left;
+  }
+  .enquanto .rotulo {
+    margin-bottom: 16px;
+    text-align: center;
+  }
+</style>
+
+<script>
+  // A conversao acontece aqui: e esta pagina que diz ao Google Ads
+  // e ao GA4 que o clique virou contato.
+  const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
+  const p = new URLSearchParams(location.search);
+  dl.push({
+    event: 'contato_enviado',
+    origem_formulario: p.get('origem') || 'nao-informado',
+    frota: p.get('frota') || 'nao-informado',
+  });
+</script>
