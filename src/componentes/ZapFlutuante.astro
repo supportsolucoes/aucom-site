@@ -1,51 +1,110 @@
 ---
 import { empresa, zap } from '../dados/site';
 
+/**
+ * Botao flutuante do WhatsApp.
+ *
+ * Clicar nao abre o WhatsApp direto: abre um painel com formulario
+ * curto. Assim o contato fica registrado mesmo quando a conversa nao
+ * acontece — hoje o clique some e ninguem sabe quem era.
+ * Quem tem pressa tem a saida "abrir sem preencher".
+ */
 interface Props {
   mensagem: string;
   campanha?: boolean;
 }
-const { mensagem, campanha = false } = Astro.props;
-const link = zap(mensagem);
+const { mensagem } = Astro.props;
+const linkDireto = zap(mensagem);
 ---
 
-<a
-  href={link}
-  class:list={['zap-flutua', { campanha }]}
-  target="_blank"
-  rel="noopener"
-  data-zap
->
+<button type="button" class="zap-flutua" data-zap-abre aria-expanded="false" aria-controls="zap-painel">
   <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor">
     <path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.57-.49-.5-.67-.5h-.57c-.2 0-.52.07-.79.37s-1.04 1.01-1.04 2.47 1.06 2.86 1.21 3.06c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/>
     <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.13a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24a8.2 8.2 0 0 1 5.83 2.42 8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.21-8.25 8.21z"/>
   </svg>
   <span class="texto" data-zap-texto>Falar no WhatsApp</span>
-</a>
+</button>
+
+<div class="zap-painel" id="zap-painel" data-zap-painel hidden role="dialog" aria-modal="false" aria-label="Iniciar conversa no WhatsApp">
+  <div class="zap-cabeca">
+    <div>
+      <strong>Vamos conversar no WhatsApp</strong>
+      <span data-zap-sub>Preencha os campos e a conversa já começa com o seu contexto.</span>
+    </div>
+    <button type="button" class="fechar" data-zap-fecha aria-label="Fechar">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+  </div>
+
+  <form class="zap-form" data-zap-form novalidate>
+    <label>
+      <span class="rotulo">Seu nome <i>*</i></span>
+      <input type="text" name="nome" required autocomplete="name" placeholder="Nome e sobrenome" />
+    </label>
+
+    <label>
+      <span class="rotulo">Transportadora <i>*</i></span>
+      <input type="text" name="empresa" required autocomplete="organization" placeholder="Nome da empresa" />
+    </label>
+
+    <label>
+      <span class="rotulo">Seu WhatsApp <i>*</i></span>
+      <input type="tel" name="whatsapp" required inputmode="tel" autocomplete="tel" placeholder="(14) 90000-0000" />
+    </label>
+
+    <label>
+      <span class="rotulo">Quantos veículos</span>
+      <select name="frota">
+        <option value="">Prefiro não informar</option>
+        <option value="1-5">1 a 5</option>
+        <option value="6-20">6 a 20</option>
+        <option value="21-50">21 a 50</option>
+        <option value="50+">Mais de 50</option>
+      </select>
+    </label>
+
+    <label>
+      <span class="rotulo">Mensagem</span>
+      <textarea name="mensagem" rows="2" data-zap-mensagem></textarea>
+    </label>
+
+    <p class="erro" data-zap-erro hidden></p>
+
+    <button type="submit" class="botao botao-zap">Abrir conversa no WhatsApp</button>
+
+    <div class="zap-rodape">
+      <a href={linkDireto} target="_blank" rel="noopener" data-zap-direto>Abrir sem preencher</a>
+      <span>Ao enviar, você concorda com a <a href="/politica-de-privacidade/">política de privacidade</a>.</span>
+    </div>
+  </form>
+</div>
 
 <style>
   .zap-flutua {
     position: fixed;
     right: 20px;
     bottom: 20px;
-    z-index: 70;
+    z-index: 85;
     display: inline-flex;
     align-items: center;
     gap: 10px;
     background: var(--emitido);
     color: #fff;
-    text-decoration: none;
+    border: 0;
+    font-family: var(--f-ui);
     font-size: 15px;
     font-weight: 650;
     padding: 13px 19px;
     min-height: 52px;
     border-radius: 100px;
+    cursor: pointer;
     box-shadow: 0 6px 22px -8px rgba(11, 27, 38, 0.5);
     transition: background var(--transicao), transform var(--transicao);
   }
   .zap-flutua:hover {
     background: #10633c;
-    color: #fff;
     transform: translateY(-1px);
   }
   .zap-flutua.fora {
@@ -53,6 +112,133 @@ const link = zap(mensagem);
   }
   .zap-flutua.fora:hover {
     background: var(--tinta);
+  }
+
+  .zap-painel {
+    position: fixed;
+    right: 20px;
+    bottom: 84px;
+    z-index: 95;
+    width: min(370px, calc(100vw - 32px));
+    max-height: min(78vh, 620px);
+    overflow-y: auto;
+    background: var(--superficie);
+    border-radius: var(--raio);
+    box-shadow: 0 30px 70px -20px rgba(3, 15, 25, 0.6);
+    border: 1px solid var(--fio);
+  }
+  .zap-painel[hidden] {
+    display: none;
+  }
+
+  .zap-cabeca {
+    background: var(--emitido);
+    color: #fff;
+    padding: 16px 18px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+  }
+  .zap-cabeca strong {
+    display: block;
+    font-size: 16.5px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin-bottom: 3px;
+  }
+  .zap-cabeca span {
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: #D6F0E2;
+    display: block;
+  }
+  .fechar {
+    background: rgba(255, 255, 255, 0.16);
+    border: 0;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    flex: none;
+  }
+  .fechar:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .zap-form {
+    padding: 16px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .zap-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .rotulo i {
+    color: var(--rejeitado);
+    font-style: normal;
+  }
+  .zap-form input,
+  .zap-form select,
+  .zap-form textarea {
+    font-family: var(--f-ui);
+    font-size: 16px;
+    color: var(--tinta);
+    background: var(--papel);
+    border: 1px solid var(--fio-forte);
+    border-radius: var(--raio-p);
+    padding: 10px 12px;
+    min-height: 44px;
+    width: 100%;
+  }
+  .zap-form textarea {
+    resize: vertical;
+    line-height: 1.45;
+    min-height: 58px;
+  }
+  .zap-form input:focus,
+  .zap-form select:focus,
+  .zap-form textarea:focus {
+    background: var(--superficie);
+    border-color: var(--emitido);
+    outline: 2px solid var(--emitido-suave);
+  }
+  .zap-form [aria-invalid='true'] {
+    border-color: var(--rejeitado);
+    background: var(--rejeitado-suave);
+  }
+  .zap-form .botao {
+    width: 100%;
+    margin-top: 4px;
+  }
+  .erro {
+    font-size: 13.5px;
+    color: var(--rejeitado);
+    background: var(--rejeitado-suave);
+    padding: 9px 11px;
+    border-radius: var(--raio-p);
+    margin: 0;
+  }
+  .zap-rodape {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--tinta-3);
+    line-height: 1.45;
+    text-align: center;
+  }
+  .zap-rodape > a {
+    font-size: 13.5px;
+    color: var(--tinta-2);
   }
 
   @media (max-width: 620px) {
@@ -68,26 +254,111 @@ const link = zap(mensagem);
       display: inline;
       font-size: 13.5px;
     }
+    .zap-painel {
+      right: 12px;
+      left: 12px;
+      bottom: 78px;
+      width: auto;
+    }
   }
 </style>
 
-<script>
-  // Fora do horario comercial o botao muda de texto, em vez de
-  // prometer uma conversa que nao vai acontecer agora.
-  (function horario() {
-    const el = document.querySelector<HTMLAnchorElement>('[data-zap]');
-    const txt = document.querySelector<HTMLElement>('[data-zap-texto]');
-    if (!el || !txt) return;
+<script define:vars={{ numero: empresa.whatsapp, mensagemPadrao: mensagem }}>
+  (function zapPainel() {
+    const botao = document.querySelector('[data-zap-abre]');
+    const painel = document.querySelector('[data-zap-painel]');
+    const form = document.querySelector('[data-zap-form]');
+    const erro = document.querySelector('[data-zap-erro]');
+    const campoMensagem = document.querySelector('[data-zap-mensagem]');
+    const textoBotao = document.querySelector('[data-zap-texto]');
+    const subtitulo = document.querySelector('[data-zap-sub]');
+    if (!botao || !painel || !form) return;
 
+    // a mensagem da pagina ja vem escrita no campo, e pode ser editada
+    if (campoMensagem) campoMensagem.value = mensagemPadrao;
+
+    // fora do expediente o botao muda de texto em vez de prometer
+    // uma conversa que nao vai acontecer agora
     const agora = new Date();
-    const dia = agora.getDay(); // 0 = domingo
+    const dia = agora.getDay();
     const hora = agora.getHours();
     const expediente = dia >= 1 && dia <= 5 && hora >= 8 && hora < 18;
-
     if (!expediente) {
-      el.classList.add('fora');
-      txt.textContent = 'Deixe sua mensagem';
-      el.setAttribute('title', 'Fora do horário de atendimento — respondemos no próximo dia útil, a partir das 8h');
+      botao.classList.add('fora');
+      if (textoBotao) textoBotao.textContent = 'Deixe sua mensagem';
+      if (subtitulo)
+        subtitulo.textContent =
+          'Estamos fora do horário agora. Deixe os dados que respondemos no próximo dia útil, a partir das 8h.';
     }
+
+    function abrir() {
+      painel.hidden = false;
+      botao.setAttribute('aria-expanded', 'true');
+      painel.querySelector('input')?.focus();
+      const dl = (window.dataLayer = window.dataLayer || []);
+      dl.push({ event: 'whatsapp_painel_aberto', origem: location.pathname });
+    }
+
+    function fechar() {
+      painel.hidden = true;
+      botao.setAttribute('aria-expanded', 'false');
+    }
+
+    botao.addEventListener('click', () => (painel.hidden ? abrir() : fechar()));
+    painel.querySelector('[data-zap-fecha]')?.addEventListener('click', fechar);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !painel.hidden) fechar();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (painel.hidden) return;
+      if (!painel.contains(e.target) && !botao.contains(e.target)) fechar();
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const faltando = Array.from(form.querySelectorAll('[required]')).filter(
+        (c) => !c.value.trim()
+      );
+      form.querySelectorAll('[aria-invalid]').forEach((c) => c.removeAttribute('aria-invalid'));
+
+      if (faltando.length) {
+        faltando.forEach((c) => c.setAttribute('aria-invalid', 'true'));
+        faltando[0].focus();
+        if (erro) {
+          erro.textContent =
+            faltando.length === 1
+              ? 'Falta preencher um campo.'
+              : `Faltam ${faltando.length} campos.`;
+          erro.hidden = false;
+        }
+        return;
+      }
+      if (erro) erro.hidden = true;
+
+      const dados = Object.fromEntries(new FormData(form).entries());
+
+      // registra o contato antes de sair do site: e o que hoje se perde
+      const dl = (window.dataLayer = window.dataLayer || []);
+      dl.push({
+        event: 'whatsapp_lead',
+        origem: location.pathname,
+        frota: dados.frota || 'nao-informado',
+      });
+
+      const linhas = [
+        `Olá! Sou ${dados.nome}, da ${dados.empresa}.`,
+        dados.frota ? `Frota: ${dados.frota} veículos.` : '',
+        dados.mensagem ? `\n${dados.mensagem}` : '',
+      ].filter(Boolean);
+
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(linhas.join(' '))}`;
+      window.open(url, '_blank', 'noopener');
+      fechar();
+      form.reset();
+      if (campoMensagem) campoMensagem.value = mensagemPadrao;
+    });
   })();
 </script>

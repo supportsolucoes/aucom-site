@@ -105,8 +105,14 @@ const atual = Astro.url.pathname;
     line-height: 0;
   }
   .marca img {
-    height: 36px;
+    height: 48px;
     width: auto;
+  }
+  @media (max-width: 1000px) {
+    /* no celular a barra e mais baixa: o logo acompanha */
+    .marca img {
+      height: 34px;
+    }
   }
 
   .menu {

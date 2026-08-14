@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Cabecalho from '../componentes/Cabecalho.astro';
 import Rodape from '../componentes/Rodape.astro';
 import ZapFlutuante from '../componentes/ZapFlutuante.astro';
+import Privacidade from '../componentes/Privacidade.astro';
 import { empresa } from '../dados/site';
 
 interface Props {
@@ -89,6 +90,27 @@ const organizacao = {
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
 
     <!--
+      Consent Mode v2 — precisa vir ANTES de qualquer tag do Google.
+      Tudo comeca negado; o aviso de privacidade libera o que a pessoa
+      escolher. Sem esta ordem, a tag dispara antes do consentimento.
+    -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted',
+        wait_for_update: 500,
+      });
+    </script>
+
+    <!--
       Aqui entra o Google Tag Manager quando a Aucom liberar o contêiner.
       Etapa 1 do plano: sem isso, nada do que o site produz é medido.
       <script>(function(w,d,s,l,i){...})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
@@ -107,6 +129,7 @@ const organizacao = {
     {!campanha && <Rodape />}
 
     <ZapFlutuante mensagem={zapMensagem} campanha={campanha} />
+    <Privacidade />
 
     <script>
       // Marca os cliques que hoje sao invisiveis: WhatsApp e telefone.

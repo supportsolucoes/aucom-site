@@ -8,10 +8,9 @@ const ano = new Date().getFullYear();
   <div class="faixa">
     <div class="colunas">
       <div class="col marca-col">
-        <Marca claro altura={36} />
+        <Marca claro altura={32} />
         <p>
-          Sistemas para transportadoras há mais de {empresa.anos} anos, em {empresa.cidade}, interior de
-          São Paulo. Transporte, documentos fiscais e risco no mesmo sistema.
+          Sistemas para transportadoras há mais de {empresa.anos} anos, em {empresa.cidade}/{empresa.uf}.
         </p>
         <div class="sociais">
           <a href={empresa.sociais.linkedin} rel="noopener">LinkedIn</a>
@@ -81,30 +80,29 @@ const ano = new Date().getFullYear();
   .rodape {
     background: var(--tinta);
     color: #B8C9D3;
-    padding: 54px 0 26px;
-    margin-top: 20px;
-    font-size: 15px;
+    padding: 36px 0 18px;
+    font-size: 14px;
   }
   .colunas {
     display: grid;
-    grid-template-columns: 1.6fr repeat(4, 1fr);
-    gap: 34px 26px;
+    grid-template-columns: 1.5fr repeat(4, 1fr);
+    gap: 24px 22px;
   }
   .col {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 9px;
     min-width: 0;
   }
-  .marca-col img {
-    height: 36px;
-    width: auto;
+  .marca-col {
+    gap: 10px;
   }
   .marca-col p {
-    font-size: 14.5px;
-    line-height: 1.55;
-    max-width: 34ch;
+    font-size: 13.5px;
+    line-height: 1.5;
+    max-width: 30ch;
     color: #92AAB8;
+    margin: 0;
   }
   .rotulo {
     color: #6D8797;
@@ -115,12 +113,12 @@ const ano = new Date().getFullYear();
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 9px;
+    gap: 6px;
   }
   .col a {
     color: #D5E1E8;
     text-decoration: none;
-    font-size: 14.5px;
+    font-size: 13.8px;
   }
   .col a:hover {
     color: var(--ciano);
@@ -128,38 +126,38 @@ const ano = new Date().getFullYear();
   }
   .col .sem-link {
     color: #92AAB8;
-    font-size: 14.5px;
+    font-size: 13.8px;
   }
   .sociais {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px 16px;
+    gap: 6px 14px;
     margin-top: 2px;
   }
   .sociais a {
     color: #D5E1E8;
     text-decoration: none;
     font-family: var(--f-mono);
-    font-size: 12.5px;
+    font-size: 12px;
   }
   .sociais a:hover {
     color: var(--ciano);
   }
 
   .base {
-    margin-top: 40px;
-    padding-top: 20px;
+    margin-top: 26px;
+    padding-top: 14px;
     border-top: 1px solid #233945;
     display: flex;
     justify-content: space-between;
     gap: 14px;
     flex-wrap: wrap;
-    font-size: 13.5px;
+    font-size: 12.8px;
     color: #7E96A4;
   }
   .legais {
     display: flex;
-    gap: 20px;
+    gap: 18px;
   }
   .legais a {
     color: #7E96A4;

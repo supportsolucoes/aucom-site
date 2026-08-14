@@ -1,0 +1,303 @@
+---
+/**
+ * Aviso de privacidade e cookies (LGPD).
+ *
+ * Comeca fechado para o buscador e para quem ja escolheu: a decisao
+ * fica no localStorage. Enquanto nao houver escolha, o Consent Mode
+ * v2 fica em "denied" — que e o padrao correto e o que o Google exige
+ * para medicao e publicidade no Brasil e na Europa.
+ */
+---
+
+<div class="cookies" data-cookies hidden>
+  <div class="cookies-cabeca">
+    <h2>Sua privacidade</h2>
+  </div>
+
+  <p>
+    Usamos cookies necessários para o site funcionar e, se você permitir, cookies de medição e de
+    publicidade — que nos mostram quais páginas e anúncios geram contato.
+  </p>
+
+  <div class="cookies-detalhe" data-detalhe hidden>
+    <label class="opcao">
+      <input type="checkbox" checked disabled />
+      <span>
+        <strong>Necessários</strong>
+        Fazem o site funcionar: formulário, preferências e segurança. Não dá para desligar.
+      </span>
+    </label>
+    <label class="opcao">
+      <input type="checkbox" data-op="analytics" checked />
+      <span>
+        <strong>Medição</strong>
+        Quantas pessoas visitam cada página e de onde vieram. Sem isso, não sabemos o que funciona.
+      </span>
+    </label>
+    <label class="opcao">
+      <input type="checkbox" data-op="ads" checked />
+      <span>
+        <strong>Publicidade</strong>
+        Permite saber quais anúncios trouxeram contato e não mostrar o mesmo anúncio à toa.
+      </span>
+    </label>
+  </div>
+
+  <div class="cookies-links">
+    <a href="/politica-de-privacidade/">Política de privacidade</a>
+    <span aria-hidden="true">·</span>
+    <a href="/termos-e-condicoes/">Termos de uso</a>
+  </div>
+
+  <div class="cookies-acoes">
+    <button type="button" class="link-botao" data-personalizar>Personalizar</button>
+    <button type="button" class="botao botao-vazado" data-rejeitar>Rejeitar</button>
+    <button type="button" class="botao botao-acao" data-aceitar>Aceitar</button>
+  </div>
+
+  <div class="cookies-acoes-detalhe" data-acoes-detalhe hidden>
+    <button type="button" class="botao botao-vazado" data-voltar>Voltar</button>
+    <button type="button" class="botao botao-acao" data-salvar>Salvar escolha</button>
+  </div>
+</div>
+
+<button type="button" class="reabrir" data-reabrir hidden aria-label="Configurações de privacidade">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7">
+    <path d="M21.5 12a9.5 9.5 0 1 1-6.9-9.1 3.5 3.5 0 0 0 4.4 4.4 9.4 9.4 0 0 1 2.5 4.7z" stroke-linejoin="round"/>
+    <circle cx="9" cy="10" r="1.1" fill="currentColor" stroke="none"/>
+    <circle cx="14" cy="15" r="1.1" fill="currentColor" stroke="none"/>
+    <circle cx="8.5" cy="15.5" r="1" fill="currentColor" stroke="none"/>
+  </svg>
+</button>
+
+<style>
+  .cookies {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    z-index: 90;
+    width: min(390px, calc(100vw - 32px));
+    background: var(--superficie);
+    color: var(--tinta);
+    border: 1px solid var(--fio);
+    border-radius: var(--raio);
+    box-shadow: 0 24px 60px -22px rgba(3, 15, 25, 0.55);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .cookies[hidden] {
+    display: none;
+  }
+  .cookies-cabeca h2 {
+    font-size: 19px;
+    margin: 0;
+  }
+  .cookies p {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--tinta-2);
+    margin: 0;
+  }
+  .cookies-links {
+    display: flex;
+    gap: 8px;
+    font-size: 13.5px;
+    color: var(--tinta-3);
+    flex-wrap: wrap;
+  }
+  .cookies-acoes,
+  .cookies-acoes-detalhe {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex-wrap: wrap;
+    margin-top: 2px;
+  }
+  .cookies-acoes-detalhe[hidden] {
+    display: none;
+  }
+  .cookies .botao {
+    min-height: 44px;
+    padding: 10px 18px;
+    font-size: 15px;
+    flex: 1;
+  }
+  .link-botao {
+    background: none;
+    border: 0;
+    padding: 6px 2px;
+    font-family: var(--f-ui);
+    font-size: 14px;
+    color: var(--tinta-2);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  .link-botao:hover {
+    color: var(--azul);
+  }
+
+  .cookies-detalhe {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+    background: var(--papel);
+    border-radius: var(--raio-p);
+    max-height: 42vh;
+    overflow-y: auto;
+  }
+  .cookies-detalhe[hidden] {
+    display: none;
+  }
+  .opcao {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    cursor: pointer;
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--tinta-2);
+  }
+  .opcao input {
+    width: 18px;
+    height: 18px;
+    min-height: 0;
+    margin-top: 2px;
+    flex: none;
+    accent-color: var(--azul);
+  }
+  .opcao strong {
+    display: block;
+    color: var(--tinta);
+    font-size: 14.5px;
+    margin-bottom: 1px;
+  }
+
+  .reabrir {
+    position: fixed;
+    left: 18px;
+    bottom: 18px;
+    z-index: 80;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--fio);
+    background: var(--superficie);
+    color: var(--tinta-2);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: var(--sombra);
+  }
+  .reabrir[hidden] {
+    display: none;
+  }
+  .reabrir:hover {
+    color: var(--azul);
+    border-color: var(--azul);
+  }
+
+  @media (max-width: 620px) {
+    .cookies {
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      width: auto;
+      padding: 18px;
+    }
+    /* no celular o botao do WhatsApp fica na direita: este vai para a esquerda */
+    .reabrir {
+      left: 12px;
+      bottom: 12px;
+    }
+  }
+</style>
+
+<script>
+  (function privacidade() {
+    const CHAVE = 'aucom_privacidade';
+    const caixa = document.querySelector<HTMLElement>('[data-cookies]');
+    const reabrir = document.querySelector<HTMLElement>('[data-reabrir]');
+    const detalhe = document.querySelector<HTMLElement>('[data-detalhe]');
+    const acoes = document.querySelector<HTMLElement>('.cookies-acoes');
+    const acoesDetalhe = document.querySelector<HTMLElement>('[data-acoes-detalhe]');
+    if (!caixa || !reabrir) return;
+
+    const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
+    function gtag(...args: any[]) {
+      dl.push(args);
+    }
+
+    function aplicar(escolha: { analytics: boolean; ads: boolean }) {
+      // Consent Mode v2: o GTM le isto e libera (ou nao) medicao e anuncios
+      gtag('consent', 'update', {
+        analytics_storage: escolha.analytics ? 'granted' : 'denied',
+        ad_storage: escolha.ads ? 'granted' : 'denied',
+        ad_user_data: escolha.ads ? 'granted' : 'denied',
+        ad_personalization: escolha.ads ? 'granted' : 'denied',
+      });
+      dl.push({ event: 'consentimento_definido', ...escolha });
+      try {
+        localStorage.setItem(CHAVE, JSON.stringify({ ...escolha, data: new Date().toISOString() }));
+      } catch {}
+      fechar();
+    }
+
+    function fechar() {
+      caixa.hidden = true;
+      reabrir.hidden = false;
+    }
+
+    function abrir() {
+      caixa.hidden = false;
+      reabrir.hidden = true;
+      if (detalhe) detalhe.hidden = true;
+      if (acoes) acoes.hidden = false;
+      if (acoesDetalhe) acoesDetalhe.hidden = true;
+    }
+
+    // primeira visita: mostra. Ja escolheu: so o botao de reabrir.
+    let salvo = null;
+    try {
+      salvo = JSON.parse(localStorage.getItem(CHAVE) || 'null');
+    } catch {}
+
+    if (salvo) {
+      gtag('consent', 'update', {
+        analytics_storage: salvo.analytics ? 'granted' : 'denied',
+        ad_storage: salvo.ads ? 'granted' : 'denied',
+        ad_user_data: salvo.ads ? 'granted' : 'denied',
+        ad_personalization: salvo.ads ? 'granted' : 'denied',
+      });
+      reabrir.hidden = false;
+    } else {
+      caixa.hidden = false;
+    }
+
+    caixa.querySelector('[data-aceitar]')?.addEventListener('click', () =>
+      aplicar({ analytics: true, ads: true })
+    );
+    caixa.querySelector('[data-rejeitar]')?.addEventListener('click', () =>
+      aplicar({ analytics: false, ads: false })
+    );
+    caixa.querySelector('[data-personalizar]')?.addEventListener('click', () => {
+      if (detalhe) detalhe.hidden = false;
+      if (acoes) acoes.hidden = true;
+      if (acoesDetalhe) acoesDetalhe.hidden = false;
+    });
+    caixa.querySelector('[data-voltar]')?.addEventListener('click', () => {
+      if (detalhe) detalhe.hidden = true;
+      if (acoes) acoes.hidden = false;
+      if (acoesDetalhe) acoesDetalhe.hidden = true;
+    });
+    caixa.querySelector('[data-salvar]')?.addEventListener('click', () => {
+      const marcado = (nome: string) =>
+        !!caixa.querySelector<HTMLInputElement>(`[data-op="${nome}"]`)?.checked;
+      aplicar({ analytics: marcado('analytics'), ads: marcado('ads') });
+    });
+    reabrir.addEventListener('click', abrir);
+  })();
+</script>
