@@ -6,12 +6,20 @@ interface Props {
   apoio?: string;
   origem: string;
   compacto?: boolean;
+  /**
+   * Texto do botao de envio. Nas landing pages de anuncio ele muda: quem
+   * chegou de um clique ha 10 segundos responde melhor a "ver funcionando"
+   * do que a "agendar", que ja pede compromisso de agenda. Hipotese a
+   * confirmar quando o GTM estiver medindo — hoje nao ha dado.
+   */
+  acao?: string;
 }
 const {
   titulo = 'Agende uma demonstração',
   apoio = 'Mostramos o sistema rodando com o perfil da sua operação. Sem compromisso, em 30 minutos.',
   origem,
   compacto = false,
+  acao = 'Agendar demonstração',
 } = Astro.props;
 ---
 
@@ -94,7 +102,7 @@ const {
   <input type="hidden" name="rastreio" value="" data-rastreio />
 
   <button type="submit" class="botao botao-acao enviar">
-    <span data-texto-envio>Agendar demonstração</span>
+    <span data-texto-envio>{acao}</span>
   </button>
 
   <p class="aviso">

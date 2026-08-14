@@ -24,10 +24,18 @@ interface Props {
   faq: { p: string; r: string }[];
   origem: string;
   zapMensagem: string;
+  /**
+   * Texto do botao de envio. Cada LP diz o nome da coisa que a pessoa
+   * veio procurar — a mesma logica de casar palavra-chave, anuncio e
+   * pagina. No site institucional o botao continua "Agendar demonstracao".
+   */
+  acao?: string;
 }
 
-const { titulo, descricao, selo, h1, abertura, destaques, dores, recursos, faq, origem, zapMensagem } =
-  Astro.props;
+const {
+  titulo, descricao, selo, h1, abertura, destaques, dores, recursos, faq, origem, zapMensagem,
+  acao = 'Ver funcionando',
+} = Astro.props;
 
 const schema = {
   '@context': 'https://schema.org',
@@ -77,6 +85,7 @@ const schema = {
           origem={origem}
           titulo="Peça uma demonstração"
           apoio="30 minutos, sem compromisso. Respondemos em até 1 dia útil."
+          acao={acao}
           compacto
         />
       </div>
@@ -138,7 +147,7 @@ const schema = {
           </a>
         </div>
       </div>
-      <Formulario origem={`${origem}-fim`} titulo="Agendar demonstração" apoio="Respondemos em até 1 dia útil." compacto />
+      <Formulario origem={`${origem}-fim`} titulo={acao} apoio="Respondemos em até 1 dia útil." acao={acao} compacto />
     </div>
   </section>
 
