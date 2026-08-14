@@ -11,7 +11,7 @@ import fotoRodovia from '../imagens/rodovia-interior-sp.jpg';
 import fotoCarreta from '../imagens/carreta-rodovia-br.jpg';
 import fotoLoja from '../imagens/loja-varejo.jpg';
 import fotoPosto from '../imagens/posto.jpg';
-import { empresa, zap, faqTms } from '../dados/site';
+import { empresa, zap, faqTms, mostrarProvas } from '../dados/site';
 
 const zapMsg = 'Olá! Vim pelo site da Aucom e quero saber mais sobre o sistema TMS.';
 
@@ -86,11 +86,13 @@ const schema = {
   </section>
 
   <!-- ================= PROVA ================= -->
-  <section class="prova-secao">
-    <div class="faixa">
-      <ProvaSocial />
-    </div>
-  </section>
+  {mostrarProvas && (
+    <section class="prova-secao">
+      <div class="faixa">
+        <ProvaSocial />
+      </div>
+    </section>
+  )}
 
   <!-- ================= DORES ================= -->
   <section class="fundo-claro">

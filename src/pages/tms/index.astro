@@ -6,7 +6,7 @@ import ProvaSocial from '../../componentes/ProvaSocial.astro';
 import Formulario from '../../componentes/Formulario.astro';
 import Faq from '../../componentes/Faq.astro';
 import CtaFinal from '../../componentes/CtaFinal.astro';
-import { faqTms, empresa, zap } from '../../dados/site';
+import { faqTms, empresa, zap, mostrarProvas } from '../../dados/site';
 
 const zapMsg = 'Olá! Vim pela página do TMS e quero saber mais sobre o sistema para a minha transportadora.';
 
@@ -42,11 +42,13 @@ const schema = {
     </div>
   </HeroInterno>
 
-  <section class="fundo-claro">
-    <div class="faixa">
-      <ProvaSocial />
-    </div>
-  </section>
+  {mostrarProvas && (
+    <section class="fundo-claro">
+      <div class="faixa">
+        <ProvaSocial />
+      </div>
+    </section>
+  )}
 
   <section class="fundo-papel">
     <div class="faixa">

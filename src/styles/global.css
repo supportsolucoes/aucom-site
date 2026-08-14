@@ -191,7 +191,9 @@ section.rente{padding-top:0}
 }
 
 /* entrada e saida das secoes escuras, em diagonal suave:
-   da a sensacao de estrada, sem virar enfeite */
+   da a sensacao de estrada, sem virar enfeite.
+   As margens de 52px existem para abrigar as cunhas — se tirar o corte,
+   tem de tirar as margens junto, senao viram faixas de fundo entre as secoes. */
 .fundo-escuro{
   background:
     radial-gradient(100% 80% at 88% 8%, #10496E 0%, transparent 60%),

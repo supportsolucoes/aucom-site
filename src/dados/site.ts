@@ -35,6 +35,16 @@ export function zap(mensagem: string): string {
   return `https://wa.me/${empresa.whatsapp}?text=${encodeURIComponent(mensagem)}`;
 }
 
+/**
+ * A faixa de numeros so entra na pagina quando houver numero real para mostrar.
+ * Hoje 1 de 4 e real (1995): tres travessoes com "PENDENTE" ocupando meia tela
+ * fazem a pagina parecer inacabada, que e o oposto do que a faixa deveria provar.
+ *
+ * Quando a Aucom mandar os dados: preencher `provas` abaixo, apagar as notas
+ * "PENDENTE" e virar esta chave para true.
+ */
+export const mostrarProvas = false;
+
 /** PENDENTE: numeros reais de operacao, a confirmar com a Aucom. */
 export const provas = [
   { rotulo: 'No mercado desde', valor: '1995', nota: 'mais de 30 anos' },
