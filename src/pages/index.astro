@@ -99,33 +99,59 @@ const schema = {
       </div>
 
       <div class="grade grade-3">
-        <div class="cartao dor">
-          <span class="icone-selo claro"><Icone nome="alerta" /></span>
-          <span class="selo selo-erro">Rejeição</span>
-          <h3>CT-e rejeitado pela SEFAZ</h3>
-          <p>
-            O caminhão está carregado e o documento não passa. A conferência acontece antes do envio,
-            e a contingência entra automaticamente quando a SEFAZ cai.
-          </p>
-        </div>
-        <div class="cartao dor">
-          <span class="icone-selo claro"><Icone nome="xml" /></span>
-          <span class="selo selo-erro">Retrabalho</span>
-          <h3>Digitar nota por nota</h3>
-          <p>
-            Cada conhecimento redigitado é tempo perdido e chance de erro. O XML do embarcador entra
-            e vira CT-e, com peso, valor e destinatário já preenchidos.
-          </p>
-        </div>
-        <div class="cartao dor">
-          <span class="icone-selo claro"><Icone nome="dinheiro" /></span>
-          <span class="selo selo-erro">Prejuízo mudo</span>
-          <h3>Não saber o custo da viagem</h3>
-          <p>
-            Frete bom e viagem no vermelho convivem quando ninguém mede. Custo por veículo, por rota e
-            por viagem, com o acerto do agregado no mesmo lugar.
-          </p>
-        </div>
+        <article class="dor">
+          <div class="dor-corpo">
+            <div class="dor-topo">
+              <span class="icone-selo alerta"><Icone nome="alerta" /></span>
+              <span class="selo selo-erro">Rejeição</span>
+            </div>
+            <h3>CT-e rejeitado com o caminhão carregado</h3>
+            <p>
+              O motorista espera no pátio, o cliente cobra e o faturamento atrasa — quase sempre por
+              um dado que já estava errado antes do envio.
+            </p>
+          </div>
+          <div class="dor-saida">
+            <span class="rotulo">No Aucom TMS</span>
+            <p>A conferência roda antes de transmitir, e a contingência entra sozinha.</p>
+          </div>
+        </article>
+
+        <article class="dor">
+          <div class="dor-corpo">
+            <div class="dor-topo">
+              <span class="icone-selo alerta"><Icone nome="xml" /></span>
+              <span class="selo selo-erro">Retrabalho</span>
+            </div>
+            <h3>Uma tarde inteira digitando nota</h3>
+            <p>
+              Numa carga fracionada com 30 notas, alguém do escritório redigita remetente, peso, valor
+              e uma chave de 44 dígitos. Cada dígito é uma chance de rejeição.
+            </p>
+          </div>
+          <div class="dor-saida">
+            <span class="rotulo">No Aucom TMS</span>
+            <p>O XML do embarcador entra e vira conhecimento, já com peso, valor e destinatário.</p>
+          </div>
+        </article>
+
+        <article class="dor">
+          <div class="dor-corpo">
+            <div class="dor-topo">
+              <span class="icone-selo alerta"><Icone nome="dinheiro" /></span>
+              <span class="selo selo-erro">Prejuízo mudo</span>
+            </div>
+            <h3>Faturamento alto e lucro baixo</h3>
+            <p>
+              Combustível, manutenção, pneu e pedágio caem no caixa geral. No fim do mês fecha, mas
+              ninguém sabe qual rota paga e qual consome.
+            </p>
+          </div>
+          <div class="dor-saida">
+            <span class="rotulo">No Aucom TMS</span>
+            <p>Cada despesa amarrada à placa e à viagem, com o acerto do agregado no mesmo lugar.</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -411,21 +437,67 @@ const schema = {
     border-color: transparent;
   }
 
-  /* ---------- dores ---------- */
+  /* ---------- dores ----------
+     Cada cartao mostra o problema e, logo abaixo em faixa verde, o
+     que muda com o sistema. Antes os dois viviam no mesmo paragrafo
+     e a resposta se perdia no meio do texto. */
   .dor {
     display: flex;
     flex-direction: column;
-    gap: 9px;
-    align-items: flex-start;
+    background: var(--superficie);
+    border: 1px solid var(--fio);
+    border-radius: var(--raio);
+    overflow: hidden;
+    box-shadow: var(--sombra);
+    transition: box-shadow var(--transicao), transform var(--transicao);
+  }
+  .dor:hover {
+    box-shadow: var(--sombra-alta);
+    transform: translateY(-3px);
+  }
+  .dor-corpo {
+    padding: 24px 24px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    flex: 1;
+    border-top: 3px solid var(--rejeitado);
+  }
+  .dor-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .icone-selo.alerta {
+    background: var(--rejeitado-suave);
+    color: var(--rejeitado);
+    box-shadow: none;
   }
   .dor h3 {
-    font-size: 19px;
+    font-size: 19.5px;
   }
   .dor p {
     color: var(--tinta-2);
     font-size: 15.5px;
     line-height: 1.55;
     margin: 0;
+  }
+  .dor-saida {
+    background: var(--emitido-suave);
+    padding: 15px 24px 17px;
+    border-top: 1px solid rgba(21, 122, 75, 0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .dor-saida .rotulo {
+    color: var(--emitido);
+  }
+  .dor-saida p {
+    color: #16553A;
+    font-size: 15px;
+    line-height: 1.5;
   }
 
   /* ---------- diferencial ---------- */
