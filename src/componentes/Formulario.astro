@@ -1,4 +1,6 @@
 ---
+import { empresa } from '../dados/site';
+
 interface Props {
   titulo?: string;
   apoio?: string;
@@ -15,9 +17,8 @@ const {
 
 <form
   class:list={['form', { compacto }]}
-  action="/api/contato"
-  method="post"
   data-form
+  data-zap={empresa.whatsapp}
   novalidate
 >
   <div class="form-cabeca">
@@ -97,8 +98,9 @@ const {
   </button>
 
   <p class="aviso">
-    Respondemos em até 1 dia útil. Seus dados são usados apenas para este contato, conforme a
-    <a href="/politica-de-privacidade/">política de privacidade</a>.
+    Ao enviar, abrimos o WhatsApp com os seus dados já preenchidos. Se preferir, ligue para
+    <a href={`tel:${empresa.telefoneLink}`}>{empresa.telefone}</a>. Seus dados são usados apenas para
+    este contato, conforme a <a href="/politica-de-privacidade/">política de privacidade</a>.
   </p>
 
   <p class="erro" data-erro hidden></p>
@@ -300,16 +302,49 @@ const {
         return;
       }
 
+      e.preventDefault();
       if (erro) erro.hidden = true;
       if (botao) botao.disabled = true;
-      if (texto) texto.textContent = 'Enviando…';
+      if (texto) texto.textContent = 'Abrindo o WhatsApp…';
 
+      const dados = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+      const origem = dados.origem || '';
+
+      // A conversao e registrada ANTES de sair do site. Se dependesse
+      // do WhatsApp, todo contato que nao vira conversa sumiria — que
+      // e exatamente o buraco que existe hoje.
       const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
       dl.push({
         event: 'envio_formulario',
-        origem: form.querySelector<HTMLInputElement>('[name=origem]')?.value,
-        frota: form.querySelector<HTMLSelectElement>('[name=frota]')?.value,
+        origem,
+        frota: dados.frota || 'nao-informado',
+        quer_ligacao: dados.ligar || 'nao',
       });
+
+      const linhas = [
+        `Olá! Sou ${dados.nome}, da ${dados.empresa}.`,
+        dados.frota ? `Frota: ${dados.frota} veículos.` : '',
+        dados.ligar ? `Prefiro atendimento por telefone (${dados.ligar}). Meu número: ${dados.whatsapp}.` : '',
+        dados.email ? `E-mail: ${dados.email}.` : '',
+        dados.mensagem ? `\n${dados.mensagem}` : '\nQuero agendar uma demonstração do sistema.',
+      ].filter(Boolean);
+
+      const mensagem = linhas.join(' ');
+      const numero = form.getAttribute('data-zap');
+
+      // abre a conversa numa aba e leva esta para a pagina de
+      // confirmacao — que e onde a conversao fica registrada e onde
+      // sobra um botao caso o navegador bloqueie a janela nova
+      window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`, '_blank', 'noopener');
+
+      // a mensagem vai crua: quem codifica e o proprio URLSearchParams.
+      // Codificar antes gera codificacao dupla na barra de endereco.
+      const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+      const destino = new URL(`${base}/obrigado/`, location.origin);
+      destino.searchParams.set('origem', origem);
+      if (dados.frota) destino.searchParams.set('frota', dados.frota);
+      destino.searchParams.set('zap', mensagem);
+      location.href = destino.pathname + destino.search;
     });
   });
 </script>

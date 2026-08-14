@@ -19,14 +19,16 @@ const zapMsg = 'Olá! Acabei de enviar um contato pelo site da Aucom.';
         </svg>
       </span>
 
-      <h1>Recebemos seu contato</h1>
+      <h1>Abrimos o WhatsApp com os seus dados</h1>
       <p class="subtitulo">
-        Nossa equipe responde em até <strong>1 dia útil</strong>. Se preferir adiantar, chame no
-        WhatsApp — atendemos {empresa.horario.toLowerCase()}.
+        É só enviar a mensagem que já está escrita. Se a janela não abriu, use o botão abaixo —
+        atendemos {empresa.horario.toLowerCase()}.
       </p>
 
       <div class="acoes">
-        <a href={zap(zapMsg)} class="botao botao-zap" target="_blank" rel="noopener">Falar no WhatsApp agora</a>
+        <a href={zap(zapMsg)} class="botao botao-zap" target="_blank" rel="noopener" data-abrir-zap>
+          Abrir a conversa no WhatsApp
+        </a>
         <a href={`tel:${empresa.telefoneLink}`} class="botao botao-vazado">{empresa.telefone}</a>
       </div>
 
@@ -94,14 +96,22 @@ const zapMsg = 'Olá! Acabei de enviar um contato pelo site da Aucom.';
   }
 </style>
 
-<script>
+<script define:vars={{ numero: empresa.whatsapp }}>
   // A conversao acontece aqui: e esta pagina que diz ao Google Ads
   // e ao GA4 que o clique virou contato.
-  const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
+  const dl = (window.dataLayer = window.dataLayer || []);
   const p = new URLSearchParams(location.search);
   dl.push({
     event: 'contato_enviado',
     origem_formulario: p.get('origem') || 'nao-informado',
     frota: p.get('frota') || 'nao-informado',
   });
+
+  // o formulario manda a mensagem ja montada: o botao daqui abre a
+  // mesma conversa, para quem teve a janela bloqueada pelo navegador
+  const texto = p.get('zap');
+  if (texto) {
+    const botao = document.querySelector('[data-abrir-zap]');
+    if (botao) botao.setAttribute('href', `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`);
+  }
 </script>
