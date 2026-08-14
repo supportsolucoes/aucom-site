@@ -21,12 +21,18 @@ interface Props {
   migalhas: { texto: string; href?: string }[];
   /** foto de fundo; sem isto o topo fica so no gradiente */
   foto?: keyof typeof fotos;
+  /**
+   * topo em superficie clara. Para pagina de leitura longa (politica,
+   * termos): sem foto o topo escuro nao entrega nada visualmente e ainda
+   * cobra o preco de ler texto claro sobre fundo escuro.
+   */
+  claro?: boolean;
 }
-const { rotulo, titulo, texto, migalhas, foto } = Astro.props;
-const imagem = foto ? fotos[foto] : null;
+const { rotulo, titulo, texto, migalhas, foto, claro = false } = Astro.props;
+const imagem = foto && !claro ? fotos[foto] : null;
 ---
 
-<section class="hero-interno">
+<section class:list={['hero-interno', { claro }]}>
   {imagem && (
     <Image
       class="hero-foto"
@@ -40,7 +46,7 @@ const imagem = foto ? fotos[foto] : null;
       fetchpriority="high"
     />
   )}
-  <div class="hero-veu" aria-hidden="true"></div>
+  {!claro && <div class="hero-veu" aria-hidden="true"></div>}
 
   <div class="faixa">
     <Migalhas itens={migalhas} />
@@ -60,7 +66,7 @@ const imagem = foto ? fotos[foto] : null;
     background:
       radial-gradient(90% 80% at 85% 0%, #10496E 0%, transparent 62%),
       linear-gradient(160deg, var(--noite-2) 0%, var(--noite) 72%);
-    color: #fff;
+    color: var(--noite-tinta);
     padding-bottom: clamp(44px, 6vw, 76px);
     overflow: hidden;
   }
@@ -95,18 +101,52 @@ const imagem = foto ? fotos[foto] : null;
     color: var(--ciano);
   }
   .hero-texto h1 {
-    color: #fff;
+    color: var(--noite-tinta);
+    font-weight: 740;
   }
   .hero-texto .subtitulo {
-    color: #A8C4D6;
+    color: var(--noite-tinta-2);
+    font-weight: 410;
   }
   .hero-interno :global(.migalhas a) {
-    color: #7C9DB3;
+    color: var(--noite-tinta-3);
   }
   .hero-interno :global(.migalhas span) {
     color: #B8CEDC;
   }
   .hero-interno :global(.migalhas li + li::before) {
     color: #47657A;
+  }
+
+  /* ---- variante clara ---------------------------------------------
+     Mesma estrutura, superficie invertida. O rotulo troca o ciano pelo
+     azul institucional porque o ciano so tem contraste sobre escuro. */
+  .hero-interno.claro {
+    /* --papel e nao --superficie: as secoes de conteudo destas paginas sao
+       brancas, entao o topo precisa ser o tom acima para virar faixa */
+    background: var(--papel);
+    color: var(--tinta);
+    border-bottom: 1px solid var(--fio);
+    padding-bottom: clamp(26px, 3.5vw, 44px);
+  }
+  .hero-interno.claro .hero-texto h1 {
+    color: var(--tinta);
+    font-weight: 800;
+  }
+  .hero-interno.claro .hero-texto .rotulo {
+    color: var(--azul);
+  }
+  .hero-interno.claro .hero-texto .subtitulo {
+    color: var(--tinta-2);
+    font-weight: 430;
+  }
+  .hero-interno.claro :global(.migalhas a) {
+    color: var(--tinta-2);
+  }
+  .hero-interno.claro :global(.migalhas span) {
+    color: var(--tinta-3);
+  }
+  .hero-interno.claro :global(.migalhas li + li::before) {
+    color: var(--fio-forte);
   }
 </style>

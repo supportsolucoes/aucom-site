@@ -178,7 +178,7 @@ const schema = {
     font-family: var(--f-mono);
     font-size: 17px;
     font-weight: 600;
-    color: #fff;
+    color: var(--noite-tinta);
     text-decoration: none;
   }
   .barra-contato a:hover {
@@ -188,7 +188,7 @@ const schema = {
   .lp-topo {
     position: relative;
     isolation: isolate;
-    color: #fff;
+    color: var(--noite-tinta);
     padding: clamp(36px, 5vw, 64px) 0 clamp(90px, 10vw, 130px);
     background: var(--noite);
   }
@@ -226,11 +226,13 @@ const schema = {
     align-items: flex-start;
   }
   .lp-texto h1 {
-    color: #fff;
+    color: var(--noite-tinta);
+    font-weight: 740;
     text-shadow: 0 2px 40px rgba(3, 15, 25, 0.7);
   }
   .lp-texto .subtitulo {
-    color: #A8C4D6;
+    color: var(--noite-tinta-2);
+    font-weight: 410;
     max-width: 54ch;
   }
   .selo-topo {
@@ -250,7 +252,8 @@ const schema = {
     font-size: 16.5px;
   }
   .destaques li :global(strong) {
-    color: #fff;
+    color: var(--noite-tinta);
+    font-weight: 640;
   }
   .destaques.check li::before {
     border-color: var(--ciano);

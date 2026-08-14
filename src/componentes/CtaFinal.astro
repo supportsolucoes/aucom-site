@@ -33,8 +33,14 @@ const {
 </section>
 
 <style>
+  /* Era quase-preto e caia colado no rodape, que tambem e escuro: toda
+     pagina terminava num bloco preto de duas alturas. Em azul da marca o
+     fechamento continua forte, separa do rodape e tira a maior mancha
+     escura do site. Branco sobre este azul da 8,1:1. */
   .cta {
-    background: var(--tinta);
+    background:
+      radial-gradient(90% 120% at 88% 0%, #00679F 0%, transparent 62%),
+      var(--azul-esc);
     color: #fff;
   }
   /* texto em cima, botoes lado a lado embaixo: em coluna estreita
@@ -51,10 +57,12 @@ const {
   }
   .cta h2 {
     color: #fff;
+    /* sobre azul o contraste e menor que sobre quase-preto, entao aqui
+       nao ha halo para compensar: o peso volta ao normal do titulo */
     margin-bottom: 10px;
   }
   .cta p {
-    color: #A9BECA;
+    color: #CFE3F2;
     margin: 0;
     font-size: 17.5px;
   }
@@ -66,6 +74,13 @@ const {
   }
   .cta-acoes .botao {
     min-width: 220px;
+  }
+  /* sobre o azul, o verde do WhatsApp e o laranja ficam perto demais em
+     luminancia (1,5:1 o verde) e a borda do botao some. Um fio claro de
+     1px resolve sem mexer na cor do botao, que e a mesma do resto do site. */
+  .cta-acoes .botao-zap,
+  .cta-acoes .botao-acao {
+    border-color: rgba(255, 255, 255, 0.34);
   }
   .tel {
     font-family: var(--f-mono);

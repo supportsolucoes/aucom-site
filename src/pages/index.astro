@@ -332,7 +332,7 @@ const schema = {
     isolation: isolate;
     display: flex;
     align-items: center;
-    color: #fff;
+    color: var(--noite-tinta);
     padding-top: clamp(40px, 5vw, 68px);
     padding-bottom: clamp(96px, 11vw, 140px);
     background: var(--noite);
@@ -379,7 +379,10 @@ const schema = {
     align-items: flex-start;
   }
   .topo h1 {
-    color: #fff;
+    color: var(--noite-tinta);
+    /* o veu ja e quase opaco onde o titulo passa, entao vale o mesmo
+       passo a menos de peso das outras superficies escuras */
+    font-weight: 740;
     text-shadow: 0 2px 40px rgba(3, 15, 25, 0.7);
   }
   .tel-botao {
@@ -390,7 +393,8 @@ const schema = {
     box-shadow: var(--sombra-flutua);
   }
   .topo .subtitulo {
-    color: #A8C4D6;
+    color: var(--noite-tinta-2);
+    font-weight: 410;
   }
   .selo-topo {
     display: inline-block;
@@ -412,7 +416,8 @@ const schema = {
     color: #D6E5EF;
   }
   .destaques li strong {
-    color: #fff;
+    color: var(--noite-tinta);
+    font-weight: 640;
   }
   .destaques.check li::before {
     border-color: var(--ciano);
@@ -438,7 +443,7 @@ const schema = {
     font-weight: 600;
     text-decoration: none;
     letter-spacing: -0.01em;
-    color: #fff;
+    color: var(--noite-tinta);
   }
   .assinatura-topo a:hover {
     color: var(--ciano);
@@ -538,13 +543,15 @@ const schema = {
     align-items: flex-start;
   }
   .dif-texto h2 {
-    color: #fff;
+    color: var(--noite-tinta);
+    font-weight: 740;
   }
   .dif-texto .rotulo {
     color: var(--ciano);
   }
   .dif-texto p {
-    color: #A8C4D6;
+    color: var(--noite-tinta-2);
+    font-weight: 410;
     margin: 0;
     max-width: 54ch;
   }
