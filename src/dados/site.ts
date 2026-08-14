@@ -11,6 +11,16 @@ export const empresa = {
   nomeCompleto: 'Aucom Informática',
   cidade: 'Bauru',
   uf: 'SP',
+  /**
+   * Endereco confirmado pela Aucom em 14/08/2026.
+   * Falta so o CEP: entra aqui e no PostalAddress do Base.astro quando vier
+   * (nao inventar — CEP errado atrapalha o Perfil da Empresa no Google).
+   */
+  endereco: {
+    logradouro: 'Rua Engenheiro Alpheu José Ribas Sampaio, 3-26',
+    complemento: 'Sala 210, Residencial Trianon',
+    bairro: 'Vila Nova Cidade Universitária',
+  },
   anos: 30,
   telefone: '(14) 3879-0200',
   telefoneLink: '+551438790200',
@@ -155,7 +165,7 @@ export const faqTms = [
   },
   {
     p: 'Vocês migram os dados do sistema que eu uso hoje?',
-    r: 'Sim. Cadastro de clientes, motoristas, veículos, tabelas de frete e histórico de documentos são migrados. O que é possível trazer depende do formato em que o sistema atual permite exportar — avaliamos isso no diagnóstico, antes de fechar.',
+    r: 'Sim. Cadastro de clientes, motoristas, veículos, tabelas de frete e histórico de documentos são migrados. O que é possível trazer depende do formato em que o sistema atual permite exportar. Avaliamos isso no diagnóstico, antes de fechar.',
   },
   {
     p: 'Quantos veículos preciso ter para valer a pena?',
@@ -171,7 +181,7 @@ export const faqTms = [
   },
   {
     p: 'Quem atende quando dá problema na hora de emitir?',
-    r: 'Nossa equipe, por telefone e WhatsApp, no horário comercial. Somos de Bauru e atendemos transportadora há 30 anos — quem responde conhece transporte, não é central de atendimento genérica.',
+    r: 'Nossa equipe, por telefone e WhatsApp, no horário comercial. Somos de Bauru e atendemos transportadora há 30 anos. Quem responde conhece transporte, não é central de atendimento genérica.',
   },
 ];
 

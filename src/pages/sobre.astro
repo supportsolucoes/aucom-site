@@ -8,14 +8,14 @@ const zapMsg = 'Olá! Vim pela página sobre a Aucom e quero conhecer os sistema
 ---
 
 <Base
-  titulo="Sobre a Aucom — Sistemas para Transportadoras há 30 anos"
+  titulo="Sobre a Aucom | Sistemas para Transportadoras há 30 anos"
   descricao="A Aucom desenvolve sistemas de gestão em Bauru, interior de São Paulo, há mais de 30 anos. TMS, gerenciamento de risco e ERP, com equipe e suporte próprios."
   zapMensagem={zapMsg}
 >
   <HeroInterno
     rotulo="Sobre"
     titulo="Trinta anos automatizando operação no interior de São Paulo"
-    texto="A Aucom nasceu em Bauru fazendo automação comercial e hoje é uma casa de software de transporte — com clientes que atravessaram décadas junto com a gente."
+    texto="A Aucom nasceu em Bauru fazendo automação comercial e hoje é uma casa de software de transporte, com clientes que atravessaram décadas junto com a gente."
     migalhas={[{ texto: 'Sobre' }]}
     foto="rodovia"
   />
@@ -31,7 +31,7 @@ const zapMsg = 'Olá! Vim pela página sobre a Aucom e quero conhecer os sistema
         </p>
         <p>
           A Aucom está em Bauru desde o começo. Atendemos transportadora, loja, atacado e posto no
-          interior paulista — muitos clientes há mais de dez anos. Não somos a maior empresa do
+          interior paulista, muitos clientes há mais de dez anos. Não somos a maior empresa do
           mercado, e é justamente por isso que o cliente fala com quem resolve, e não com um número de
           protocolo.
         </p>
@@ -40,19 +40,19 @@ const zapMsg = 'Olá! Vim pela página sobre a Aucom e quero conhecer os sistema
         <p>
           Três linhas de produto que se conectam: o <a href="/tms/">TMS</a> para a operação de
           transporte, o <a href="/gerenciamento-de-risco/">gerenciamento de risco</a> integrado a ele, e
-          o <a href="/erp/">ERP</a> para comércio, atacado e postos — a linha com que a empresa começou
+          o <a href="/erp/">ERP</a> para comércio, atacado e postos, a linha com que a empresa começou
           e que continua atendendo.
         </p>
         <p>
           Trabalhamos com sistema no escritório, aplicativo na mão do motorista, acesso pela web e
-          integração via API — porque uma transportadora não roda em um lugar só.
+          integração via API, porque uma transportadora não roda em um lugar só.
         </p>
       </div>
 
       <aside class="ficha">
         <span class="rotulo">A empresa</span>
         <dl>
-          <div><dt>Onde fica</dt><dd>{empresa.cidade} — {empresa.uf}</dd></div>
+          <div><dt>Onde fica</dt><dd>{empresa.cidade}/{empresa.uf}</dd></div>
           <div><dt>No mercado desde</dt><dd>1995</dd></div>
           <div><dt>Produtos</dt><dd>TMS, gerenciamento de risco e ERP</dd></div>
           <div><dt>Atendimento</dt><dd>{empresa.horario}</dd></div>

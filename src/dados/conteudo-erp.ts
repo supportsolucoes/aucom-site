@@ -24,7 +24,7 @@ export const paginasErp: Record<string, PaginaErp> = {
       'Sistema de gestão para loja, atacado e distribuidora: estoque, vendas, compras, fiscal e financeiro integrados, com app de vendas e integração com e-commerce.',
     h1: 'ERP para varejo, atacado e distribuidora',
     abertura:
-      'Do balcão à distribuição: um sistema que controla o que entra, o que sai, quanto custa e quanto sobra — sem planilha paralela para fechar o mês.',
+      'Do balcão à distribuição: um sistema que controla o que entra, o que sai, quanto custa e quanto sobra, sem planilha paralela para fechar o mês.',
     itens: [
       { t: 'Vendas e balcão', d: 'PDV, NFC-e, orçamento, pedido e condição de pagamento por cliente.' },
       { t: 'Estoque', d: 'Entrada, saída, inventário, custo médio e controle por lote quando o produto exige.' },
@@ -46,7 +46,7 @@ export const paginasErp: Record<string, PaginaErp> = {
       'Gestão para posto de combustível: bombas, tanques, aferição, conveniência, fiscal do combustível e financeiro em um sistema só.',
     h1: 'Sistema para posto de combustível',
     abertura:
-      'Posto é um negócio de margem apertada e fiscalização pesada. O sistema precisa fechar bomba com tanque, tanque com nota e nota com o caixa — todo dia, sem sobra e sem falta.',
+      'Posto é um negócio de margem apertada e fiscalização pesada. O sistema precisa fechar bomba com tanque, tanque com nota e nota com o caixa, todo dia, sem sobra e sem falta.',
     itens: [
       { t: 'Bombas e encerrantes', d: 'Leitura por bico, fechamento de turno e conferência com o que foi vendido.' },
       { t: 'Tanques', d: 'Estoque por tanque, recebimento de carga e controle de perda por evaporação.' },

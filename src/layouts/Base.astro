@@ -45,6 +45,7 @@ const organizacao = {
   email: empresa.email,
   address: {
     '@type': 'PostalAddress',
+    streetAddress: `${empresa.endereco.logradouro}, ${empresa.endereco.complemento}`,
     addressLocality: empresa.cidade,
     addressRegion: empresa.uf,
     addressCountry: 'BR',
@@ -93,7 +94,7 @@ const organizacao = {
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
 
     <!--
-      Consent Mode v2 — precisa vir ANTES de qualquer tag do Google.
+      Consent Mode v2: precisa vir ANTES de qualquer tag do Google.
       Tudo comeca negado; o aviso de privacidade libera o que a pessoa
       escolher. Sem esta ordem, a tag dispara antes do consentimento.
     -->

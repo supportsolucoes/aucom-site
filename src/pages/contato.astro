@@ -8,14 +8,14 @@ const zapMsg = 'Olá! Vim pela página de contato do site da Aucom.';
 ---
 
 <Base
-  titulo="Contato | Aucom — Sistemas para Transportadoras"
+  titulo="Contato | Aucom Sistemas para Transportadoras"
   descricao="Fale com a Aucom por telefone, WhatsApp ou e-mail. Atendimento próprio em Bauru, interior de São Paulo, de segunda a sexta."
   zapMensagem={zapMsg}
 >
   <HeroInterno
     rotulo="Contato"
     titulo="Fale com a gente"
-    texto="Atendimento próprio, em Bauru. Quem responde conhece transporte — e conhece o sistema."
+    texto="Atendimento próprio, em Bauru. Quem responde conhece transporte, e conhece o sistema."
     migalhas={[{ texto: 'Contato' }]}
     foto="carreta"
   />
@@ -51,8 +51,12 @@ const zapMsg = 'Olá! Vim pela página de contato do site da Aucom.';
 
         <div class="canal">
           <span class="rotulo">Onde estamos</span>
-          <span class="destaque-link sem-link">{empresa.cidade} — {empresa.uf}</span>
-          <p class="pendente"><strong>Confirmar:</strong> endereço completo para publicar aqui e no Perfil da Empresa no Google.</p>
+          <span class="destaque-link sem-link">{empresa.cidade}/{empresa.uf}</span>
+          <p>
+            {empresa.endereco.logradouro}<br />
+            {empresa.endereco.complemento}<br />
+            {empresa.endereco.bairro}, {empresa.cidade}/{empresa.uf}
+          </p>
         </div>
       </div>
 

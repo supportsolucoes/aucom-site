@@ -28,7 +28,7 @@ export const conteudo: Record<string, ConteudoModulo> = {
     dor: {
       titulo: 'Rejeição da SEFAZ com o caminhão carregado no pátio',
       texto:
-        'Erro de CFOP, tomador errado, peso divergente, destinatário sem inscrição — a rejeição quase sempre vem de um dado que já estava errado antes do envio. O sistema confere isso antes, não depois.',
+        'Erro de CFOP, tomador errado, peso divergente, destinatário sem inscrição: a rejeição quase sempre vem de um dado que já estava errado antes do envio. O sistema confere isso antes, não depois.',
     },
     recursos: [
       {
@@ -44,7 +44,7 @@ export const conteudo: Record<string, ConteudoModulo> = {
       {
         titulo: 'Conferência antes de transmitir',
         texto:
-          'O sistema verifica os campos que mais causam rejeição e avisa antes do envio, com a mensagem em português — não com o código da SEFAZ.',
+          'O sistema verifica os campos que mais causam rejeição e avisa antes do envio, com a mensagem em português, não com o código da SEFAZ.',
       },
       {
         titulo: 'Contingência quando a SEFAZ cai',
@@ -59,7 +59,7 @@ export const conteudo: Record<string, ConteudoModulo> = {
       {
         titulo: 'Carta de correção e cancelamento',
         texto:
-          'CC-e e cancelamento dentro do prazo legal, com histórico de quem fez e quando — o que salva na hora da fiscalização.',
+          'CC-e e cancelamento dentro do prazo legal, com histórico de quem fez e quando, o que salva na hora da fiscalização.',
       },
       {
         titulo: 'Guarda dos XML',
@@ -95,11 +95,11 @@ export const conteudo: Record<string, ConteudoModulo> = {
       'Importe o XML da nota fiscal do embarcador e gere o CT-e sem digitação. Peso, valor, destinatário e chave da NF-e já preenchidos, com conferência automática.',
     h1: 'Importe o XML da nota e gere o CT-e sem digitar',
     abertura:
-      'Toda transportadora conhece esta cena: a nota chega, alguém digita remetente, destinatário, peso, valor e a chave de 44 dígitos — e depois confere tudo de novo. É o trabalho mais repetitivo do escritório e o que mais gera rejeição.',
+      'Toda transportadora conhece esta cena: a nota chega, alguém digita remetente, destinatário, peso, valor e a chave de 44 dígitos, e depois confere tudo de novo. É o trabalho mais repetitivo do escritório e o que mais gera rejeição.',
     dor: {
       titulo: 'Digitar nota por nota para emitir o conhecimento',
       texto:
-        'Cada nota redigitada custa alguns minutos e abre espaço para erro de digitação. Numa carga fracionada com 30 notas, isso vira uma tarde inteira — e um CT-e rejeitado no fim do dia.',
+        'Cada nota redigitada custa alguns minutos e abre espaço para erro de digitação. Numa carga fracionada com 30 notas, isso vira uma tarde inteira, e um CT-e rejeitado no fim do dia.',
     },
     recursos: [
       {
@@ -125,7 +125,7 @@ export const conteudo: Record<string, ConteudoModulo> = {
       {
         titulo: 'Cálculo do frete pela tabela',
         texto:
-          'Com os dados da nota já no sistema, o frete é calculado pela tabela do cliente — por peso, valor, volume ou faixa de quilometragem.',
+          'Com os dados da nota já no sistema, o frete é calculado pela tabela do cliente, por peso, valor, volume ou faixa de quilometragem.',
       },
       {
         titulo: 'Romaneio direto das notas',
@@ -138,7 +138,7 @@ export const conteudo: Record<string, ConteudoModulo> = {
     faq: [
       {
         p: 'E se o embarcador não mandar o XML?',
-        r: 'Dá para buscar a nota pela chave de acesso, quando ela está disponível, ou lançar manualmente. Mas na maioria das operações o embarcador envia o XML — e aí o ganho é imediato.',
+        r: 'Dá para buscar a nota pela chave de acesso, quando ela está disponível, ou lançar manualmente. Mas na maioria das operações o embarcador envia o XML, e aí o ganho é imediato.',
       },
       {
         p: 'O sistema aceita XML de qualquer emissor?',
@@ -151,10 +151,10 @@ export const conteudo: Record<string, ConteudoModulo> = {
   'ciot-pagamento-de-frete': {
     title: 'Sistema para Emitir CIOT e Pagar Frete de Autônomo | Aucom',
     descricao:
-      'Declaração de CIOT, pagamento eletrônico de frete ao motorista autônomo, adiantamento, saldo e prestação de contas da viagem — dentro do mesmo TMS.',
+      'Declaração de CIOT, pagamento eletrônico de frete ao motorista autônomo, adiantamento, saldo e prestação de contas da viagem, tudo dentro do mesmo TMS.',
     h1: 'CIOT emitido junto com a viagem, não depois dela',
     abertura:
-      'Contratar autônomo sem CIOT é multa na estrada e dor de cabeça na fiscalização. Quando a declaração é feita em sistema separado, ela sempre atrasa — e alguém descobre o problema com o caminhão já rodando.',
+      'Contratar autônomo sem CIOT é multa na estrada e dor de cabeça na fiscalização. Quando a declaração é feita em sistema separado, ela sempre atrasa, e alguém descobre o problema com o caminhão já rodando.',
     dor: {
       titulo: 'CIOT feito depois, em outro sistema, por outra pessoa',
       texto:
@@ -195,7 +195,7 @@ export const conteudo: Record<string, ConteudoModulo> = {
     faq: [
       {
         p: 'Quando o CIOT é obrigatório?',
-        r: 'Sempre que a transportadora contrata transportador autônomo (TAC) para uma operação de transporte remunerado. A declaração precisa existir antes de o veículo rodar — por isso ela nasce junto da viagem no sistema.',
+        r: 'Sempre que a transportadora contrata transportador autônomo (TAC) para uma operação de transporte remunerado. A declaração precisa existir antes de o veículo rodar, por isso ela nasce junto da viagem no sistema.',
       },
       {
         p: 'O pagamento sai pelo sistema?',
@@ -236,7 +236,7 @@ export const conteudo: Record<string, ConteudoModulo> = {
       {
         titulo: 'Abastecimento e consumo',
         texto:
-          'Média de consumo por veículo e por motorista, com desvio sinalizado — é onde aparece o abastecimento que não fecha.',
+          'Média de consumo por veículo e por motorista, com desvio sinalizado, é onde aparece o abastecimento que não fecha.',
       },
       {
         titulo: 'Agregados e terceiros',
@@ -253,12 +253,12 @@ export const conteudo: Record<string, ConteudoModulo> = {
   },
 
   'controle-de-jornada': {
-    title: 'Controle de Jornada do Motorista — Lei 13.103 | Aucom TMS',
+    title: 'Controle de Jornada do Motorista, Lei 13.103 | Aucom TMS',
     descricao:
       'Registro de jornada, escala, tempo de espera, horas extras e descanso conforme a Lei do Motorista, integrado à operação de transporte e à folha.',
     h1: 'Controle de jornada do motorista dentro da Lei',
     abertura:
-      'A Lei do Motorista transformou jornada em risco trabalhista. Sem registro organizado, a transportadora descobre o problema na reclamação — e aí a conta já está formada.',
+      'A Lei do Motorista transformou jornada em risco trabalhista. Sem registro organizado, a transportadora descobre o problema na reclamação, e aí a conta já está formada.',
     dor: {
       titulo: 'Jornada em papel, planilha ou memória',
       texto:
@@ -273,7 +273,7 @@ export const conteudo: Record<string, ConteudoModulo> = {
       {
         titulo: 'Tempo de espera',
         texto:
-          'Espera em cliente registrada separadamente da direção — é a diferença que costuma pesar na apuração.',
+          'Espera em cliente registrada separadamente da direção, é a diferença que costuma pesar na apuração.',
       },
       {
         titulo: 'Escala e revezamento',
@@ -292,7 +292,7 @@ export const conteudo: Record<string, ConteudoModulo> = {
       {
         titulo: 'Histórico que serve de prova',
         texto:
-          'Registro guardado por motorista e por período, com trilha de alterações — o que a empresa precisa apresentar se for questionada.',
+          'Registro guardado por motorista e por período, com trilha de alterações, o que a empresa precisa apresentar se for questionada.',
       },
     ],
     zap: 'Olá! Vim pela página de controle de jornada e quero saber como o sistema atende a Lei do Motorista.',
@@ -304,7 +304,7 @@ export const conteudo: Record<string, ConteudoModulo> = {
       'Montagem de rota de entrega, integração com rastreadores, acompanhamento da viagem e registro de ocorrências no momento em que acontecem.',
     h1: 'A carga na tela, do embarque à entrega',
     abertura:
-      'Cliente que liga perguntando onde está a carga custa caro: ocupa o atendimento e passa insegurança. Quando a viagem está na tela, a resposta sai em segundos — ou o cliente consulta sozinho.',
+      'Cliente que liga perguntando onde está a carga custa caro: ocupa o atendimento e passa insegurança. Quando a viagem está na tela, a resposta sai em segundos, ou o cliente consulta sozinho.',
     dor: {
       titulo: 'Descobrir o problema da entrega só quando o cliente reclama',
       texto:
@@ -333,7 +333,7 @@ export const conteudo: Record<string, ConteudoModulo> = {
       {
         titulo: 'Histórico por rota e por cliente',
         texto:
-          'Quais rotas atrasam sempre e quais clientes concentram ocorrência — informação para renegociar o frete com base em fato.',
+          'Quais rotas atrasam sempre e quais clientes concentram ocorrência, informação para renegociar o frete com base em fato.',
       },
     ],
     zap: 'Olá! Vim pela página de roteirização e rastreamento e quero saber mais sobre o acompanhamento das cargas.',
@@ -369,7 +369,7 @@ export const conteudo: Record<string, ConteudoModulo> = {
       {
         titulo: 'Ocorrência de entrega',
         texto:
-          'Recusa, ausência, avaria e devolução com motivo padronizado — o que permite medir e cobrar melhoria.',
+          'Recusa, ausência, avaria e devolução com motivo padronizado, o que permite medir e cobrar melhoria.',
       },
       {
         titulo: 'Consulta pelo cliente',
@@ -389,7 +389,7 @@ export const conteudo: Record<string, ConteudoModulo> = {
     dor: {
       titulo: 'Atendimento parado respondendo status de carga',
       texto:
-        'Quanto maior a operação, mais o telefone toca — e quem atende deixa de fazer o que realmente precisa ser feito.',
+        'Quanto maior a operação, mais o telefone toca, e quem atende deixa de fazer o que realmente precisa ser feito.',
     },
     recursos: [
       {
@@ -407,7 +407,7 @@ export const conteudo: Record<string, ConteudoModulo> = {
       {
         titulo: 'Menos telefone, mais serviço percebido',
         texto:
-          'Transportadora com portal passa imagem de operação organizada — e isso ajuda na hora de disputar contrato com embarcador grande.',
+          'Transportadora com portal passa imagem de operação organizada, e isso ajuda na hora de disputar contrato com embarcador grande.',
       },
     ],
     zap: 'Olá! Vim pela página do portal do embarcador e quero saber como funciona para os meus clientes.',

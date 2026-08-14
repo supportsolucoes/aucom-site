@@ -12,7 +12,7 @@ const zapMsg = 'Olá! Vim pela página de gerenciamento de risco e quero saber c
 const faq = [
   {
     p: 'Preciso contratar uma empresa de gerenciamento de risco separada?',
-    r: 'Não para a parte de sistema. O cadastro do motorista, as regras por tipo de carga, o acompanhamento da viagem e o histórico de ocorrências ficam no mesmo sistema que emite seus documentos. Serviços de campo (escolta, pronta-resposta) continuam sendo contratados de quem presta esse serviço — mas a informação fica organizada em um lugar só.',
+    r: 'Não para a parte de sistema. O cadastro do motorista, as regras por tipo de carga, o acompanhamento da viagem e o histórico de ocorrências ficam no mesmo sistema que emite seus documentos. Serviços de campo (escolta, pronta-resposta) continuam sendo contratados de quem presta esse serviço, mas a informação fica organizada em um lugar só.',
   },
   {
     p: 'Dá para exigir regras diferentes por tipo de carga?',
@@ -24,7 +24,7 @@ const faq = [
   },
   {
     p: 'Funciona para transportadora que usa agregado?',
-    r: 'Especialmente. É justamente com terceiro e agregado que a checagem antes da viagem faz mais diferença — porque o veículo não é seu e o motorista não é do seu quadro.',
+    r: 'Especialmente. É justamente com terceiro e agregado que a checagem antes da viagem faz mais diferença, porque o veículo não é seu e o motorista não é do seu quadro.',
   },
 ];
 
@@ -41,14 +41,14 @@ const schema = {
 
 <Base
   titulo="Gerenciamento de Risco para Transportadoras (ERM) | Aucom"
-  descricao="Cadastro e consulta de motoristas, regras por tipo de carga, monitoramento de viagem e histórico de ocorrências — no mesmo sistema que emite seus documentos."
+  descricao="Cadastro e consulta de motoristas, regras por tipo de carga, monitoramento de viagem e histórico de ocorrências, no mesmo sistema que emite seus documentos."
   zapMensagem={zapMsg}
   schema={schema}
 >
   <HeroInterno
     rotulo="ERM · Gerenciamento de risco"
     titulo="Gerenciamento de risco integrado ao seu TMS"
-    texto="Quem entrega a carga, em qual veículo, por qual rota e com qual histórico. Tudo isso vive junto do CT-e e da viagem — e não num sistema separado, de outro fornecedor, que não conversa com a sua operação."
+    texto="Quem entrega a carga, em qual veículo, por qual rota e com qual histórico. Tudo isso vive junto do CT-e e da viagem, e não num sistema separado, de outro fornecedor, que não conversa com a sua operação."
     migalhas={[{ texto: 'Gerenciamento de risco' }]}
     foto="carreta"
   >
@@ -70,7 +70,7 @@ const schema = {
           <h3>Quem está dirigindo</h3>
           <p>
             Motorista terceiro ou agregado sem checagem é a porta de entrada da maior parte dos
-            problemas — e a primeira pergunta que a seguradora faz depois do sinistro.
+            problemas, e a primeira pergunta que a seguradora faz depois do sinistro.
           </p>
         </div>
         <div class="cartao risco">
