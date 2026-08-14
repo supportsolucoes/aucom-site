@@ -3,7 +3,9 @@
 Site institucional reposicionado para **TMS e gerenciamento de risco de transportadoras**,
 conforme o plano do relatório de diagnóstico (`../relatorio/`).
 
-**Status:** roda em localhost. **Não publicado** — sem deploy configurado, por decisão do cliente.
+**Status:** publicado como ambiente de teste em
+https://supportsolucoes.github.io/aucom-site/ (com `noindex`, para não concorrer com o site
+real da Aucom no Google).
 
 ## Como rodar
 
@@ -13,6 +15,22 @@ npm run dev      # http://localhost:4321
 npm run build    # gera dist/
 npm run preview  # serve o dist/
 ```
+
+## Como publicar o teste
+
+```powershell
+$env:SITE_URL="https://supportsolucoes.github.io"; $env:BASE_PATH="/aucom-site"
+npm run build
+$env:SITE_URL=$null; $env:BASE_PATH=$null
+```
+
+Depois criar `dist/.nojekyll`, sobrescrever `dist/robots.txt` com `Disallow: /` e enviar o
+conteúdo de `dist` para a branch `gh-pages`. O deploy automático está pronto em
+`docs/workflow-pages.yml.txt`, mas exige `gh auth refresh -s workflow` para poder subir.
+
+> O Pages leva de 30 s a alguns minutos para propagar. Nesse intervalo ele serve HTML novo
+> com CSS antigo e a página aparece quebrada — confirme o conteúdo no ar antes de mostrar
+> para alguém.
 
 ## Stack e por quê
 
@@ -71,11 +89,25 @@ public/
 - Imagens em WebP com `srcset`; fonte com preload e métricas de fallback
 - 404 útil, com atalhos
 
+## Como o formulário funciona hoje
+
+Não há backend. Ao enviar, o formulário:
+
+1. registra a conversão no `dataLayer` (**antes** de sair do site — se dependesse do envio no
+   WhatsApp, todo contato que não vira conversa sumiria);
+2. abre `wa.me` numa aba nova, com a mensagem montada a partir dos campos;
+3. leva a aba atual para `/obrigado/`, que repete o link com a mesma mensagem — necessário
+   porque o navegador pode bloquear a janela nova.
+
+Consequência: existe a **contagem** de contatos (GA4/Ads), mas não a **lista** com nome e
+telefone — ela vive nas conversas do WhatsApp. Para lead gravado e conversão offline, é
+preciso o backend (ver `../arquitetura.md`); a troca fica no `submit` de
+`src/componentes/Formulario.astro`.
+
 ## O que falta (depende do cliente)
 
 1. **Container do GTM** — o espaço está marcado em `src/layouts/Base.astro`. Sem ele, nada é medido.
-2. **Backend do formulário** — hoje ele posta em `/api/contato`, que ainda não existe. Precisa de
-   função serverless ou do PHP atual, e deve redirecionar para `/obrigado/`. Ver `../arquitetura.md`.
+2. **Backend do formulário**, quando quiserem lead gravado em banco/CRM e conversão offline.
 3. **Números reais** da faixa de prova social (`src/dados/site.ts` → `provas`).
 4. **Clientes e cases** — `/clientes/` está montada mas sem conteúdo real, e por isso fora do menu.
 5. **Política de preço** — decidir o que publicar em `/planos/`.
