@@ -45,7 +45,8 @@ const organizacao = {
   email: empresa.email,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: `${empresa.endereco.logradouro}, ${empresa.endereco.complemento}`,
+    // sem streetAddress ate a Aucom confirmar o endereco atual: endereco
+    // errado aqui atrapalha o Perfil da Empresa mais do que a ausencia
     addressLocality: empresa.cidade,
     addressRegion: empresa.uf,
     addressCountry: 'BR',

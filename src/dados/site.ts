@@ -12,15 +12,13 @@ export const empresa = {
   cidade: 'Bauru',
   uf: 'SP',
   /**
-   * Endereco confirmado pela Aucom em 14/08/2026.
-   * Falta so o CEP: entra aqui e no PostalAddress do Base.astro quando vier
-   * (nao inventar — CEP errado atrapalha o Perfil da Empresa no Google).
+   * PENDENTE: endereco completo.
+   * Em 14/08/2026 chegou um endereco na Rua Engenheiro Alpheu Jose Ribas
+   * Sampaio, mas era o ANTIGO — foi publicado e removido no mesmo dia.
+   * Nao republicar sem a Aucom confirmar o endereco atual, com CEP.
+   * Endereco errado no site e no JSON-LD atrapalha o Perfil da Empresa no
+   * Google mais do que a ausencia dele.
    */
-  endereco: {
-    logradouro: 'Rua Engenheiro Alpheu José Ribas Sampaio, 3-26',
-    complemento: 'Sala 210, Residencial Trianon',
-    bairro: 'Vila Nova Cidade Universitária',
-  },
   anos: 30,
   telefone: '(14) 3879-0200',
   telefoneLink: '+551438790200',
