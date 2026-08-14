@@ -241,26 +241,35 @@ const schema = {
 
       <ol class="passos">
         <li>
-          <span class="rotulo">Etapa 1</span>
+          <span class="marca-passo" aria-hidden="true">1</span>
           <h3>Diagnóstico</h3>
-          <p>Entendemos sua operação e o que dá para trazer do sistema atual. O prazo é fechado aqui.</p>
+          <p>Entendemos sua operação e o que dá para trazer do sistema atual. O prazo é fechado aqui — e não muda depois.</p>
         </li>
         <li>
-          <span class="rotulo">Etapa 2</span>
+          <span class="marca-passo" aria-hidden="true">2</span>
           <h3>Migração dos dados</h3>
           <p>Clientes, motoristas, veículos, tabelas de frete e histórico de documentos.</p>
         </li>
         <li>
-          <span class="rotulo">Etapa 3</span>
+          <span class="marca-passo" aria-hidden="true">3</span>
           <h3>Treinamento</h3>
           <p>Sua equipe aprende no sistema já com os dados dela dentro, não em base de exemplo.</p>
         </li>
-        <li>
-          <span class="rotulo">Etapa 4</span>
+        <li class="chegada">
+          <span class="marca-passo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m4 12.5 5.2 5.2L20 7" />
+            </svg>
+          </span>
           <h3>Virada acompanhada</h3>
           <p>No dia da virada tem gente da Aucom junto, até o primeiro CT-e sair autorizado.</p>
         </li>
       </ol>
+
+      <p class="promessa">
+        <strong>Durante todo o processo você continua emitindo no sistema atual.</strong>
+        A virada acontece em data combinada, e só depois que o novo estiver testado com os seus dados.
+      </p>
     </div>
   </section>
 
@@ -305,7 +314,7 @@ const schema = {
 
   <!-- ================= FAQ ================= -->
   <section class="fundo-claro">
-    <div class="faixa texto-largo">
+    <div class="faixa">
       <Faq itens={faqTms} />
     </div>
   </section>
@@ -605,34 +614,86 @@ const schema = {
     object-fit: cover;
   }
 
-  /* ---------- passos ---------- */
+  /* ---------- passos ----------
+     Linha do tempo: aqui a numeracao nao e enfeite, e a ordem real
+     em que a troca de sistema acontece. O fio ligando as etapas
+     mostra que existe comeco e fim — e o fim e o CT-e autorizado. */
   .passos {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
-    gap: 1px;
-    background: var(--fio);
-    border: 1px solid var(--fio);
-    border-radius: var(--raio);
-    overflow: hidden;
+    grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+    gap: 26px 22px;
+    position: relative;
   }
   .passos li {
-    background: var(--superficie);
-    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 9px;
+    position: relative;
+    padding-top: 6px;
+  }
+  /* o fio que liga uma etapa a proxima */
+  .passos li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 29px;
+    left: 58px;
+    right: -22px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--ciano), var(--fio-forte));
+    opacity: 0.5;
+  }
+  .marca-passo {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(145deg, var(--azul) 0%, var(--ciano) 100%);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    font-stretch: 110%;
+    box-shadow: 0 8px 18px -9px rgba(0, 113, 187, 0.95);
+    position: relative;
+    z-index: 1;
+  }
+  .chegada .marca-passo {
+    background: linear-gradient(145deg, var(--emitido) 0%, #2FA46A 100%);
+    box-shadow: 0 8px 18px -9px rgba(21, 122, 75, 0.95);
   }
   .passos h3 {
-    font-size: 18px;
+    font-size: 18.5px;
   }
   .passos p {
     font-size: 15px;
     color: var(--tinta-2);
     line-height: 1.5;
     margin: 0;
+    max-width: 34ch;
+  }
+  .promessa {
+    margin: 34px 0 0;
+    padding: 18px 22px;
+    background: var(--azul-suave);
+    border-left: 3px solid var(--azul);
+    border-radius: var(--raio-p);
+    font-size: 16.5px;
+    line-height: 1.55;
+    color: var(--tinta-2);
+    max-width: 88ch;
+  }
+  .promessa strong {
+    color: var(--tinta);
+    display: block;
+  }
+
+  @media (max-width: 700px) {
+    .passos li:not(:last-child)::after {
+      display: none;
+    }
   }
 
   /* ---------- segmentos do ERP ----------
