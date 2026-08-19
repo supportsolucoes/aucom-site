@@ -20,8 +20,8 @@ export const empresa = {
    * Google mais do que a ausencia dele.
    */
   anos: 30,
-  telefone: '(14) 3879-0200',
-  telefoneLink: '+551438790200',
+  telefone: '(14) 98211-2211',
+  telefoneLink: '+5514982112211',
   email: 'contato@aucom.com.br',
   whatsapp: '5514982270077',
   areaCliente: 'https://cliente.aucom.com.br',
@@ -78,7 +78,7 @@ export const modulos: Modulo[] = [
     titulo: 'Emissão de CT-e e MDF-e',
     chamada: 'Emita CT-e e MDF-e sem retrabalho e sem rejeição',
     resumo:
-      'CT-e, MDF-e e DACTE integrados à SEFAZ, com conferência antes do envio e contingência quando a SEFAZ cai.',
+      'CT-e, DACTE e MDF-e integrados à SEFAZ, com conferência antes do envio e contingência quando a SEFAZ cai.',
   },
   {
     slug: 'importacao-xml-nfe',
@@ -189,7 +189,7 @@ export const planos = [
     nome: 'Operação enxuta',
     porte: 'até 10 veículos',
     resumo: 'Emissão de documentos, frota e financeiro do transporte.',
-    itens: ['CT-e, MDF-e e DACTE', 'Importação de XML de NF-e', 'Cadastro de frota e motoristas', 'Financeiro do frete'],
+    itens: ['CT-e, DACTE e MDF-e', 'Importação de XML de NF-e', 'Cadastro de frota e motoristas', 'Financeiro do frete'],
   },
   {
     nome: 'Operação em crescimento',
@@ -211,6 +211,9 @@ export const menu = [
   { texto: 'Gerenciamento de risco', href: '/gerenciamento-de-risco/' },
   { texto: 'ERP', href: '/erp/' },
   { texto: 'Planos', href: '/planos/' },
-  { texto: 'Clientes', href: '/clientes/' },
+  // Clientes desativada em 19/08/2026 a pedido da Aucom. A pagina continua no
+  // repositorio como src/pages/_clientes.astro (o prefixo _ impede o Astro de
+  // gerar a rota). Para reativar: tirar o _ do arquivo e devolver esta linha,
+  // mais o item do Rodape.astro e o redirect em public/_htaccess-modelo.
   { texto: 'Contato', href: '/contato/' },
 ];

@@ -68,7 +68,7 @@ src/
 │   └── Campanha.astro        landing pages de anúncio (sem menu)
 ├── componentes/              cabeçalho, rodapé, formulário, FAQ, ícones, WhatsApp
 ├── imagens/                  fotos processadas pelo Astro (viram WebP com srcset)
-└── pages/                    28 páginas
+└── pages/                    27 páginas (`_clientes.astro` está desativada)
 public/
 ├── fontes/archivo.woff2
 ├── marca/                    logos da Aucom
@@ -109,7 +109,10 @@ preciso o backend (ver `../arquitetura.md`); a troca fica no `submit` de
 1. **Container do GTM** — o espaço está marcado em `src/layouts/Base.astro`. Sem ele, nada é medido.
 2. **Backend do formulário**, quando quiserem lead gravado em banco/CRM e conversão offline.
 3. **Números reais** da faixa de prova social (`src/dados/site.ts` → `provas`).
-4. **Clientes e cases** — `/clientes/` está montada mas sem conteúdo real, e por isso fora do menu.
+4. **Clientes e cases** — a Aucom pediu a aba desativada em 19/08/2026. A página continua pronta
+   em `src/pages/_clientes.astro`; o prefixo `_` impede o Astro de gerar a rota. Para reativar:
+   tirar o `_`, devolver o item ao menu (`src/dados/site.ts`) e ao `Rodape.astro`, e apontar de
+   novo o redirect de `/empresa/clientes.html` em `public/_htaccess-modelo`.
 5. **Política de preço** — decidir o que publicar em `/planos/`.
 6. **Fotos próprias** da operação e **capturas de tela do sistema**. As fotos atuais são do Pexels
    (licença livre para uso comercial): rodovia do interior paulista e carreta em rodovia brasileira.

@@ -28,7 +28,9 @@ RewriteRule ^index\.html$ / [R=301,L]
 # ---------------------------------------------------------------------
 # 2. URLs do site antigo (2020) -> novas
 # ---------------------------------------------------------------------
-Redirect 301 /empresa/clientes.html              /clientes/
+# a pagina /clientes/ esta desativada (19/08/2026), entao a URL antiga
+# vai para /sobre/, que e o conteudo institucional mais proximo
+Redirect 301 /empresa/clientes.html              /sobre/
 Redirect 301 /empresa/politica-de-privacidade.html /politica-de-privacidade/
 Redirect 301 /empresa/termos-e-condicoes.html    /termos-e-condicoes/
 

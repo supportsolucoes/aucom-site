@@ -21,7 +21,7 @@ export const conteudo: Record<string, ConteudoModulo> = {
   'emissao-cte-mdfe': {
     title: 'Emissor de CT-e e MDF-e para Transportadoras | Aucom TMS',
     descricao:
-      'Emita CT-e, MDF-e e DACTE integrados à SEFAZ, com conferência antes do envio e contingência automática. Menos rejeição e menos caminhão parado esperando documento.',
+      'Emita CT-e, DACTE e MDF-e integrados à SEFAZ, com conferência antes do envio e contingência automática. Menos rejeição e menos caminhão parado esperando documento.',
     h1: 'Emissão de CT-e e MDF-e sem retrabalho e sem rejeição',
     abertura:
       'O documento é o que libera o caminhão. Quando ele trava, para tudo: o motorista espera, o cliente cobra e o faturamento atrasa. A emissão no Aucom TMS foi feita para o documento sair certo na primeira tentativa.',
@@ -37,6 +37,11 @@ export const conteudo: Record<string, ConteudoModulo> = {
           'Emissão para carga fracionada, lotação, redespacho e subcontratação, com o tipo de tomador certo em cada caso.',
       },
       {
+        titulo: 'DACTE impresso e por e-mail',
+        texto:
+          'DACTE gerado na hora, enviado ao tomador por e-mail e guardado junto do CT-e para consulta de qualquer estação.',
+      },
+      {
         titulo: 'MDF-e junto com a viagem',
         texto:
           'O manifesto é montado a partir dos CT-e da viagem, com veículo, motorista e percurso já preenchidos. Encerramento do MDF-e controlado, sem manifesto esquecido em aberto.',
@@ -50,11 +55,6 @@ export const conteudo: Record<string, ConteudoModulo> = {
         titulo: 'Contingência quando a SEFAZ cai',
         texto:
           'A emissão continua em contingência e a transmissão é regularizada sozinha quando o serviço volta. O caminhão não fica esperando o governo.',
-      },
-      {
-        titulo: 'DACTE impresso e por e-mail',
-        texto:
-          'DACTE gerado na hora, enviado ao tomador por e-mail e guardado junto do CT-e para consulta de qualquer estação.',
       },
       {
         titulo: 'Carta de correção e cancelamento',
