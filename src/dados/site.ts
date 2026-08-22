@@ -49,7 +49,16 @@ export const empresa = {
    * antes da migracao.
    */
   whatsapp: '5514982270077',
-  areaCliente: 'https://cliente.aucom.com.br',
+  /**
+   * Area do cliente. Em 22/08/2026 descobrimos que o subdominio
+   * cliente.aucom.com.br NAO EXISTE: o DNS responde dominio inexistente.
+   * O site de 2020 tambem aponta para la, ou seja, herdamos o link quebrado.
+   * O que funciona e https://aucom.com.br/cliente/, que serve a tela
+   * "Aucom - Acesso Cliente" a partir de public_html/cliente/ no servidor.
+   * URL absoluta de proposito: assim a integracao de prefixo-base nao
+   * transforma em /novo/cliente/ no ambiente de teste.
+   */
+  areaCliente: 'https://aucom.com.br/cliente/',
   horario: 'Segunda a sexta, das 8h às 18h',
   sociais: {
     linkedin: 'https://www.linkedin.com/company/aucom-informatica',
