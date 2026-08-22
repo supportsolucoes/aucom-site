@@ -3,7 +3,14 @@ import Campanha from '../../layouts/Campanha.astro';
 ---
 
 <Campanha
-  titulo="Importar XML de NF-e e Gerar CT-e sem Digitar | Aucom TMS"
+  {/*
+    Titulo diferente do /tms/importacao-xml-nfe/ de proposito: os dois falavam
+    a mesma frase, e sao duas paginas de ~1000 palavras sobre o mesmo assunto.
+    Hoje a LP esta bloqueada no robots, entao nao brigam no organico, mas se
+    esse bloqueio cair um dia a duplicidade vira problema de verdade.
+    A palavra-chave continua no titulo, que e o que o Indice de Qualidade le.
+  */}
+  titulo="Importação de XML de NF-e para Transportadora | Aucom"
   descricao="Importe o XML da nota fiscal do embarcador e gere o CT-e sem digitação: peso, valor, destinatário e chave preenchidos, com conferência automática."
   selo="Importação de XML de nota fiscal"
   h1="Importe o XML da nota e gere o CT-e sem digitar nota por nota"
