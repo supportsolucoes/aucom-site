@@ -104,6 +104,31 @@ telefone — ela vive nas conversas do WhatsApp. Para lead gravado e conversão 
 preciso o backend (ver `../arquitetura.md`); a troca fica no `submit` de
 `src/componentes/Formulario.astro`.
 
+## Identificação jurídica no site (verificação da Meta)
+
+Desde 22/08/2026 o site mostra razão social, CNPJ e endereço. Não é enfeite: é exigência da
+verificação de negócio da Meta para liberar a API oficial do WhatsApp, que é o motivo pelo
+qual a Aucom quis o site novo. Onde isso aparece:
+
+- rodapé, nas 27 páginas, no `<address class="juridico">` do `Rodape.astro`, centralizado.
+  Só razão social e CNPJ: o usuário pediu o endereço fora do rodapé em 22/08/2026, e a linha
+  ficou mais limpa. O endereço continua visível no site, em `/contato/` e `/sobre/`.
+- `/contato/`, em "Onde estamos". O bloco "Dados da empresa" foi criado e removido no mesmo
+  dia: repetia no meio dos canais de atendimento o que o rodapé já diz, e não fazia sentido ali.
+- `/sobre/`, na ficha da empresa
+- política de privacidade e termos, identificando a pessoa jurídica
+- JSON-LD do `Base.astro`: `legalName`, `taxID`, `streetAddress` e `postalCode`
+
+Tudo sai de `empresa.razaoSocial`, `empresa.cnpj` e `empresa.endereco`, em `src/dados/site.ts`.
+Mudou o cadastro? Muda lá e vale para o site inteiro.
+
+`metaVerificacaoDominio`, no mesmo arquivo, está vazia. Quando a Aucom gerar o código na
+Central de Negócios da Meta (Segurança da Marca > Domínios), ele entra ali e vira
+`<meta name="facebook-domain-verification">` em todas as páginas.
+
+**A verificação só funciona no domínio de verdade.** A Meta confere o site que responde em
+aucom.com.br, e não o ambiente de teste. Detalhes em `../verificacao-meta-whatsapp.md`.
+
 ## O que falta (depende do cliente)
 
 1. **Container do GTM** — o espaço está marcado em `src/layouts/Base.astro`. Sem ele, nada é medido.
@@ -117,10 +142,16 @@ preciso o backend (ver `../arquitetura.md`); a troca fica no `submit` de
 6. **Fotos próprias** da operação e **capturas de tela do sistema**. As fotos atuais são do Pexels
    (licença livre para uso comercial): rodovia do interior paulista e carreta em rodovia brasileira.
 7. **Logo horizontal em vetor** — hoje usamos a versão clara sobre a barra escura.
-8. Dados para fechar `/sobre/`, `/contato/` e as páginas legais (CNPJ, endereço, razão social, DPO).
+8. **Encarregado de dados (DPO)** na política de privacidade. Razão social, CNPJ e endereço já
+   entraram em 22/08/2026; hoje os pedidos de LGPD caem no e-mail comercial, o que resolve por
+   ora, mas a Aucom pode querer nomear um encarregado com e-mail próprio.
+9. **Código de verificação de domínio da Meta**, para `metaVerificacaoDominio`.
 
-Os pontos 3, 4, 5 e 8 aparecem no próprio site como blocos tracejados marcados
-"Para a Aucom preencher", para não passarem despercebidos na revisão.
+**Nenhum desses pontos aparece mais como bloco tracejado no site.** Todos saíram em 22/08/2026:
+aviso de pendência passa ar de site inacabado, ainda mais com a Meta prestes a revisar o site.
+Em `/planos/` o aviso virou o bloco "Como definimos o investimento", que explica o critério sem
+publicar preço; em `/sobre/` virou comentário no código. O que falta continua faltando, só não
+está mais escrito na cara do visitante.
 
 ## Cuidados ao editar
 

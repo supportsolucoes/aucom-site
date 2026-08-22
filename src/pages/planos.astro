@@ -59,11 +59,20 @@ const faq = [
         ))}
       </div>
 
-      <p class="pendente">
-        <strong>Para a Aucom preencher:</strong> definir a política de preço a ser publicada, tabela
-        fechada, faixa por porte ("a partir de R$ X") ou apenas o que está incluído. Página sem
-        nenhuma referência de investimento perde o contato para o concorrente que publica.
-      </p>
+      <div class="investimento">
+        <h2>Como definimos o investimento</h2>
+        <p>
+          O valor depende de três coisas: quantos veículos a operação tem, quais módulos entram e
+          se o sistema roda na nuvem ou em servidor dentro da sua empresa. É por isso que esta
+          página mostra o que está incluído em cada faixa, e não um preço de tabela. Uma
+          transportadora de 8 veículos não tem a mesma necessidade de uma de 60, e não faz sentido
+          cobrar por módulo que você não vai usar.
+        </p>
+        <p>
+          No diagnóstico levantamos o volume de documentos e a estrutura da sua operação, e
+          devolvemos uma proposta fechada, com implantação e mensalidade.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -92,6 +101,35 @@ const faq = [
 </Base>
 
 <style>
+  /*
+    Este bloco entrou no lugar do aviso "Para a Aucom preencher" sobre preço,
+    em 22/08/2026. A Aucom nao definiu politica de preco, e um aviso tracejado
+    no meio da pagina de planos passa ar de site inacabado. O texto explica o
+    criterio sem publicar numero nenhum, que e o que da para afirmar hoje.
+    Se um dia a Aucom quiser publicar faixa ("a partir de R$ X"), e aqui.
+  */
+  .investimento {
+    max-width: 68ch;
+    margin: clamp(30px, 4vw, 44px) auto 0;
+    padding-top: clamp(24px, 3vw, 32px);
+    border-top: 1px solid var(--fio);
+    text-align: center;
+  }
+  .investimento h2 {
+    font-size: 24px;
+    margin: 0 0 12px;
+  }
+  .investimento p {
+    color: var(--tinta-2);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 12px;
+    text-align: left;
+  }
+  .investimento p:last-child {
+    margin-bottom: 0;
+  }
+
   .planos {
     align-items: start;
   }
@@ -140,18 +178,6 @@ const faq = [
     font-size: 15px;
     line-height: 1.5;
     margin: 0;
-  }
-  .pendente {
-    margin: 26px 0 0;
-    font-size: 13px;
-    line-height: 1.55;
-    color: var(--tinta-3);
-    border: 1px dashed var(--fio-forte);
-    border-radius: var(--raio-p);
-    padding: 11px 14px;
-  }
-  .pendente strong {
-    color: var(--sinal-esc);
   }
   .texto-largo {
     max-width: 900px;

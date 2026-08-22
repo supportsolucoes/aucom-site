@@ -4,7 +4,7 @@ import Cabecalho from '../componentes/Cabecalho.astro';
 import Rodape from '../componentes/Rodape.astro';
 import ZapFlutuante from '../componentes/ZapFlutuante.astro';
 import Privacidade from '../componentes/Privacidade.astro';
-import { empresa } from '../dados/site';
+import { empresa, metaVerificacaoDominio } from '../dados/site';
 
 interface Props {
   titulo: string;
@@ -39,16 +39,20 @@ const organizacao = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Aucom Informática',
+  // legalName e taxID sao o que liga o site ao cartao CNPJ: a Meta e o Google
+  // conferem a correspondencia entre a empresa registrada e o site indicado.
+  legalName: empresa.razaoSocial,
+  taxID: empresa.cnpj,
   url: 'https://aucom.com.br',
   logo: 'https://aucom.com.br/marca/aucom.png',
-  telephone: empresa.telefone,
+  telephone: empresa.telefoneLink,
   email: empresa.email,
   address: {
     '@type': 'PostalAddress',
-    // sem streetAddress ate a Aucom confirmar o endereco atual: endereco
-    // errado aqui atrapalha o Perfil da Empresa mais do que a ausencia
+    streetAddress: `${empresa.endereco.logradouro}, ${empresa.endereco.complemento}`,
     addressLocality: empresa.cidade,
     addressRegion: empresa.uf,
+    postalCode: empresa.endereco.cep,
     addressCountry: 'BR',
   },
   sameAs: Object.values(empresa.sociais),
@@ -63,6 +67,9 @@ const organizacao = {
 
     <title>{titulo}</title>
     <meta name="description" content={descricao} />
+    {metaVerificacaoDominio && (
+      <meta name="facebook-domain-verification" content={metaVerificacaoDominio} />
+    )}
     <link rel="canonical" href={canonical} />
     {(naoIndexar || ambienteTeste) && <meta name="robots" content="noindex, nofollow" />}
     {ambienteTeste && <meta name="googlebot" content="noindex, nofollow" />}

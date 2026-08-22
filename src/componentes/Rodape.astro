@@ -66,6 +66,17 @@ const ano = new Date().getFullYear();
       </div>
     </div>
 
+    <!--
+      Identificacao juridica no rodape: exigencia da verificacao de negocio
+      da Meta, que confere se a razao social e o endereco do cartao CNPJ
+      aparecem no site indicado. Nao remover.
+    -->
+    <address class="juridico">
+      <strong>{empresa.razaoSocial}</strong>
+      <span class="ponto" aria-hidden="true">·</span>
+      CNPJ {empresa.cnpj}
+    </address>
+
     <div class="base">
       <span>© {ano} {empresa.nomeCompleto}. Todos os direitos reservados.</span>
       <div class="legais">
@@ -144,10 +155,27 @@ const ano = new Date().getFullYear();
     color: var(--ciano);
   }
 
-  .base {
+  .juridico {
     margin-top: 26px;
     padding-top: 14px;
     border-top: 1px solid #233945;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #92AAB8;
+    text-align: center;
+  }
+  .juridico strong {
+    color: #C6D6DF;
+    font-weight: 640;
+  }
+  .juridico .ponto {
+    color: #6D8797;
+    padding: 0 2px;
+  }
+
+  .base {
+    margin-top: 12px;
     display: flex;
     justify-content: space-between;
     gap: 14px;

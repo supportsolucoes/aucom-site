@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import HeroInterno from '../componentes/HeroInterno.astro';
-import { empresa } from '../dados/site';
+import { empresa, enderecoLinha } from '../dados/site';
 
 const atualizado = '13 de agosto de 2026';
 ---
@@ -22,12 +22,13 @@ const atualizado = '13 de agosto de 2026';
     <div class="faixa legal">
       <h2>Quem é o responsável pelos dados</h2>
       <p>
-        {empresa.nomeCompleto}, com sede em {empresa.cidade}/{empresa.uf}, é a controladora dos dados
-        pessoais coletados neste site. Contato: <a href={`mailto:${empresa.email}`}>{empresa.email}</a>.
+        <strong>{empresa.razaoSocial}</strong>, inscrita no CNPJ sob o nº {empresa.cnpj}, com sede
+        na {enderecoLinha}, é a controladora dos dados pessoais coletados neste site.
       </p>
-      <p class="pendente">
-        <strong>Para a Aucom completar:</strong> razão social, CNPJ, endereço completo e o e-mail do
-        encarregado de dados (DPO), exigido pela LGPD.
+      <p>
+        Para exercer qualquer direito previsto na LGPD, ou para falar sobre o tratamento dos seus
+        dados, escreva para <a href={`mailto:${empresa.email}`}>{empresa.email}</a> ou ligue para
+        <a href={`tel:${empresa.telefoneLink}`}>{empresa.telefone}</a>.
       </p>
 
       <h2>Quais dados coletamos</h2>
@@ -106,15 +107,5 @@ const atualizado = '13 de agosto de 2026';
   }
   .legal ul {
     margin-bottom: 16px;
-  }
-  .pendente {
-    font-size: 13px;
-    color: var(--tinta-3) !important;
-    border: 1px dashed var(--fio-forte);
-    border-radius: var(--raio-p);
-    padding: 11px 14px;
-  }
-  .pendente strong {
-    color: var(--sinal-esc);
   }
 </style>

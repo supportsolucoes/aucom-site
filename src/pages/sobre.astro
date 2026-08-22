@@ -52,17 +52,31 @@ const zapMsg = 'Olá! Vim pela página sobre a Aucom e quero conhecer os sistema
       <aside class="ficha">
         <span class="rotulo">A empresa</span>
         <dl>
-          <div><dt>Onde fica</dt><dd>{empresa.cidade}/{empresa.uf}</dd></div>
+          <div><dt>Razão social</dt><dd>{empresa.razaoSocial}</dd></div>
+          <div><dt>CNPJ</dt><dd>{empresa.cnpj}</dd></div>
+          <div>
+            <dt>Onde fica</dt>
+            <dd>
+              <address class="end">
+                {empresa.endereco.logradouro}, {empresa.endereco.complemento}<br />
+                {empresa.endereco.bairro}, {empresa.cidade}/{empresa.uf}, CEP {empresa.endereco.cep}
+              </address>
+            </dd>
+          </div>
           <div><dt>No mercado desde</dt><dd>1995</dd></div>
           <div><dt>Produtos</dt><dd>TMS, gerenciamento de risco e ERP</dd></div>
           <div><dt>Atendimento</dt><dd>{empresa.horario}</dd></div>
           <div><dt>Telefone</dt><dd><a href={`tel:${empresa.telefoneLink}`}>{empresa.telefone}</a></dd></div>
           <div><dt>E-mail</dt><dd><a href={`mailto:${empresa.email}`}>{empresa.email}</a></dd></div>
         </dl>
-        <p class="pendente">
-          <strong>Confirmar com a Aucom:</strong> ano de fundação exato, número de colaboradores,
-          endereço completo e razão social, para fechar esta ficha e os dados estruturados do site.
-        </p>
+        {/*
+          O aviso tracejado que pedia ano de fundacao e numero de colaboradores saiu em
+          22/08/2026: era o unico bloco inacabado sobrando na pagina, e numero de colaboradores
+          nao faz falta nenhuma na ficha.
+          FICA O ALERTA, invisivel para o visitante: o "1995" desta ficha e do cabecalho do site
+          NAO foi confirmado pela Aucom. O site atual dela so diz "30 anos"; o 1995 foi deduzido
+          disso. Se a Aucom confirmar outro ano, mudar aqui e em Cabecalho.astro.
+        */}
       </aside>
     </div>
   </section>
@@ -118,17 +132,10 @@ const zapMsg = 'Olá! Vim pela página sobre a Aucom e quero conhecer os sistema
     font-weight: 600;
     font-size: 16px;
   }
-  .pendente {
-    margin: 22px 0 0;
-    font-size: 12.5px;
+  .ficha .end {
+    font-style: normal;
+    font-weight: 600;
     line-height: 1.5;
-    color: var(--tinta-3);
-    border: 1px dashed var(--fio-forte);
-    border-radius: var(--raio-p);
-    padding: 10px 12px;
-  }
-  .pendente strong {
-    color: var(--sinal-esc);
   }
   @media (max-width: 900px) {
     .dois {

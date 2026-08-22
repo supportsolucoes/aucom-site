@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import HeroInterno from '../componentes/HeroInterno.astro';
-import { empresa } from '../dados/site';
+import { empresa, enderecoLinha } from '../dados/site';
 
 const atualizado = '13 de agosto de 2026';
 ---
@@ -22,8 +22,10 @@ const atualizado = '13 de agosto de 2026';
     <div class="faixa legal">
       <h2>Sobre este site</h2>
       <p>
-        Este site é mantido por {empresa.nomeCompleto}, de {empresa.cidade}/{empresa.uf}, para
-        apresentar seus sistemas e receber contatos comerciais.
+        Este site é mantido por <strong>{empresa.razaoSocial}</strong>, inscrita no CNPJ sob o
+        nº {empresa.cnpj}, com sede na {enderecoLinha}, para apresentar seus sistemas e receber
+        contatos comerciais. A empresa também se apresenta comercialmente como
+        {' '}{empresa.nomeCompleto}.
       </p>
 
       <h2>Conteúdo</h2>
@@ -58,9 +60,9 @@ const atualizado = '13 de agosto de 2026';
       </p>
 
       <h2>Foro</h2>
-      <p class="pendente">
-        <strong>Para a Aucom completar:</strong> foro eleito e razão social completa, com CNPJ, para
-        fechar esta cláusula com o jurídico.
+      <p>
+        Fica eleito o foro da comarca de {empresa.cidade}/{empresa.uf}, sede da empresa, para
+        resolver questões decorrentes destes termos.
       </p>
 
       <h2>Contato</h2>
@@ -85,15 +87,5 @@ const atualizado = '13 de agosto de 2026';
   }
   .legal p {
     color: var(--tinta-2);
-  }
-  .pendente {
-    font-size: 13px;
-    color: var(--tinta-3) !important;
-    border: 1px dashed var(--fio-forte);
-    border-radius: var(--raio-p);
-    padding: 11px 14px;
-  }
-  .pendente strong {
-    color: var(--sinal-esc);
   }
 </style>

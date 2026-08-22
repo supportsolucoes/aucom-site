@@ -12,17 +12,42 @@ export const empresa = {
   cidade: 'Bauru',
   uf: 'SP',
   /**
-   * PENDENTE: endereco completo.
-   * Em 14/08/2026 chegou um endereco na Rua Engenheiro Alpheu Jose Ribas
-   * Sampaio, mas era o ANTIGO — foi publicado e removido no mesmo dia.
-   * Nao republicar sem a Aucom confirmar o endereco atual, com CEP.
-   * Endereco errado no site e no JSON-LD atrapalha o Perfil da Empresa no
-   * Google mais do que a ausencia dele.
+   * Dados juridicos, confirmados pela Aucom em 22/08/2026.
+   * Sao exigencia da verificacao de negocio da Meta (WhatsApp Business API):
+   * a razao social e o endereco registrado precisam estar visiveis no site,
+   * batendo com o cartao CNPJ. O CEP foi conferido na base dos Correios
+   * (ViaCEP): 17012-120 cobre a faixa "de 13/14 ao fim" da rua, onde cai a
+   * quadra 15, no Jardim Nasralla. O endereco antigo (Alpheu Jose Ribas
+   * Sampaio) esta descartado de vez.
    */
+  razaoSocial: 'AUCOM INFORMATICA LTDA ME',
+  cnpj: '69.159.903/0001-16',
+  endereco: {
+    logradouro: 'Rua Vivaldo Guimarães, 15-55',
+    complemento: 'Sala 82',
+    bairro: 'Jardim Nasralla',
+    cep: '17012-120',
+  },
   anos: 30,
   telefone: '(14) 98211-2211',
   telefoneLink: '+5514982112211',
-  email: 'contato@aucom.com.br',
+  /**
+   * E-mail comercial, definido pela Aucom em 22/08/2026. E o endereco que
+   * aparece no site inteiro. Precisa ser do proprio dominio: a Meta usa a
+   * correspondencia entre e-mail e dominio para ligar a empresa ao site.
+   */
+  email: 'comercial@aucom.com.br',
+  /**
+   * Numero do botao de WhatsApp do site inteiro.
+   * ATENCAO (22/08/2026): a Aucom vai levar para a API oficial da Meta um
+   * TERCEIRO numero, usado na operacao, que nao e este nem o `telefone` acima.
+   * Quando a API entrar no ar, este campo precisa apontar para o numero da API,
+   * senao o site continua jogando contato em uma caixa de WhatsApp comum, fora
+   * do atendimento oficial. Trocar aqui vale para o site todo.
+   * Lembrete: numero que entra na API oficial para de funcionar no aplicativo
+   * comum do WhatsApp. Quem usa esse numero no dia a dia precisa saber disso
+   * antes da migracao.
+   */
   whatsapp: '5514982270077',
   areaCliente: 'https://cliente.aucom.com.br',
   horario: 'Segunda a sexta, das 8h às 18h',
@@ -33,6 +58,30 @@ export const empresa = {
     facebook: 'https://www.facebook.com/aucom.informatica',
   },
 };
+
+/**
+ * O endereco em uma linha, do jeito que a Meta espera achar no rodape.
+ * Serve tambem para a pagina de contato, o /sobre/ e as paginas legais.
+ */
+export const enderecoLinha = [
+  `${empresa.endereco.logradouro}`,
+  `${empresa.endereco.complemento}`,
+  `${empresa.endereco.bairro}`,
+  `${empresa.cidade}/${empresa.uf}`,
+  `CEP ${empresa.endereco.cep}`,
+].join(', ');
+
+/**
+ * Codigo da verificacao de dominio da Meta (Central de Negocios >
+ * Seguranca da Marca > Dominios). A Meta entrega uma string; ela entra aqui
+ * e vira <meta name="facebook-domain-verification"> em todas as paginas.
+ * Enquanto estiver vazia, a tag simplesmente nao e gerada.
+ * So funciona no dominio de verdade (aucom.com.br), nao no ambiente de teste.
+ */
+export const metaVerificacaoDominio = '';
+
+/** Identificacao legal completa: razao social mais CNPJ. */
+export const identificacaoLegal = `${empresa.razaoSocial}, CNPJ ${empresa.cnpj}`;
 
 /**
  * Monta o link do WhatsApp com a mensagem ja escrita.
