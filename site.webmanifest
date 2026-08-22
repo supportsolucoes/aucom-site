@@ -1,0 +1,14 @@
+{
+  "name": "Aucom — Sistemas para transportadoras",
+  "short_name": "Aucom",
+  "description": "TMS, gerenciamento de risco e ERP para transportadoras. Bauru/SP.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#071C2C",
+  "icons": [
+    { "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
