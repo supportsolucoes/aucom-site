@@ -1,0 +1,199 @@
+---
+/**
+ * Area do cliente.
+ *
+ * Substitui a pagina de 2020 que vivia em public_html/cliente/index.html, feita
+ * com o template Tooplate: ela destoava do site inteiro, ainda mostrava o
+ * telefone fixo que a Aucom mandou tirar, o contato@ antigo, "Copyright 2020" e
+ * apontava para o subdominio cliente.aucom.com.br, que nao existe.
+ *
+ * ATENCAO, PENDENCIA CONHECIDA (22/08/2026): o formulario continua sem destino.
+ * O original tambem nao tinha `action`, e um POST em /cliente/ devolve HTTP 406.
+ * Ou seja, quem preenche e clica em Entrar recebe uma pagina de erro. Isso ja
+ * acontecia antes desta pagina existir; o usuario optou por arrumar so o visual
+ * agora e descobrir depois para onde o login deve enviar.
+ * Quando a Aucom informar o destino, e uma linha: por o `action` no <form>.
+ * Por isso o painel de suporte ao lado nao e enfeite: hoje ele e a unica saida
+ * de quem nao consegue entrar.
+ */
+import Base from '../layouts/Base.astro';
+import HeroInterno from '../componentes/HeroInterno.astro';
+import { empresa, zap } from '../dados/site';
+
+const zapMsg = 'Olá! Sou cliente da Aucom e preciso de ajuda com o acesso ao sistema.';
+---
+
+<Base
+  titulo="Acesso do cliente | Aucom"
+  descricao="Área de acesso dos clientes da Aucom Informática."
+  zapMensagem={zapMsg}
+  naoIndexar
+>
+  <HeroInterno
+    rotulo="Área do cliente"
+    titulo="Acesso do cliente"
+    texto="Entre com seus dados. Se precisar de ajuda, nossa equipe atende no horário comercial."
+    migalhas={[{ texto: 'Área do cliente' }]}
+    claro
+  />
+
+  <section class="fundo-claro">
+    <div class="faixa acesso">
+      <div class="cartao entrada">
+        <h2>Entrar</h2>
+        <form method="post">
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" autocomplete="username" required />
+          </div>
+          <div class="campo">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" autocomplete="current-password" required />
+          </div>
+          <div class="lembrar">
+            <input type="checkbox" id="lembrar" name="lembrar" />
+            <label for="lembrar">Lembrar-me neste computador</label>
+          </div>
+          <button type="submit" class="botao botao-acao">Entrar</button>
+        </form>
+      </div>
+
+      <aside class="ajuda">
+        <span class="rotulo">Precisa de ajuda?</span>
+        <h2>Fale com o suporte</h2>
+        <p>
+          Se não conseguir entrar, ou se precisar de atendimento no sistema, chame a gente.
+          Quem responde conhece transporte e conhece o sistema.
+        </p>
+        <ul class="canais">
+          <li>
+            <span class="rot">WhatsApp</span>
+            <a href={zap(zapMsg)} target="_blank" rel="noopener">Abrir conversa</a>
+          </li>
+          <li>
+            <span class="rot">Telefone</span>
+            <a href={`tel:${empresa.telefoneLink}`} class="mono">{empresa.telefone}</a>
+          </li>
+          <li>
+            <span class="rot">E-mail</span>
+            <a href={`mailto:${empresa.email}`} class="mono">{empresa.email}</a>
+          </li>
+          <li>
+            <span class="rot">Atendimento</span>
+            <span class="sem-link">{empresa.horario}</span>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .acesso {
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: start;
+  }
+
+  .entrada {
+    padding: clamp(24px, 3vw, 34px);
+  }
+  .entrada h2 {
+    font-size: 24px;
+    margin: 0 0 18px;
+  }
+  .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .campo label {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--tinta-3);
+  }
+  .campo input {
+    font: inherit;
+    font-size: 16px;
+    padding: 11px 13px;
+    border: 1px solid var(--fio-forte);
+    border-radius: var(--raio-p);
+    background: var(--superficie);
+    color: var(--tinta);
+    width: 100%;
+  }
+  .campo input:focus-visible {
+    outline: 2px solid var(--azul);
+    outline-offset: 1px;
+    border-color: var(--azul);
+  }
+  .lembrar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .lembrar label {
+    font-size: 14.5px;
+    color: var(--tinta-2);
+  }
+  .entrada .botao {
+    width: 100%;
+  }
+
+  .ajuda {
+    padding-top: 6px;
+  }
+  .ajuda h2 {
+    font-size: 22px;
+    margin: 6px 0 10px;
+  }
+  .ajuda p {
+    color: var(--tinta-2);
+    font-size: 15.5px;
+    line-height: 1.6;
+    margin: 0 0 18px;
+    max-width: 42ch;
+  }
+  .canais {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .canais li {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .canais .rot {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--tinta-3);
+  }
+  .canais a {
+    color: var(--azul);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .canais a:hover {
+    text-decoration: underline;
+  }
+  .canais .sem-link {
+    color: var(--tinta-2);
+  }
+
+  @media (max-width: 900px) {
+    .acesso {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

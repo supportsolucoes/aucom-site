@@ -23,7 +23,10 @@ export default defineConfig({
   // Google trata pior que um 301 de verdade. Ver public/_htaccess-modelo.
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/obrigado') && !page.includes('/lp/'),
+      // /cliente/ e area de acesso, nao conteudo: fica fora do sitemap e sai
+      // com noindex, como o /obrigado/.
+      filter: (page) =>
+        !page.includes('/obrigado') && !page.includes('/lp/') && !page.includes('/cliente'),
     }),
     prefixoBase(),
   ],
