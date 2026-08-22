@@ -227,8 +227,20 @@
     if (!caixa || !reabrir) return;
 
     const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
-    function gtag(...args: any[]) {
-      dl.push(args);
+    /**
+     * ATENCAO: tem de empurrar o objeto `arguments`, nao um array.
+     * O gtag.js e o GTM so reconhecem o comando de consentimento quando o que
+     * chega no dataLayer e um Arguments; com um Array comum eles ignoram em
+     * silencio, sem erro no console. O sintoma e cruel: o visitante aceita, o
+     * evento `consentimento_definido` aparece no dataLayer, e mesmo assim as
+     * requisicoes do GA4 continuam saindo com `gcs=G100` e `pscdl=denied`,
+     * ou seja, medindo todo mundo como se tivesse recusado.
+     * Descoberto em 22/08/2026, olhando as requisicoes de rede depois de
+     * publicar o contêiner. Conferir sempre por `gcs=` na requisicao, nunca
+     * so pelo dataLayer.
+     */
+    function gtag(..._args: any[]) {
+      dl.push(arguments);
     }
 
     function aplicar(escolha: { analytics: boolean; ads: boolean }) {
