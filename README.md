@@ -3,9 +3,12 @@
 Site institucional reposicionado para **TMS e gerenciamento de risco de transportadoras**,
 conforme o plano do relatório de diagnóstico (`../relatorio/`).
 
-**Status:** publicado como ambiente de teste em
-https://supportsolucoes.github.io/aucom-site/ (com `noindex`, para não concorrer com o site
-real da Aucom no Google).
+**Status: NO AR em https://aucom.com.br** desde 22/08/2026, no lugar do template de 2020.
+O ambiente de teste em https://supportsolucoes.github.io/aucom-site/ continua existindo, com
+`noindex`, e serve para revisar mudança antes de mandar para o domínio.
+
+O servidor da Aucom é cPanel com Apache. O mapa da hospedagem, o cuidado com o `.htaccess` e
+o passo a passo da publicação estão em `../CLAUDE.md`.
 
 ## Como rodar
 
