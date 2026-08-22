@@ -94,7 +94,7 @@ export const metaVerificacaoDominio = '';
  * Preencher aqui liga a medicao no site inteiro, de uma vez.
  * O mapa dos eventos e o passo a passo estao em ../gtm-do-zero.md.
  */
-export const gtmId = '';
+export const gtmId = 'GTM-NG7B7XLW';
 
 /** Identificacao legal completa: razao social mais CNPJ. */
 export const identificacaoLegal = `${empresa.razaoSocial}, CNPJ ${empresa.cnpj}`;
