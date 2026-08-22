@@ -4,7 +4,7 @@ import Cabecalho from '../componentes/Cabecalho.astro';
 import Rodape from '../componentes/Rodape.astro';
 import ZapFlutuante from '../componentes/ZapFlutuante.astro';
 import Privacidade from '../componentes/Privacidade.astro';
-import { empresa, metaVerificacaoDominio } from '../dados/site';
+import { empresa, metaVerificacaoDominio, gtmId } from '../dados/site';
 
 interface Props {
   titulo: string;
@@ -123,13 +123,26 @@ const organizacao = {
     </script>
 
     <!--
-      Aqui entra o Google Tag Manager quando a Aucom liberar o contêiner.
-      Etapa 1 do plano: sem isso, nada do que o site produz é medido.
-      <script>(function(w,d,s,l,i){...})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+      Google Tag Manager. So carrega quando `gtmId` tem valor, em
+      src/dados/site.ts. Vazio, o site nao chama nada do Google, e os 7
+      eventos ficam esperando no dataLayer.
+      Vem DEPOIS do Consent Mode acima, de proposito: a ordem importa.
     -->
+    {gtmId && (
+      <script
+        is:inline
+        set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmId}');`}
+      />
+    )}
   </head>
 
   <body>
+    {gtmId && (
+      <noscript
+        set:html={`<iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`}
+      />
+    )}
+
     <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
     {!campanha && <Cabecalho />}

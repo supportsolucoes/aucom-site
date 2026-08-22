@@ -131,7 +131,10 @@ aucom.com.br, e não o ambiente de teste. Detalhes em `../verificacao-meta-whats
 
 ## O que falta (depende do cliente)
 
-1. **Container do GTM** — o espaço está marcado em `src/layouts/Base.astro`. Sem ele, nada é medido.
+1. **Container do GTM.** Preencher `gtmId` em `src/dados/site.ts` com o `GTM-XXXXXXX` liga a
+   medição nas 27 páginas de uma vez. Vazio, o site não carrega nada do Google e os 7 eventos
+   ficam parados no `dataLayer`. O caminho completo, da criação das contas até a conversão
+   chegando no Ads, está em `../gtm-do-zero.md`.
 2. **Backend do formulário**, quando quiserem lead gravado em banco/CRM e conversão offline.
 3. **Números reais** da faixa de prova social (`src/dados/site.ts` → `provas`).
 4. **Clientes e cases** — a Aucom pediu a aba desativada em 19/08/2026. A página continua pronta

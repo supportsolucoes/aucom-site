@@ -80,6 +80,15 @@ export const enderecoLinha = [
  */
 export const metaVerificacaoDominio = '';
 
+/**
+ * ID do contêiner do Google Tag Manager, no formato GTM-XXXXXXX.
+ * Enquanto estiver vazio, nenhuma tag do Google e carregada: o site continua
+ * empurrando os 7 eventos para o dataLayer, e eles ficam parados ali.
+ * Preencher aqui liga a medicao no site inteiro, de uma vez.
+ * O mapa dos eventos e o passo a passo estao em ../gtm-do-zero.md.
+ */
+export const gtmId = '';
+
 /** Identificacao legal completa: razao social mais CNPJ. */
 export const identificacaoLegal = `${empresa.razaoSocial}, CNPJ ${empresa.cnpj}`;
 
